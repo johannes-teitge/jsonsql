@@ -1,0 +1,11 @@
+{
+    "fields": {
+        "id": {
+            "dataType": "string",
+            "autohash": true,
+            "algorithm": "sha256",
+            "length": 64
+        }
+    },
+    "allowAdditionalFields": true
+}

@@ -1,0 +1,30 @@
+[
+    {
+        "ID": 117,
+        "Erstellt am": "2025-04-14 09:45:05",
+        "Ge\u00e4ndert am": "2025-04-14 09:45:05",
+        "name": "Alice",
+        "email": "alice@example.com"
+    },
+    {
+        "ID": 118,
+        "Erstellt am": "2025-04-14 09:45:05",
+        "Ge\u00e4ndert am": "2025-04-14 09:45:05",
+        "name": "Bob",
+        "email": "bob@example.com"
+    },
+    {
+        "ID": 119,
+        "Erstellt am": "2025-04-14 09:45:05",
+        "Ge\u00e4ndert am": "2025-04-14 09:45:05",
+        "name": "Carol",
+        "email": "carol@example.com"
+    },
+    {
+        "ID": 120,
+        "Erstellt am": "2025-04-14 09:45:05",
+        "Ge\u00e4ndert am": "2025-04-14 09:45:05",
+        "name": "Dave",
+        "email": "dave@example.com"
+    }
+]

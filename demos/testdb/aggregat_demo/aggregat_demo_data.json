@@ -1,0 +1,1352 @@
+[
+    {
+        "id": 1,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 84.69,
+        "vendor": "Otto",
+        "stock": 1340,
+        "date": "2025-01-18"
+    },
+    {
+        "id": 2,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 76.04,
+        "vendor": "Otto",
+        "stock": 2008,
+        "date": "2025-01-14"
+    },
+    {
+        "id": 3,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 101.65,
+        "vendor": "Amazon",
+        "stock": 4897,
+        "date": "2025-03-31"
+    },
+    {
+        "id": 4,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 101.35,
+        "vendor": "MediaMarkt",
+        "stock": 4875,
+        "date": "2024-11-05"
+    },
+    {
+        "id": 5,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 76.51,
+        "vendor": "Real",
+        "stock": 276,
+        "date": "2024-11-15"
+    },
+    {
+        "id": 6,
+        "product": "Kaffeemaschine",
+        "rating": 2,
+        "price": 90.98,
+        "vendor": "Amazon",
+        "stock": 4920,
+        "date": "2025-01-31"
+    },
+    {
+        "id": 7,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 82.24,
+        "vendor": "Real",
+        "stock": 2848,
+        "date": "2025-03-07"
+    },
+    {
+        "id": 8,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 89.69,
+        "vendor": "Real",
+        "stock": 1494,
+        "date": "2025-01-26"
+    },
+    {
+        "id": 9,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 79.04,
+        "vendor": "Real",
+        "stock": 2103,
+        "date": "2025-03-23"
+    },
+    {
+        "id": 10,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 85.55,
+        "vendor": "Saturn",
+        "stock": 4453,
+        "date": "2025-02-26"
+    },
+    {
+        "id": 11,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 82.85,
+        "vendor": "Saturn",
+        "stock": 1542,
+        "date": "2025-03-27"
+    },
+    {
+        "id": 12,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 103.38,
+        "vendor": "eBay",
+        "stock": 1711,
+        "date": "2024-12-01"
+    },
+    {
+        "id": 13,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 90.5,
+        "vendor": "Real",
+        "stock": 3868,
+        "date": "2025-01-21"
+    },
+    {
+        "id": 14,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 95.33,
+        "vendor": "eBay",
+        "stock": 1054,
+        "date": "2025-01-23"
+    },
+    {
+        "id": 15,
+        "product": "Kaffeemaschine",
+        "rating": 1,
+        "price": 85.85,
+        "vendor": "Aldi",
+        "stock": 594,
+        "date": "2025-02-12"
+    },
+    {
+        "id": 16,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 103.74,
+        "vendor": "Lidl",
+        "stock": 487,
+        "date": "2025-03-04"
+    },
+    {
+        "id": 17,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 83.07,
+        "vendor": "Otto",
+        "stock": 1332,
+        "date": "2025-03-28"
+    },
+    {
+        "id": 18,
+        "product": "Kaffeemaschine",
+        "rating": 2,
+        "price": 80.98,
+        "vendor": "Real",
+        "stock": 4343,
+        "date": "2024-12-07"
+    },
+    {
+        "id": 19,
+        "product": "Kaffeemaschine",
+        "rating": 2,
+        "price": 100.37,
+        "vendor": "eBay",
+        "stock": 3091,
+        "date": "2024-11-15"
+    },
+    {
+        "id": 20,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 86.54,
+        "vendor": "eBay",
+        "stock": 2530,
+        "date": "2025-01-19"
+    },
+    {
+        "id": 21,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 105.37,
+        "vendor": "Otto",
+        "stock": 2558,
+        "date": "2024-12-21"
+    },
+    {
+        "id": 22,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 77.9,
+        "vendor": "Real",
+        "stock": 496,
+        "date": "2025-02-03"
+    },
+    {
+        "id": 23,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 101.41,
+        "vendor": "Lidl",
+        "stock": 3207,
+        "date": "2025-01-11"
+    },
+    {
+        "id": 24,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 77.78,
+        "vendor": "eBay",
+        "stock": 71,
+        "date": "2025-03-01"
+    },
+    {
+        "id": 25,
+        "product": "Kaffeemaschine",
+        "rating": 1,
+        "price": 77.69,
+        "vendor": "MediaMarkt",
+        "stock": 3147,
+        "date": "2025-01-07"
+    },
+    {
+        "id": 26,
+        "product": "Kaffeemaschine",
+        "rating": 1,
+        "price": 81.67,
+        "vendor": "Real",
+        "stock": 2656,
+        "date": "2025-03-24"
+    },
+    {
+        "id": 27,
+        "product": "Kaffeemaschine",
+        "rating": 2,
+        "price": 76.57,
+        "vendor": "MediaMarkt",
+        "stock": 1545,
+        "date": "2025-02-02"
+    },
+    {
+        "id": 28,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 82.53,
+        "vendor": "Lidl",
+        "stock": 2874,
+        "date": "2025-02-12"
+    },
+    {
+        "id": 29,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 94.08,
+        "vendor": "Saturn",
+        "stock": 1297,
+        "date": "2024-11-11"
+    },
+    {
+        "id": 30,
+        "product": "Kaffeemaschine",
+        "rating": 2,
+        "price": 99.88,
+        "vendor": "Amazon",
+        "stock": 3819,
+        "date": "2024-12-21"
+    },
+    {
+        "id": 31,
+        "product": "Kaffeemaschine",
+        "rating": 2,
+        "price": 97.46,
+        "vendor": "Lidl",
+        "stock": 2543,
+        "date": "2024-12-25"
+    },
+    {
+        "id": 32,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 100.57,
+        "vendor": "Amazon",
+        "stock": 1117,
+        "date": "2025-01-23"
+    },
+    {
+        "id": 33,
+        "product": "Kaffeemaschine",
+        "rating": 1,
+        "price": 96.96,
+        "vendor": "Amazon",
+        "stock": 4485,
+        "date": "2024-12-28"
+    },
+    {
+        "id": 34,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 76.8,
+        "vendor": "Amazon",
+        "stock": 4131,
+        "date": "2025-03-07"
+    },
+    {
+        "id": 35,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 95.95,
+        "vendor": "MediaMarkt",
+        "stock": 557,
+        "date": "2025-02-22"
+    },
+    {
+        "id": 36,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 105.28,
+        "vendor": "Amazon",
+        "stock": 1625,
+        "date": "2025-01-09"
+    },
+    {
+        "id": 37,
+        "product": "Kaffeemaschine",
+        "rating": 2,
+        "price": 84.2,
+        "vendor": "Lidl",
+        "stock": 3697,
+        "date": "2025-02-22"
+    },
+    {
+        "id": 38,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 92.62,
+        "vendor": "Real",
+        "stock": 3676,
+        "date": "2024-12-02"
+    },
+    {
+        "id": 39,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 100.18,
+        "vendor": "Lidl",
+        "stock": 1046,
+        "date": "2024-11-26"
+    },
+    {
+        "id": 40,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 96.79,
+        "vendor": "Real",
+        "stock": 62,
+        "date": "2025-02-08"
+    },
+    {
+        "id": 41,
+        "product": "Kaffeemaschine",
+        "rating": 2,
+        "price": 104.71,
+        "vendor": "Otto",
+        "stock": 968,
+        "date": "2025-03-31"
+    },
+    {
+        "id": 42,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 90.48,
+        "vendor": "Lidl",
+        "stock": 762,
+        "date": "2025-03-21"
+    },
+    {
+        "id": 43,
+        "product": "Kaffeemaschine",
+        "rating": 2,
+        "price": 87.54,
+        "vendor": "Amazon",
+        "stock": 4996,
+        "date": "2025-03-31"
+    },
+    {
+        "id": 44,
+        "product": "Kaffeemaschine",
+        "rating": 3,
+        "price": 100.55,
+        "vendor": "MediaMarkt",
+        "stock": 3472,
+        "date": "2024-11-25"
+    },
+    {
+        "id": 45,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 94.78,
+        "vendor": "Amazon",
+        "stock": 2107,
+        "date": "2025-03-13"
+    },
+    {
+        "id": 46,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 77.74,
+        "vendor": "eBay",
+        "stock": 4131,
+        "date": "2024-12-21"
+    },
+    {
+        "id": 47,
+        "product": "Kaffeemaschine",
+        "rating": 5,
+        "price": 99.21,
+        "vendor": "Real",
+        "stock": 1561,
+        "date": "2025-01-11"
+    },
+    {
+        "id": 48,
+        "product": "Kaffeemaschine",
+        "rating": 1,
+        "price": 91.97,
+        "vendor": "eBay",
+        "stock": 2539,
+        "date": "2024-11-12"
+    },
+    {
+        "id": 49,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 75.31,
+        "vendor": "eBay",
+        "stock": 3100,
+        "date": "2024-12-01"
+    },
+    {
+        "id": 50,
+        "product": "Kaffeemaschine",
+        "rating": 4,
+        "price": 76.67,
+        "vendor": "Aldi",
+        "stock": 3522,
+        "date": "2024-11-17"
+    },
+    {
+        "id": 51,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 39.95,
+        "vendor": "Amazon",
+        "stock": 4599,
+        "date": "2024-12-23"
+    },
+    {
+        "id": 52,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 53.49,
+        "vendor": "eBay",
+        "stock": 4909,
+        "date": "2025-02-18"
+    },
+    {
+        "id": 53,
+        "product": "Wasserkocher",
+        "rating": 5,
+        "price": 36.1,
+        "vendor": "Aldi",
+        "stock": 4693,
+        "date": "2024-12-17"
+    },
+    {
+        "id": 54,
+        "product": "Wasserkocher",
+        "rating": 5,
+        "price": 45.12,
+        "vendor": "Otto",
+        "stock": 3655,
+        "date": "2025-03-26"
+    },
+    {
+        "id": 55,
+        "product": "Wasserkocher",
+        "rating": 5,
+        "price": 35.84,
+        "vendor": "Real",
+        "stock": 3503,
+        "date": "2025-01-18"
+    },
+    {
+        "id": 56,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 46.33,
+        "vendor": "Aldi",
+        "stock": 4712,
+        "date": "2025-03-30"
+    },
+    {
+        "id": 57,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 44.09,
+        "vendor": "MediaMarkt",
+        "stock": 3564,
+        "date": "2025-03-17"
+    },
+    {
+        "id": 58,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 55.99,
+        "vendor": "Saturn",
+        "stock": 3776,
+        "date": "2024-11-10"
+    },
+    {
+        "id": 59,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 39.88,
+        "vendor": "Lidl",
+        "stock": 1549,
+        "date": "2025-02-16"
+    },
+    {
+        "id": 60,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 37.46,
+        "vendor": "Lidl",
+        "stock": 4287,
+        "date": "2024-12-24"
+    },
+    {
+        "id": 61,
+        "product": "Wasserkocher",
+        "rating": 2,
+        "price": 47.96,
+        "vendor": "Otto",
+        "stock": 3608,
+        "date": "2025-02-15"
+    },
+    {
+        "id": 62,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 51.09,
+        "vendor": "Aldi",
+        "stock": 1683,
+        "date": "2025-01-10"
+    },
+    {
+        "id": 63,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 36.79,
+        "vendor": "Real",
+        "stock": 2246,
+        "date": "2025-01-23"
+    },
+    {
+        "id": 64,
+        "product": "Wasserkocher",
+        "rating": 2,
+        "price": 40.09,
+        "vendor": "MediaMarkt",
+        "stock": 2903,
+        "date": "2024-12-19"
+    },
+    {
+        "id": 65,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 42.45,
+        "vendor": "Aldi",
+        "stock": 1000,
+        "date": "2025-03-09"
+    },
+    {
+        "id": 66,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 42.27,
+        "vendor": "Aldi",
+        "stock": 3426,
+        "date": "2025-01-07"
+    },
+    {
+        "id": 67,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 43.75,
+        "vendor": "Lidl",
+        "stock": 263,
+        "date": "2025-03-18"
+    },
+    {
+        "id": 68,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 43.09,
+        "vendor": "Otto",
+        "stock": 29,
+        "date": "2025-02-07"
+    },
+    {
+        "id": 69,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 48.12,
+        "vendor": "Saturn",
+        "stock": 2233,
+        "date": "2024-11-10"
+    },
+    {
+        "id": 70,
+        "product": "Wasserkocher",
+        "rating": 2,
+        "price": 36.04,
+        "vendor": "MediaMarkt",
+        "stock": 826,
+        "date": "2025-03-27"
+    },
+    {
+        "id": 71,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 41.47,
+        "vendor": "Amazon",
+        "stock": 3280,
+        "date": "2024-12-05"
+    },
+    {
+        "id": 72,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 40.32,
+        "vendor": "Lidl",
+        "stock": 1933,
+        "date": "2025-03-07"
+    },
+    {
+        "id": 73,
+        "product": "Wasserkocher",
+        "rating": 5,
+        "price": 55.18,
+        "vendor": "MediaMarkt",
+        "stock": 4426,
+        "date": "2025-01-07"
+    },
+    {
+        "id": 74,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 44.12,
+        "vendor": "Amazon",
+        "stock": 4624,
+        "date": "2024-12-05"
+    },
+    {
+        "id": 75,
+        "product": "Wasserkocher",
+        "rating": 2,
+        "price": 36.92,
+        "vendor": "Real",
+        "stock": 3441,
+        "date": "2025-01-29"
+    },
+    {
+        "id": 76,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 36.11,
+        "vendor": "Lidl",
+        "stock": 2670,
+        "date": "2024-11-10"
+    },
+    {
+        "id": 77,
+        "product": "Wasserkocher",
+        "rating": 5,
+        "price": 53.79,
+        "vendor": "Lidl",
+        "stock": 1664,
+        "date": "2025-01-22"
+    },
+    {
+        "id": 78,
+        "product": "Wasserkocher",
+        "rating": 5,
+        "price": 48.12,
+        "vendor": "Otto",
+        "stock": 134,
+        "date": "2025-03-21"
+    },
+    {
+        "id": 79,
+        "product": "Wasserkocher",
+        "rating": 2,
+        "price": 38.01,
+        "vendor": "Real",
+        "stock": 2096,
+        "date": "2024-11-11"
+    },
+    {
+        "id": 80,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 55.59,
+        "vendor": "Real",
+        "stock": 994,
+        "date": "2024-12-31"
+    },
+    {
+        "id": 81,
+        "product": "Wasserkocher",
+        "rating": 2,
+        "price": 55.32,
+        "vendor": "eBay",
+        "stock": 4441,
+        "date": "2025-03-08"
+    },
+    {
+        "id": 82,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 46.72,
+        "vendor": "Lidl",
+        "stock": 4384,
+        "date": "2024-11-02"
+    },
+    {
+        "id": 83,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 35.86,
+        "vendor": "Lidl",
+        "stock": 4425,
+        "date": "2025-02-05"
+    },
+    {
+        "id": 84,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 45.84,
+        "vendor": "Amazon",
+        "stock": 1455,
+        "date": "2025-02-21"
+    },
+    {
+        "id": 85,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 42.26,
+        "vendor": "Otto",
+        "stock": 3379,
+        "date": "2025-02-06"
+    },
+    {
+        "id": 86,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 50.44,
+        "vendor": "Saturn",
+        "stock": 2558,
+        "date": "2025-01-17"
+    },
+    {
+        "id": 87,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 43.05,
+        "vendor": "Real",
+        "stock": 3786,
+        "date": "2025-02-05"
+    },
+    {
+        "id": 88,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 47.8,
+        "vendor": "eBay",
+        "stock": 544,
+        "date": "2024-11-01"
+    },
+    {
+        "id": 89,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 48.12,
+        "vendor": "Saturn",
+        "stock": 814,
+        "date": "2025-03-09"
+    },
+    {
+        "id": 90,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 40.94,
+        "vendor": "MediaMarkt",
+        "stock": 636,
+        "date": "2025-01-09"
+    },
+    {
+        "id": 91,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 50.97,
+        "vendor": "Amazon",
+        "stock": 730,
+        "date": "2025-01-06"
+    },
+    {
+        "id": 92,
+        "product": "Wasserkocher",
+        "rating": 5,
+        "price": 47.34,
+        "vendor": "Saturn",
+        "stock": 4022,
+        "date": "2025-02-10"
+    },
+    {
+        "id": 93,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 39.18,
+        "vendor": "Saturn",
+        "stock": 67,
+        "date": "2024-12-28"
+    },
+    {
+        "id": 94,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 53.31,
+        "vendor": "Otto",
+        "stock": 1565,
+        "date": "2024-12-09"
+    },
+    {
+        "id": 95,
+        "product": "Wasserkocher",
+        "rating": 2,
+        "price": 50.34,
+        "vendor": "Amazon",
+        "stock": 1935,
+        "date": "2024-11-03"
+    },
+    {
+        "id": 96,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 37.86,
+        "vendor": "MediaMarkt",
+        "stock": 1551,
+        "date": "2024-12-29"
+    },
+    {
+        "id": 97,
+        "product": "Wasserkocher",
+        "rating": 1,
+        "price": 40.15,
+        "vendor": "eBay",
+        "stock": 3397,
+        "date": "2024-12-28"
+    },
+    {
+        "id": 98,
+        "product": "Wasserkocher",
+        "rating": 3,
+        "price": 35.31,
+        "vendor": "Amazon",
+        "stock": 4836,
+        "date": "2024-12-09"
+    },
+    {
+        "id": 99,
+        "product": "Wasserkocher",
+        "rating": 4,
+        "price": 51.2,
+        "vendor": "MediaMarkt",
+        "stock": 2660,
+        "date": "2025-03-25"
+    },
+    {
+        "id": 100,
+        "product": "Wasserkocher",
+        "rating": 5,
+        "price": 37.66,
+        "vendor": "eBay",
+        "stock": 1998,
+        "date": "2025-01-06"
+    },
+    {
+        "id": 101,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 29.69,
+        "vendor": "MediaMarkt",
+        "stock": 4582,
+        "date": "2025-01-06"
+    },
+    {
+        "id": 102,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 20.47,
+        "vendor": "Aldi",
+        "stock": 141,
+        "date": "2025-03-20"
+    },
+    {
+        "id": 103,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 26.29,
+        "vendor": "eBay",
+        "stock": 3838,
+        "date": "2024-11-15"
+    },
+    {
+        "id": 104,
+        "product": "Toaster",
+        "rating": 2,
+        "price": 20.38,
+        "vendor": "Aldi",
+        "stock": 1943,
+        "date": "2024-12-20"
+    },
+    {
+        "id": 105,
+        "product": "Toaster",
+        "rating": 2,
+        "price": 28.6,
+        "vendor": "Real",
+        "stock": 4856,
+        "date": "2025-01-08"
+    },
+    {
+        "id": 106,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 19.2,
+        "vendor": "Lidl",
+        "stock": 323,
+        "date": "2024-12-25"
+    },
+    {
+        "id": 107,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 24.07,
+        "vendor": "Lidl",
+        "stock": 2074,
+        "date": "2025-02-19"
+    },
+    {
+        "id": 108,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 21.75,
+        "vendor": "eBay",
+        "stock": 57,
+        "date": "2025-02-24"
+    },
+    {
+        "id": 109,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 27.5,
+        "vendor": "Real",
+        "stock": 3822,
+        "date": "2024-11-28"
+    },
+    {
+        "id": 110,
+        "product": "Toaster",
+        "rating": 2,
+        "price": 24.32,
+        "vendor": "Otto",
+        "stock": 2154,
+        "date": "2025-02-09"
+    },
+    {
+        "id": 111,
+        "product": "Toaster",
+        "rating": 2,
+        "price": 26.22,
+        "vendor": "Otto",
+        "stock": 4828,
+        "date": "2025-01-24"
+    },
+    {
+        "id": 112,
+        "product": "Toaster",
+        "rating": 5,
+        "price": 30.21,
+        "vendor": "Aldi",
+        "stock": 2342,
+        "date": "2024-11-14"
+    },
+    {
+        "id": 113,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 20.3,
+        "vendor": "Amazon",
+        "stock": 2487,
+        "date": "2025-01-15"
+    },
+    {
+        "id": 114,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 20.46,
+        "vendor": "Amazon",
+        "stock": 119,
+        "date": "2025-02-19"
+    },
+    {
+        "id": 115,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 29.58,
+        "vendor": "Amazon",
+        "stock": 4583,
+        "date": "2024-12-28"
+    },
+    {
+        "id": 116,
+        "product": "Toaster",
+        "rating": 5,
+        "price": 30.03,
+        "vendor": "Otto",
+        "stock": 474,
+        "date": "2025-03-11"
+    },
+    {
+        "id": 117,
+        "product": "Toaster",
+        "rating": 5,
+        "price": 19.9,
+        "vendor": "Amazon",
+        "stock": 3584,
+        "date": "2025-01-23"
+    },
+    {
+        "id": 118,
+        "product": "Toaster",
+        "rating": 5,
+        "price": 23.38,
+        "vendor": "MediaMarkt",
+        "stock": 3212,
+        "date": "2024-11-22"
+    },
+    {
+        "id": 119,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 29.49,
+        "vendor": "Amazon",
+        "stock": 1519,
+        "date": "2024-11-30"
+    },
+    {
+        "id": 120,
+        "product": "Toaster",
+        "rating": 5,
+        "price": 25.83,
+        "vendor": "Lidl",
+        "stock": 1255,
+        "date": "2025-02-27"
+    },
+    {
+        "id": 121,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 22.17,
+        "vendor": "Otto",
+        "stock": 3080,
+        "date": "2024-11-22"
+    },
+    {
+        "id": 122,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 26.86,
+        "vendor": "Amazon",
+        "stock": 2483,
+        "date": "2025-02-01"
+    },
+    {
+        "id": 123,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 19.78,
+        "vendor": "Saturn",
+        "stock": 1669,
+        "date": "2025-03-06"
+    },
+    {
+        "id": 124,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 26.01,
+        "vendor": "Otto",
+        "stock": 4253,
+        "date": "2024-12-24"
+    },
+    {
+        "id": 125,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 29.82,
+        "vendor": "Otto",
+        "stock": 2057,
+        "date": "2024-11-24"
+    },
+    {
+        "id": 126,
+        "product": "Toaster",
+        "rating": 2,
+        "price": 29.95,
+        "vendor": "Saturn",
+        "stock": 3855,
+        "date": "2025-02-03"
+    },
+    {
+        "id": 127,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 22.18,
+        "vendor": "Real",
+        "stock": 2554,
+        "date": "2025-02-26"
+    },
+    {
+        "id": 128,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 29.03,
+        "vendor": "Real",
+        "stock": 372,
+        "date": "2024-11-10"
+    },
+    {
+        "id": 129,
+        "product": "Toaster",
+        "rating": 5,
+        "price": 19.57,
+        "vendor": "Amazon",
+        "stock": 4051,
+        "date": "2024-11-24"
+    },
+    {
+        "id": 130,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 19.46,
+        "vendor": "Amazon",
+        "stock": 3452,
+        "date": "2025-02-02"
+    },
+    {
+        "id": 131,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 28.44,
+        "vendor": "Aldi",
+        "stock": 4447,
+        "date": "2024-12-13"
+    },
+    {
+        "id": 132,
+        "product": "Toaster",
+        "rating": 5,
+        "price": 25.6,
+        "vendor": "Amazon",
+        "stock": 2245,
+        "date": "2024-12-06"
+    },
+    {
+        "id": 133,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 29.04,
+        "vendor": "Saturn",
+        "stock": 4906,
+        "date": "2024-11-18"
+    },
+    {
+        "id": 134,
+        "product": "Toaster",
+        "rating": 2,
+        "price": 22.49,
+        "vendor": "Aldi",
+        "stock": 3421,
+        "date": "2025-01-08"
+    },
+    {
+        "id": 135,
+        "product": "Toaster",
+        "rating": 2,
+        "price": 29.74,
+        "vendor": "Otto",
+        "stock": 1837,
+        "date": "2025-01-20"
+    },
+    {
+        "id": 136,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 24.65,
+        "vendor": "Saturn",
+        "stock": 2887,
+        "date": "2024-12-20"
+    },
+    {
+        "id": 137,
+        "product": "Toaster",
+        "rating": 5,
+        "price": 21.87,
+        "vendor": "Lidl",
+        "stock": 4403,
+        "date": "2024-12-03"
+    },
+    {
+        "id": 138,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 21.63,
+        "vendor": "Lidl",
+        "stock": 3358,
+        "date": "2024-12-05"
+    },
+    {
+        "id": 139,
+        "product": "Toaster",
+        "rating": 2,
+        "price": 29.48,
+        "vendor": "Real",
+        "stock": 193,
+        "date": "2024-12-10"
+    },
+    {
+        "id": 140,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 24.87,
+        "vendor": "Aldi",
+        "stock": 156,
+        "date": "2025-02-22"
+    },
+    {
+        "id": 141,
+        "product": "Toaster",
+        "rating": 4,
+        "price": 26.84,
+        "vendor": "Amazon",
+        "stock": 51,
+        "date": "2024-11-12"
+    },
+    {
+        "id": 142,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 21.46,
+        "vendor": "Aldi",
+        "stock": 3065,
+        "date": "2024-12-11"
+    },
+    {
+        "id": 143,
+        "product": "Toaster",
+        "rating": 5,
+        "price": 23.65,
+        "vendor": "MediaMarkt",
+        "stock": 957,
+        "date": "2024-12-15"
+    },
+    {
+        "id": 144,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 25.26,
+        "vendor": "Lidl",
+        "stock": 4082,
+        "date": "2025-01-09"
+    },
+    {
+        "id": 145,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 25.15,
+        "vendor": "eBay",
+        "stock": 1123,
+        "date": "2025-01-26"
+    },
+    {
+        "id": 146,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 25.65,
+        "vendor": "Aldi",
+        "stock": 1264,
+        "date": "2025-03-06"
+    },
+    {
+        "id": 147,
+        "product": "Toaster",
+        "rating": 2,
+        "price": 22.83,
+        "vendor": "Lidl",
+        "stock": 3822,
+        "date": "2025-03-06"
+    },
+    {
+        "id": 148,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 27.67,
+        "vendor": "Otto",
+        "stock": 2392,
+        "date": "2025-02-15"
+    },
+    {
+        "id": 149,
+        "product": "Toaster",
+        "rating": 1,
+        "price": 30.74,
+        "vendor": "Amazon",
+        "stock": 1501,
+        "date": "2024-11-13"
+    },
+    {
+        "id": 150,
+        "product": "Toaster",
+        "rating": 3,
+        "price": 20.33,
+        "vendor": "Lidl",
+        "stock": 2461,
+        "date": "2025-03-28"
+    }
+]

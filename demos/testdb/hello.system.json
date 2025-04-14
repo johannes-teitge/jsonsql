@@ -1,0 +1,25 @@
+{
+    "fields": {
+        "ID": {
+            "dataType": "integer",
+            "autoincrement": true,
+            "autoincrement_step": 1,
+            "autoincrement_value": 121
+        },
+        "Erstellt am": {
+            "dataType": "datetime",
+            "auto_create_timestamp": true,
+            "format": "Y-m-d H:i:s",
+            "timezone": "UTC",
+            "comment": "automatisch beim Erstellen gesetzt"
+        },
+        "Geändert am": {
+            "dataType": "datetime",
+            "auto_modified_timestamp": true,
+            "format": "Y-m-d H:i:s",
+            "timezone": "UTC",
+            "comment": "automatisch bei Änderungen aktualisiert"
+        }
+    },
+    "allowAdditionalFields": true
+}

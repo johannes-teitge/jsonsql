@@ -1,0 +1,122 @@
+[
+    {
+        "id": 671,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "NTY5VkQrQVY2SEFqNURReG9LWXlZZz09",
+        "name": "Jens",
+        "lastname": "Schmidt",
+        "email": "jens.schmidt641@example.com",
+        "username": "jschmidt97",
+        "birth": "1994-01-17",
+        "gender": "m"
+    },
+    {
+        "id": 672,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "S2dCMisydUJheDA1RnUxS0dnWmZnZz09",
+        "name": "Mehmet",
+        "lastname": "M\u00fcller",
+        "email": "mehmet.m\u00fcller244@example.com",
+        "username": "mm\u00fcller94",
+        "birth": "1988-02-16",
+        "gender": "m"
+    },
+    {
+        "id": 673,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "aFpxMUN5L240Q095SXlaMGgwQU9YZz09",
+        "name": "Mia",
+        "lastname": "Kowalski",
+        "email": "mia.kowalski358@example.com",
+        "username": "mkowalski67",
+        "birth": "1981-10-22",
+        "gender": "f"
+    },
+    {
+        "id": 674,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "OS9NOXB4N01ja2pwUHpoVFdtUWJTQT09",
+        "name": "Tom",
+        "lastname": "M\u00fcller",
+        "email": "tom.m\u00fcller594@example.com",
+        "username": "tm\u00fcller62",
+        "birth": "1977-02-05",
+        "gender": "m"
+    },
+    {
+        "id": 675,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "cHNUVDR2dzQyQlBDL3h1ZzVqRkNJUT09",
+        "name": "Fatima",
+        "lastname": "Schmidt",
+        "email": "fatima.schmidt814@example.com",
+        "username": "fschmidt63",
+        "birth": "1971-10-22",
+        "gender": "f"
+    },
+    {
+        "id": 676,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "VnF5d0VMaGFPZGZoU0JXVlJMdW9nZz09",
+        "name": "Jens",
+        "lastname": "Rossi",
+        "email": "jens.rossi455@example.com",
+        "username": "jrossi56",
+        "birth": "1965-12-26",
+        "gender": "m"
+    },
+    {
+        "id": 677,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "dXVsVmdPbGFsTFY3MERpaVJzWTdOUT09",
+        "name": "Laura",
+        "lastname": "Schmidt",
+        "email": "laura.schmidt815@example.com",
+        "username": "lschmidt61",
+        "birth": "1974-10-18",
+        "gender": "f"
+    },
+    {
+        "id": 678,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "anVJMHlWcjdScGJCVkRUczRtNEhkUT09",
+        "name": "Lukas",
+        "lastname": "Nguyen",
+        "email": "lukas.nguyen630@example.com",
+        "username": "lnguyen73",
+        "birth": "1998-07-21",
+        "gender": "m"
+    },
+    {
+        "id": 679,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "bkFRcjNqL1A2YkVCM1BRU1kwQUhZUT09",
+        "name": "Laura",
+        "lastname": "Rossi",
+        "email": "laura.rossi816@example.com",
+        "username": "lrossi47",
+        "birth": "1992-05-10",
+        "gender": "f"
+    },
+    {
+        "id": 680,
+        "created": "2025-04-13 10:30:59",
+        "timestamp": "2025-04-13 10:30:59",
+        "password": "djBIZ1ZLTk9TZVBCMUlkNUIyTWpVQT09",
+        "name": "Mia",
+        "lastname": "M\u00fcller",
+        "email": "mia.m\u00fcller776@example.com",
+        "username": "mm\u00fcller21",
+        "birth": "1989-05-25",
+        "gender": "f"
+    }
+]

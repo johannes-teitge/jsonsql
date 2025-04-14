@@ -1,0 +1,9 @@
+{
+    "fields": {
+        "id": {
+            "autoincrement": true,
+            "autoincrement_step": 1,
+            "autoincrement_value": 31
+        }
+    }
+}

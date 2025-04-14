@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "title": "Kugelschreiber",
+        "price": 1.49
+    },
+    {
+        "id": 2,
+        "title": "Notizblock",
+        "price": 2.99
+    },
+    {
+        "id": 3,
+        "title": "Textmarker",
+        "price": 0.99
+    },
+    {
+        "id": 4,
+        "title": "USB-Stick",
+        "price": 7.5
+    },
+    {
+        "id": 5,
+        "title": "Tastatur",
+        "price": 22
+    },
+    {
+        "id": 6,
+        "title": "Maus",
+        "price": 15.9
+    },
+    {
+        "id": 7,
+        "title": "HDMI-Kabel",
+        "price": 4.75
+    }
+]

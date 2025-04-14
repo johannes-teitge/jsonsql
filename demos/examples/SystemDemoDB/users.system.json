@@ -1,0 +1,22 @@
+{
+    "fields": {
+        "Test": {
+            "datentyp": "string",
+            "length": "100",
+            "allowNULL": true,
+            "defaultValue": "Hallo",
+            "comment": "Test",
+            "enumValues": "",
+            "dataType": "string"
+        },
+        "Auswahl": {
+            "dataType": "string",
+            "length": "",
+            "allowNULL": false,
+            "defaultValue": "",
+            "comment": "",
+            "enumValues": ""
+        }
+    },
+    "allowAdditionalFields": true
+}

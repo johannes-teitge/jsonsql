@@ -1,0 +1,38 @@
+[
+    {
+        "id": 35,
+        "hash": "",
+        "brand": "dsf dsf das fds fds af dsg dsfg fds gsf ",
+        "model": "",
+        "year_built": 2024,
+        "displacement": 0,
+        "power": 0,
+        "fuel": "Benzin",
+        "transmission": "",
+        "doors": 6,
+        "price": 0,
+        "datum": "1970-01-01 00:00:00",
+        "description": "",
+        "logo": "",
+        "created_at": "2025-04-13 22:11:58",
+        "updated_at": "2025-04-13 22:11:58"
+    },
+    {
+        "id": 36,
+        "hash": "",
+        "brand": "",
+        "model": "",
+        "year_built": 0,
+        "displacement": 0,
+        "power": 0,
+        "fuel": "Benzin",
+        "transmission": "",
+        "doors": 4,
+        "price": 120000.55,
+        "datum": "2025-04-13 22:11:58",
+        "description": "",
+        "logo": "",
+        "created_at": "2025-04-13 22:11:58",
+        "updated_at": "2025-04-13 22:11:58"
+    }
+]

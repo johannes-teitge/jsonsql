@@ -1,0 +1,288 @@
+:root {
+    --main-color: #0176D0;
+    --bg-color: #0176d020;
+    --white-color: #f5f5f5;
+    --main-color-darken: rgb(0, 83, 147);
+    --second-color: #394955;
+    --accent-color: #FFA800;
+    --accent-hover: #e69500;
+    --accent2-color: #ff4500;
+    --accent2-hover: #c63500;
+    --text-color: #444;
+    --text-hover-color: #131e25;
+    --background-color: #f8f9fa;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(to bottom, #ffffff, #007bff0f);
+    color: var(--text-color);
+}
+
+.container {
+    margin-left: 0 !important;
+    margin-right: 10px !important;    
+}
+
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+    color: var(--white-color) !important;
+    text-decoration: none;
+    position: relative;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.m-item {
+    margin-left: 15px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    _background-color: var(--main-color);
+    transition: width 0.3s ease-out;
+}
+
+.nav-link:hover {
+    background-color: #ffffffd5 !important;
+    color: var(--main-color) !important;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    background-color: rgba(52, 52, 52, 0.541);
+    font-weight: bold;
+    border-left: 4px solid #007bff;
+}
+
+
+/* Flex-Layout */
+.main-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 400px;
+    background: linear-gradient(to left, var(--main-color), var(--main-color-darken));
+    padding: 1rem;
+    border-right: 1px solid #ddd;
+
+    padding: 0 !important;
+    margin:0 !important;
+}
+
+/* Content */
+.content-area {
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+
+h1 {
+    color: var(--main-color);
+}
+
+h2 {
+    color: var(--second-color);
+    margin-top: 20px !important;
+}
+
+h3 {
+    color: var(--white-color);
+    background-color: var(--main-color);
+    display: inline-block; /* Damit das h3 nur so breit wie der Text wird */
+    padding: 0.5rem 1rem; /* Optional: Etwas Padding für den Abstand */
+    border-radius: 5px; /* Optional: Abgerundete Ecken */
+    font-size: 1.1rem !important;
+    margin-top: 20px !important;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: var(--second-color);
+}
+
+
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+pre {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.doku-head {}
+
+.headlogo {
+    margin-bottom: 35px !important;
+    margin-top: 15px !important;    
+    padding-bottom: 25px !important;
+    margin-left: 15px;
+    opacity: 0;
+    transform: translateY(-160px);
+    animation: moonland 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.headlogo img {
+    filter: drop-shadow(0 0 10px #0076cfaa);
+    animation: glow 2.5s ease-in-out infinite alternate;
+    animation-delay: 1.8s; /* startet nach dem Landen */
+}
+
+@keyframes moonland {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    from {
+        filter: drop-shadow(0 0 5px #0076cf55);
+    }
+    to {
+        filter: drop-shadow(0 0 20px #0076cfff);
+    }
+}
+
+.tophead {
+
+
+}
+
+.cool_sep {
+    color:  var(--main-color);
+    margin-bottom: 45px;
+}
+
+.feature-item-outer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap; /* Stellt sicher, dass Elemente bei Bedarf umgebrochen werden */
+}
+
+.feature-item {
+    text-align: center;
+    margin: 30px 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    border: 2px solid white;
+    width: 100%;
+    max-width: 380px !important; /* Maximale Breite der Boxen */
+}
+
+.feature-item:hover {
+    border-color: var(--main-color);
+    background: linear-gradient(to bottom, #ffffff, #007bff0f);
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    margin-bottom: 20px;
+}
+
+/* Optional: Medienabfrage für kleinere Bildschirme */
+@media (max-width: 576px) {
+    .feature-item {
+        margin: 15px 0;
+    }
+}
+
+.footer {
+    background: linear-gradient(to bottom, var(--main-color), var(--main-color-darken));
+}
+
+.a-mail {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--main-color);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.a-mail i {
+    margin-right: 6px;
+    transition: transform 0.3s ease;
+    margin-left: 8px;
+}
+
+.a-mail:hover {
+    color: var(--accent2-color); /* Beispielfarbe beim Hover */
+}
+
+.a-mail:hover i {
+    transform: rotate(360deg); /* Drehe das Icon um 360 Grad beim Hover */
+}
+
+/* Optionale Effekte, um das Icon beim Hover zu vergrößern */
+.a-mail:hover i {
+    transform: rotate(360deg) scale(1.2); /* Drehen und skalieren des Icons */
+}
+
+/* Optional: Wenn du einen Hover-Effekt für den Text haben willst */
+.a-mail:hover {
+    text-decoration: underline; /* Zeigt eine Linie unter dem Text */
+}
+
+#sidebar {
+    position: sticky; /* Macht die Sidebar sticky */
+    top: 0; /* Stellt sicher, dass die Sidebar oben bleibt */
+    height: 100vh; /* Die Sidebar bleibt auf voller Höhe des Bildschirms */
+    padding-top: 20px; /* Etwas Abstand oben für ein besseres Layout */
+    overflow-y: auto; /* Ermöglicht das Scrollen der Sidebar, wenn der Inhalt länger ist */
+}
+
+.doku-nav {
+    background-color: #f8f9fa; /* Hintergrundfarbe der Sidebar */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optionaler Schatten für den 3D-Effekt */
+}
+
+.nav-link {
+    padding: 10px 15px;
+    padding: 10px 7px !important;   
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #f1f1f1; /* Hintergrundfarbe beim Hover */
+}
+
+.nav-item {
+    margin-bottom: 10px; /* Abstand zwischen den Listenelementen */
+}
+
+#sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding-top: 20px;
+    overflow-y: auto;
+}
+

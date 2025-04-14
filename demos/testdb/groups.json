@@ -1,0 +1,7 @@
+[
+  { "id": 1, "title": "Büro",       "parent_id": null },
+  { "id": 2, "title": "Computer",   "parent_id": null },
+  { "id": 3, "title": "Zubehör",    "parent_id": 2 },
+  { "id": 4, "title": "Möbel",      "parent_id": 1 },
+  { "id": 5, "title": "Papierwaren","parent_id": 1 }
+]

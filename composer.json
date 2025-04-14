@@ -1,0 +1,14 @@
+{
+  "name": "teitge/jsonsql",
+  "description": "SQL-ähnliche Datenbankabfragen auf JSON-Dateien in PHP",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "JsonSQL\\": "src/JsonSQL/"
+    }
+  },
+  "require": {
+    "php": ">=7.4"
+  }
+}

@@ -1,0 +1,38 @@
+[
+    {
+        "rel_cd_id": 1,
+        "rel_genre_id": 1
+    },
+    {
+        "rel_cd_id": 1,
+        "rel_genre_id": 2
+    },
+    {
+        "rel_cd_id": 2,
+        "rel_genre_id": 2
+    },
+    {
+        "rel_cd_id": 2,
+        "rel_genre_id": 6
+    },
+    {
+        "rel_cd_id": 3,
+        "rel_genre_id": 3
+    },
+    {
+        "rel_cd_id": 3,
+        "rel_genre_id": 6
+    },
+    {
+        "rel_cd_id": 4,
+        "rel_genre_id": 4
+    },
+    {
+        "rel_cd_id": 5,
+        "rel_genre_id": 5
+    },
+    {
+        "rel_cd_id": 5,
+        "rel_genre_id": 1
+    }
+]

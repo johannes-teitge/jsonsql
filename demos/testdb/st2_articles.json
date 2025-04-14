@@ -1,0 +1,182 @@
+[
+    {
+        "title": "Kugelschreiber",
+        "price": 33.61,
+        "group_id": 5,
+        "id": 1
+    },
+    {
+        "title": "Heftger\u00e4t",
+        "price": 24.87,
+        "group_id": 1,
+        "id": 2
+    },
+    {
+        "title": "Tackerklammern",
+        "price": 34.23,
+        "group_id": 6,
+        "id": 3
+    },
+    {
+        "title": "Notizblock",
+        "price": 28.48,
+        "group_id": 1,
+        "id": 4
+    },
+    {
+        "title": "Collegeblock",
+        "price": 20.84,
+        "group_id": 6,
+        "id": 5
+    },
+    {
+        "title": "Bleistift",
+        "price": 21.02,
+        "group_id": 5,
+        "id": 6
+    },
+    {
+        "title": "Textmarker",
+        "price": 29.62,
+        "group_id": 5,
+        "id": 7
+    },
+    {
+        "title": "Korrekturroller",
+        "price": 18.2,
+        "group_id": 3,
+        "id": 8
+    },
+    {
+        "title": "USB-Stick",
+        "price": 4.62,
+        "group_id": 2,
+        "id": 9
+    },
+    {
+        "title": "Mauspad",
+        "price": 47.81,
+        "group_id": 5,
+        "id": 10
+    },
+    {
+        "title": "Monitorhalterung",
+        "price": 29.93,
+        "group_id": 6,
+        "id": 11
+    },
+    {
+        "title": "HDMI-Kabel",
+        "price": 43.09,
+        "group_id": 3,
+        "id": 12
+    },
+    {
+        "title": "LAN-Kabel",
+        "price": 15.76,
+        "group_id": 4,
+        "id": 13
+    },
+    {
+        "title": "Tastatur",
+        "price": 49.86,
+        "group_id": 2,
+        "id": 14
+    },
+    {
+        "title": "Maus",
+        "price": 7.18,
+        "group_id": 2,
+        "id": 15
+    },
+    {
+        "title": "Notebook-St\u00e4nder",
+        "price": 3.83,
+        "group_id": 2,
+        "id": 16
+    },
+    {
+        "title": "Druckerpapier",
+        "price": 18.03,
+        "group_id": 5,
+        "id": 17
+    },
+    {
+        "title": "Etiketten",
+        "price": 5.9,
+        "group_id": 4,
+        "id": 18
+    },
+    {
+        "title": "Schere",
+        "price": 18.4,
+        "group_id": 1,
+        "id": 19
+    },
+    {
+        "title": "Locher",
+        "price": 30.4,
+        "group_id": 4,
+        "id": 20
+    },
+    {
+        "title": "Ordner",
+        "price": 20.87,
+        "group_id": 3,
+        "id": 21
+    },
+    {
+        "title": "Trennbl\u00e4tter",
+        "price": 49.06,
+        "group_id": 3,
+        "id": 22
+    },
+    {
+        "title": "Briefumschl\u00e4ge",
+        "price": 1.87,
+        "group_id": 5,
+        "id": 23
+    },
+    {
+        "title": "Aktenvernichter",
+        "price": 33.2,
+        "group_id": 1,
+        "id": 24
+    },
+    {
+        "title": "Whiteboardmarker",
+        "price": 42.48,
+        "group_id": 2,
+        "id": 25
+    },
+    {
+        "title": "Magnete",
+        "price": 16.82,
+        "group_id": 3,
+        "id": 26
+    },
+    {
+        "title": "USB-Hub",
+        "price": 27.67,
+        "group_id": 6,
+        "id": 27
+    },
+    {
+        "title": "Headset",
+        "price": 48.88,
+        "group_id": 1,
+        "id": 28
+    },
+    {
+        "title": "Webcam",
+        "price": 1.86,
+        "group_id": 2,
+        "id": 29
+    },
+    {
+        "title": "Externe Festplatte",
+        "price": 43.36,
+        "group_id": 1,
+        "id": 30
+    }
+]

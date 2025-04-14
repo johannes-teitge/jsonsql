@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JsonSQL Dokumentation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" type="image/webp" href="https://teitge.de/JsonSQL/assets/images/JsonSQL-Logo.webp">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>  
+  
+<!-- Beispiel: GitHub Style -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+
+  <style>
+    body {
+      padding-bottom: 4rem;
+      color:rgb(119, 119, 119);
+    }
+    pre {
+      background: #0b5aa0;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin-top: -5px;
+      border:0 !important;
+      padding:4px;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.112);      
+    }
+
+    .hljs {   
+      background: #f6fbff;
+    }
+
+    .code-block {
+      margin-bottom: 2rem;
+    }
+    .logo {
+      max-height: 80px;
+    }
+
+    .mb-4 h1 {
+      color:rgb(71, 71, 71);
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    h2 {
+      color:rgb(19, 102, 165);      
+    }    
+
+
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+    <div class="text-center mb-4">
+      <img src="https://teitge.de/JsonSQL/assets/images/JsonSQL-Logo.webp" alt="JsonSQL Logo" class="logo">
+      <h1 class="mb-4">JsonSQL – Dokumentation</h1>
+      <p class="lead">Leistungsfähiger SQL-ähnlicher JSON-Datenbank-Handler in PHP</p>      
+    </div>
+
+
+
+    <h2 class="mt-5">🔧 Initialisierung</h2>
+    <p>Du initialisierst JsonSQL mit einem Alias-Array für deine Datenbankverzeichnisse:</p>
+    <pre><code class="language-php">$db = new JsonSQL(['main' => __DIR__ . '/testdb']);
+$db->use('main')->from('users');</code></pre>
+
+    <h2 class="mt-4">📄 SELECT</h2>
+    <p>Spalten auswählen:</p>
+    <pre><code class="language-php">$db->select('id,name,email');
+// oder alle: $db->select('*');</code></pre>
+
+    <h2 class="mt-4">🔍 WHERE</h2>
+    <p>Filterbedingungen mit Operatoren:</p>
+    <pre><code class="language-php">$db->where([
+  ['age', '>=', 18],
+  ['name', 'like', 'Peter']
+], 'AND');</code></pre>
+
+    <div class="code-block">
+      <h5>🧠 Hinweis zu mehrfachen where()-Aufrufen</h5>
+      <p><code>where()</code> überschreibt vorherige Filter. Für mehrere Bedingungen nutze ein Array mit <code>AND</code> oder <code>OR</code>:</p>
+      <pre><code class="language-php">// Richtig:
+$db->where([
+  ['city', '==', 'Berlin'],
+  ['active', '==', true]
+], 'AND');
+
+// Nicht empfohlen:
+$db->where(...)->where(...); // überschreibt</code></pre>
+    </div>
+
+    <h2 class="mt-4">🔁 JOINs</h2>
+    <p>Unterstützt INNER, LEFT, RIGHT, FULL OUTER:</p>
+    <pre><code class="language-php">$db->join('orders', 'user_id', 'LEFT');</code></pre>
+
+    <h2 class="mt-4">↕️ ORDER BY</h2>
+    <pre><code class="language-php">$db->orderBy('name', 'ASC');</code></pre>
+
+    <h2 class="mt-4">📏 LIMIT & OFFSET</h2>
+    <pre><code class="language-php">$db->limit(10, 5); // 10 Ergebnisse ab Index 5</code></pre>
+
+    <h2 class="mt-4">🎯 GET</h2>
+    <pre><code class="language-php">$ergebnisse = $db->get();</code></pre>
+
+    <h2 class="mt-4">➕ INSERT</h2>
+    <pre><code class="language-php">$db->insert([
+  'id' => 101,
+  'name' => 'Lisa',
+  'email' => 'lisa@example.com'
+]);</code></pre>
+
+    <h2 class="mt-4">📝 UPDATE</h2>
+    <pre><code class="language-php">$db->where([['id', '==', 101]])
+   ->update(['email' => 'neu@example.com']);</code></pre>
+
+    <h2 class="mt-4">🗑️ DELETE</h2>
+    <pre><code class="language-php">$db->where([['id', '==', 101]])->delete();</code></pre>
+
+    <h2 class="mt-4">📊 GROUP BY & Aggregate</h2>
+    <pre><code class="language-php">$db->groupBy('city');
+$summe = $db->sum('umsatz');
+$avg   = $db->avg('score');
+$min   = $db->min('alter');
+$max   = $db->max('punkte');</code></pre>
+
+    <h2 class="mt-4">⚖️ HAVING</h2>
+    <pre><code class="language-php">$db->groupBy('region')->having(fn($gruppe) => count($gruppe) > 3);</code></pre>
+
+    <h2 class="mt-4">✅ EXISTS & FIRST</h2>
+    <pre><code class="language-php">$exists = $db->where([['active', '==', true]])->exists();
+$erste = $db->where([['city', '==', 'Berlin']])->first();</code></pre>
+
+    <h2 class="mt-4">🔎 PLUCK</h2>
+    <pre><code class="language-php">$emails = $db->pluck('email');</code></pre>
+
+    <h2 class="mt-4">📚 PAGINATE</h2>
+    <pre><code class="language-php">$seite2 = $db->paginate(2, 10);</code></pre>
+
+
+
+    <h2 class="mt-4">🧹 CLEAR</h2>
+    <p>Löscht alle Tabellen (JSON-Dateien) im aktuell gewählten Datenbankverzeichnis:</p>
+    <pre><code class="language-php">$db->clear();</code></pre>
+
+
+    <h2 class="mt-4">🔎 DESCRIBE</h2>
+    <p>Zeigt die vermutete Feldstruktur und Typen einer JSON-Tabelle:</p>
+    <pre><code class="language-php">$info = $db->from('users')->describe();
+    print_r($info);</code></pre>
+    <p>Beispielausgabe:</p>
+    <pre><code class="language-php">Array
+    (
+        [id] => integer
+        [name] => string
+        [email] => string
+        [active] => boolean
+    )</code></pre>
+    <p><strong>Hinweis:</strong> Die Typen basieren auf der <em>ersten Datenzeile</em> in der Tabelle. JSON kennt keine festen Typen, daher ist dies nur eine Annäherung.</p>
+
+
+
+    <h2 class="mt-4">📂 LIST TABLES</h2>
+    <p>Listet alle Tabellen im aktuell gewählten Datenbankverzeichnis auf:</p>
+    <pre><code class="language-php">$tabellen = $db->listTables();
+    print_r($tabellen);</code></pre>
+    <p>Ausgabe:</p>
+    <pre><code class="language-php">Array
+    (
+        [0] => users
+        [1] => orders
+        [2] => categories
+    )</code></pre>
+    <p><strong>Hinweis:</strong> Gibt alle vorhandenen <code>.json</code>-Dateien zurück (ohne Endung).</p>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    <h2 class="mt-5">📦 Beispielanwendungen</h2>
+    <p>Einige praktische Anwendungsbeispiele aus typischen Admin-Oberflächen oder Backend-Logiken:</p>
+
+    <div class="code-block">
+      <h5>👥 Benutzer aus Berlin mit E-Mail anzeigen</h5>
+      <pre><code class="language-php">$users = $db->from('users')
+    ->where([['city', '==', 'Berlin']])
+    ->select('id,name,email')
+    ->get();</code></pre>
+    </div>
+
+    <div class="code-block">
+      <h5>➕ Neuen Benutzer anlegen</h5>
+      <pre><code class="language-php">$db->from('users')->insert([
+  'id' => 999,
+  'name' => 'Julia',
+  'email' => 'julia@beispiel.de',
+  'active' => true
+]);</code></pre>
+    </div>
+
+    <div class="code-block">
+      <h5>📝 Benutzer-E-Mail ändern</h5>
+      <pre><code class="language-php">$db->from('users')
+   ->where([['id', '==', 999]])
+   ->update(['email' => 'julia.neu@beispiel.de']);</code></pre>
+    </div>
+
+    <div class="code-block">
+      <h5>🛒 Bestellungen je Kunde summieren (ab 3 Bestellungen)</h5>
+      <pre><code class="language-php">$db->from('orders')
+    ->groupBy('customer_id')
+    ->having(fn($g) => count($g) >= 3);
+
+$umsatz = $db->sum('total');</code></pre>
+    </div>
+
+    <div class="code-block">
+      <h5>📄 Benutzerliste seitenweise anzeigen</h5>
+      <pre><code class="language-php">$users = $db->from('users')
+    ->orderBy('name')
+    ->paginate(1, 25);</code></pre>
+    </div>
+
+    <div class="code-block">
+      <h5>✅ Prüfung, ob ein Admin existiert</h5>
+      <pre><code class="language-php">$adminDa = $db->from('users')
+    ->where([['role', '==', 'admin']])
+    ->exists();</code></pre>
+    </div>
+
+    <h2 class="mt-5">🔗JOIN Beispiele</h2>
+    <div class="bg-white p-3 rounded border">
+      <p><strong>🔄INNER JOIN:</strong> Nur Datensätze mit Übereinstimmungen in beiden Tabellen</p>
+      <pre><code class="language-php">$db->from('users')
+       ->join('orders', 'user_id', 'INNER')
+       ->get();</code></pre>
+    
+      <p><strong>⬅️ LEFT JOIN:</strong> Alle Datensätze aus der linken Tabelle (z. B. <code>users</code>), passende Daten aus der rechten (z. B. <code>orders</code>), andernfalls <code>null</code></p>
+      <pre><code class="language-php">$db->from('users')
+       ->join('orders', 'user_id', 'LEFT')
+       ->get();</code></pre>
+    
+      <p><strong>➡️ RIGHT JOIN:</strong> Alle Datensätze aus der rechten Tabelle (<code>orders</code>), passende Daten aus der linken (<code>users</code>), andernfalls <code>null</code></p>
+      <pre><code class="language-php">$db->from('users')
+       ->join('orders', 'user_id', 'RIGHT')
+       ->get();</code></pre>
+    
+      <p><strong>🔁 FULL OUTER JOIN:</strong> Kombination aus LEFT und RIGHT JOIN. Es werden alle Zeilen aus beiden Tabellen zurückgegeben – verbundene Zeilen zusammengeführt, nicht verbundene ergänzt mit <code>null</code>-Feldern.</p>
+      <pre><code class="language-php">$db->from('users')
+       ->join('orders', 'user_id', 'FULL OUTER')
+       ->get();</code></pre>
+    
+      <hr class="my-4">
+    
+      <h5>🧩 Kategorie-Zuordnung via Zwischentabelle (artikel2category)</h5>
+      <p>Um z. B. alle Artikel zu finden, die einer bestimmten Kategorie (z. B. <code>category_id = 1</code>) zugewiesen sind, nutzt du die Zwischentabelle <code>artikel2category</code> als Ausgangspunkt und verknüpfst sie mit <code>artikel</code>:</p>
+      <pre><code class="language-php">$artikel = $db->from('artikel2category')
+      ->where([['category_id', '==', 1]])
+      ->join('artikel', 'artikel_id', 'INNER')
+      ->select('artikel_id,name,preis')
+      ->get();</code></pre>
+    
+      <p><em>Hinweis:</em> Diese Technik ist hilfreich für viele-zu-viele-Beziehungen wie Artikel & Kategorien, Produkte & Tags, Benutzer & Rollen usw.</p>
+    </div>
+    
+<hr>
+
+
+
+
+
+<h2 class="mt-5">🧾 Fazit</h2>
+<p>
+  JsonSQL ist mehr als nur ein Experiment – es ist ein vollwertiger Datenbank-Handler für strukturierte JSON-Dateien, der SQL-artige Abfragen mit moderner PHP-Syntax vereint. 
+</p>
+<p>
+  Besonders hervorzuheben ist die Unterstützung für <strong>JOINs</strong> (inkl. <code>FULL OUTER</code>), komplexe <strong>Filter- und Sortierlogiken</strong>, sowie Gruppenfunktionen mit <strong>Aggregaten</strong> und <code>having()</code>–Klauseln.
+</p>
+<p>
+  Ob als Admin-Tool, Daten-Mockup-System, API-Datenquelle oder Lightweight-Datenbank für lokale Webprojekte: JsonSQL bietet eine einzigartige Kombination aus Flexibilität, Lesbarkeit und Dateibasiertheit – ganz ohne MySQL oder SQLite.
+</p>
+<p class="fw-bold text-success">
+  👉 So etwas gibt es derzeit <u>nirgendwo</u> in vergleichbarer Form – JsonSQL ist ein echtes Unikat im PHP-Ökosystem!
+</p>
+<p>
+  Feedback, Ideen und Pull-Requests sind herzlich willkommen auf GitHub. Viel Spaß beim Entwickeln mit JsonSQL!
+</p>
+
+
+
+
+
+
+
+
+
+    <hr>
+    <footer class="text-center text-muted mt-5">
+      <div class="mb-2">
+        <img src="https://teitge.de/JsonSQL/assets/images/JsonSQL-Logo.webp" alt="JsonSQL Logo" style="max-height:40px;">
+      </div>
+      JsonSQL – entwickelt von Johannes Teitge – GPL Lizenz – johannes@teitge.de
+    </footer>
+  </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+[
+    {
+        "password": "TmFXNFk1M3NuWWpmb2VkOFZ1bm8vQT09",
+        "username": "admin",
+        "email": "admin@example.com"
+    },
+    {
+        "password": "c0JGczdqN1M4dXdnKy9DZENPRHllQT09",
+        "username": "testuser",
+        "email": "test@example.com"
+    }
+]
