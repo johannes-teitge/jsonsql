@@ -73,7 +73,7 @@ if ($showDebugger) {
           <li><a class="text-white" href="../examples/faq.php">FAQ</a></li>
           <li><a class="text-white" href="../examples/">Demos (Index)</a></li>
           <li><a class="text-white" href="../../LICENSE.html">Lizenz</a></li>
-          <li><a class="text-white" href="https://github.com/jteitge/jsonsql" target="_blank">GitHub</a></li>
+          <li><a class="text-white" href="https://github.com/johannes-teitge/JsonSQL" target="_blank">GitHub</a></li>
         </ul>
       </div>
     </div>

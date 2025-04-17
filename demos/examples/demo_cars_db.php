@@ -1,5 +1,6 @@
 <?php
 $pageTitle = "JsonSQL Demo: Auto-Datenbank Demo - Systemfelder";
+$baseUrl = dirname($_SERVER['PHP_SELF']);
 
 $headerBG = dirname($_SERVER['SCRIPT_NAME']) . '/images/CarDB/header.webp'; // Beispiel: Hintergrundbild für Header
 $headerHeight = '440px'; // Feste Höhe für den Header
@@ -54,6 +55,23 @@ $db->addAutoincrementField('id')
 echo "✅ Tabelle '{$table}' wurde neu initialisiert und mit Systemfeldern konfiguriert.";
 
 ?>
+
+<div class="demo-info-container">
+  <div class="demo-info-text">
+    <h2>Diese Demo ist noch in Entwicklung…</h2>
+    <p>
+      Aber gute Dinge brauchen eben ihre Zeit.<br>
+      Unser Handwerker ist schon fleißig am Werk – du darfst gespannt sein!
+    </p>
+  </div>
+  <div class="demo-info-image">
+    <img src="<?php echo $baseUrl ?>/../assets/images/handwerker.webp" alt="Fleißiger Handwerker">
+  </div>
+</div>
+
+
+
+
 <!-- Neuer Tab für JSON-Dateien -->
 <div class="container mt-5 mb-3">
   <div class="accordion" id="jsonAccordion">
@@ -131,7 +149,6 @@ $db->insert(['datum' => $formattedDate, 'price' => 120000.55]);
     </div>
   </div>
 </div>
-
 
 
 <!-- Snackbar-Styles und JavaScript -->

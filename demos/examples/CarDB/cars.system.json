@@ -4,7 +4,7 @@
             "dataType": "integer",
             "autoincrement": true,
             "autoincrement_step": 1,
-            "autoincrement_value": 37,
+            "autoincrement_value": 109,
             "comment": "Automatisch generierte ID",
             "⏱️ validated_at": "2025-04-13 03:57:58",
             "⏱️ system_validated_at": "2025-04-13 03:57:58"

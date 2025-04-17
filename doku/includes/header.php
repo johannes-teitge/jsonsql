@@ -35,7 +35,7 @@ $__start = microtime(true);
 
 
 
-    <link rel="stylesheet" href="assets/css/style.css"> <!-- Style für Dokumentation -->
+   <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>"> <!-- Style für Dokumentation -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
 

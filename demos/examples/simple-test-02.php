@@ -212,10 +212,46 @@ function hasChildCategories(array $categories, int $parentId): bool {
   </div>
 </div>
 
+
+
+
 <?php
 // 6. Code-Viewer anzeigen
 $scriptName = basename(__FILE__);
 ?>
+
+
+
+<!-- Exclude Begin -->
+<!-- ===============================
+🔍 Anzeige der JSON SQL Dateien
+=============================== -->
+<div class="container mt-5 mb-3">
+  <div class="accordion" id="jsonAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingJson">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJson" aria-expanded="false" aria-controls="collapseJson">
+          📄 JSON-Dateien anzeigen
+        </button>
+      </h2>
+      <div id="collapseJson" class="accordion-collapse collapse" aria-labelledby="headingJson" data-bs-parent="#jsonAccordion">
+        <div class="accordion-body">
+          <h4>JsonSQL Datei: st3_categories.json</h4>
+          <pre class="code-block"><code><?php
+            echo htmlspecialchars(file_get_contents(__DIR__ . '/../testdb/st3_categories.json'));
+          ?></code></pre>
+
+          <h4>JsonSQL Datei: st3_products.json</h4>
+          <pre class="code-block"><code><?php
+            echo htmlspecialchars(file_get_contents(__DIR__ . '/../testdb/st3_products.json'));
+          ?></code></pre>          
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="container mt-5 mb-3">
   <div class="accordion" id="codeAccordion">

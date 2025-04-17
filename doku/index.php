@@ -35,40 +35,16 @@ body, html {
     overflow-y: auto;
 }
 
+mark.highlight {
+  background-color: yellow;
+  color: black;
+  padding: 0 2px;
+  border-radius: 2px;
+}
 
-
-
-/* Stylischer Link zur Hello-Demo */
-.demo-nav-link {
-    margin-top: 1rem;
-    padding: 0.1rem 0.87rem;
-    background: rgba(255, 255, 255, 0.88); /* Helles Blau mit Transparenz */
-    border-radius: 12px;
-    text-align: center;
-    transition: background 0.3s ease;
-    margin-right: 2rem;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.16);
-  }
-  
-  .demo-nav-link a {
-    color: #007bff;
-    font-weight: 600;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .demo-nav-link:hover {
-    background: rgb(255, 255, 255); /* Helles Blau mit Transparenz */
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.53);    
-  }
-  
-  .demo-nav-link a:hover {
-    text-decoration: none;
-    color: #0056b3; /* Dunkleres Blau beim Hover */
-  }
-
+mark.highlight.current-hit {
+  background-color: orange;
+}
 
 
 </style>
@@ -93,15 +69,104 @@ function loadTemplate($templatePath) {
     <div class="headlogo" id="home">
             <img src="assets/images/JsonSQL-Logo-FullWhite.svg" alt="JsonSQL Logo" style="max-height: 55px;">    
 
-            <div class="demo-nav-link">
-      <a href="<?= $baseUrl ?>/../demos/examples/hello-json-sql.php" target="_blank">
-        🚀 Direkt zur Hello-Demo
-      </a>
-    </div> 
+<style>
+#doku-search {
+  border: =;
+  padding: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  max-width: 90%;
+  background: linear-gradient(180deg, #ffffff,rgb(226, 226, 226));
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.16);
+  margin-top: 35px;
+}
+
+
+#doku-search input,
+#doku-search button {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent;
+}
+
+#doku-search button {
+  background-color:rgba(219, 219, 219, 0.2);
+  border-radius: 3px;
+}  
+
+#doku-search input:focus {
+  border-bottom: 1px solid rgba(136, 150, 169, 0.29) !important;
+}
+
+#doku-search input::placeholder {
+  color: #bbb;
+}
+
+#clearSearch, #nextHit, #prevHit {
+  background-color:rgba(219, 219, 219, 0.2);  
+  color: black !important;
+  font-weight: bold;
+  margin: 2px;
+  padding: 1px;
+}
+
+#clearSearch {
+  background-color:rgba(182, 0, 0, 0.2) !important;
+  padding: 2px 4px;
+
+}
+
+#clearSearch:hover {
+  background-color:rgb(178, 0, 0) !important;
+  color: white;
+  padding: 2px 4px;
+}
+
+#clearSearch:hover i {
+  color: white !important;
+}
+</style>
+
+            
+<div id="searchWrapper" class="mb-3" Style="margin-left:8px;margin-top: 4px;">
+  <div class="input-group input-group-sm" id="doku-search">
+    <input type="text" id="searchDoc" class="form-control" placeholder="🔍 Suche...">
+    
+    <button class="btn btn-outline-light" id="prevHit" title="Vorheriger Treffer">
+    <i class="bi bi-arrow-left-square"></i>
+    </button>
+    
+    <button class="btn btn-outline-light" id="nextHit" title="Nächster Treffer">
+    <i class="bi bi-arrow-right-square"></i>
+    </button>
+    
+    <button class="btn btn-outline-light" id="clearSearch" title="Zurücksetzen">
+      <i class="bi bi-x-lg text-dark"></i>
+    </button>
+
+  </div>
+
+  <div class="d-flex justify-content-end" id="SearchcaseSensitive">
+    <div class="form-check mt-2 d-flex align-items-center justify-content-end" title="Groß-/Kleinschreibung beachten">
+      <input class="form-check-input me-2" type="checkbox" id="caseSensitive">
+      <label class="form-check-label small text-white-50 d-flex align-items-center" for="caseSensitive">
+        <i class="bi bi-type" style="font-size: 1.1rem;"></i>
+      </label>
+    </div>
+  </div>
+
+  <div style="margin-top:-25px;margin-left: 15px;font-size:0.8rem;padding:0" class="text-white-50 " id="searchCounter"></div>
+</div>
+          
 
     </div>  
 
-   
+
+
+<div class="nav-divider"></div>
+
 
 
   <ul class="nav flex-column">
@@ -112,23 +177,27 @@ function loadTemplate($templatePath) {
 
 
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#coreFunctions" role="button" aria-expanded="false" aria-controls="coreFunctions">
-      <span class="m-item"><i class="bi bi-caret-right-fill"></i> Kernfunktionen</span>
+      <a class="nav-link" data-bs-toggle="collapse" href="#coreFunctions" role="button" aria-expanded="true" aria-controls="coreFunctions">
+        <span class="m-item"><i class="bi bi-caret-down-fill"></i> Kernfunktionen</span>
       </a>
-      <div class="collapse ms-3" id="coreFunctions">
+      <div class="collapse ms-3 show" id="coreFunctions">
         <ul class="nav flex-column">
           <li><a class="nav-link" href="#insert">📥 insert()</a></li>
           <li><a class="nav-link" href="#update">🛠️ update()</a></li>
           <li><a class="nav-link" href="#delete">🗑️ delete()</a></li>
-          <li><a class="nav-link" href="#select">🔎 select() / get()</a></li>
+          <li><a class="nav-link" href="#select">🎯 select()</a></li>
+          <li><a class="nav-link" href="#get">📦 get()</a></li>
           <li><a class="nav-link" href="#exists">❓ exists()</a></li>
           <li><a class="nav-link" href="#pluck">🎯 pluck()</a></li>
           <li><a class="nav-link" href="#first">🥇 first()</a></li>
-          <li><a class="nav-link" href="#clear">♻️ clear()</a></li>
+          <li><a class="nav-link" href="#clearTable">🧹 clearTable()</a></li>
+          <li><a class="nav-link" href="#clear">☠️ clear() <span class="JsonSQL-danger small">vorsichtig!</span></a></li>
           <li><a class="nav-link" href="#paginate">📄 paginate()</a></li>
         </ul>
       </div>
     </li>
+
+
 
     <li class="nav-item">
       <a class="nav-link" href="#filter"><span class="m-item"><i class="bi bi-funnel-fill"></i> Filterlogik</span></a>
@@ -245,3 +314,73 @@ const scrollSpy = new bootstrap.ScrollSpy(document.querySelector('.content-area'
 });
 </script>  
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const input = document.getElementById("searchDoc");
+  const nextBtn = document.getElementById("nextHit");
+  const prevBtn = document.getElementById("prevHit");
+  const clearBtn = document.getElementById("clearSearch");
+  const counter = document.getElementById("searchCounter");
+  const context = new Mark(document.querySelector(".content-area"));
+  const caseCheckbox = document.getElementById("caseSensitive");  
+
+  let current = 0;
+  let marks = [];
+
+  function jumpTo(index) {
+    if (marks[index]) {
+      marks[index].scrollIntoView({ behavior: "smooth", block: "center" });
+      marks.forEach(m => m.classList.remove("current-hit"));
+      marks[index].classList.add("current-hit");
+      counter.textContent = `Treffer ${index + 1} von ${marks.length}`;
+    }
+  }
+
+  input.addEventListener("input", function () {
+    const keyword = input.value.trim();
+    context.unmark({
+      done: function () {
+        if (keyword.length > 1) {
+          context.mark(keyword, {
+            separateWordSearch: true,
+            className: "highlight",
+            caseSensitive: caseCheckbox.checked, // 👈 wichtig!
+            done: function () {
+              marks = Array.from(document.querySelectorAll("mark.highlight"));
+              current = 0;
+              if (marks.length > 0) {
+                jumpTo(current);
+              } else {
+                counter.textContent = "Keine Treffer";
+              }
+            }
+          });
+        } else {
+          counter.textContent = "";
+        }
+      }
+    });
+  });
+
+  nextBtn.addEventListener("click", function () {
+    if (marks.length > 0) {
+      current = (current + 1) % marks.length;
+      jumpTo(current);
+    }
+  });
+
+  prevBtn.addEventListener("click", function () {
+    if (marks.length > 0) {
+      current = (current - 1 + marks.length) % marks.length;
+      jumpTo(current);
+    }
+  });
+
+  clearBtn.addEventListener("click", function () {
+    input.value = "";
+    context.unmark();
+    marks = [];
+    counter.textContent = "";
+  });
+});
+</script>

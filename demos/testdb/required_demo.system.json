@@ -1,0 +1,32 @@
+{
+    "fields": {
+        "firstname": {
+            "dataType": "string",
+            "required": true,
+            "defaultValue": null,
+            "length": 50
+        },
+        "lastname": {
+            "dataType": "string",
+            "required": true,
+            "defaultValue": null,
+            "length": 50
+        },
+        "email": {
+            "dataType": "string",
+            "length": 64,
+            "required": true,
+            "defaultValue": null
+        },
+        "phone": {
+            "dataType": "string",
+            "length": 64,
+            "defaultValue": null
+        },
+        "created_at": {
+            "dataType": "datetime",
+            "auto_create_timestamp": true
+        }
+    },
+    "allowAdditionalFields": true
+}

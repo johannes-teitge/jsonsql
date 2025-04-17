@@ -1,5 +1,6 @@
 :root {
     --main-color: #0176D0;
+    --sss-color: #d63384;    
     --bg-color: #0176d020;
     --white-color: #f5f5f5;
     --main-color-darken: rgb(0, 83, 147);
@@ -8,6 +9,7 @@
     --accent-hover: #e69500;
     --accent2-color: #ff4500;
     --accent2-hover: #c63500;
+    --danger-color: #c6001a;    
     --text-color: #444;
     --text-hover-color: #131e25;
     --background-color: #f8f9fa;
@@ -19,6 +21,68 @@ body {
     background: linear-gradient(to bottom, #ffffff, #007bff0f);
     color: var(--text-color);
 }
+
+
+.method-signature {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.method-signature li {
+  margin-bottom: 0.3rem;
+}
+
+.JsonSQL-danger {
+  background-color: var(--danger-color);
+  color: var(--white-color) !important;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: all 0.1s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.53);      
+}
+
+#SearchcaseSensitive {
+  margin-right:12%;
+  font-size:0.9rem;
+  margin-top:-6px;
+}
+
+#SearchcaseSensitive #caseSensitive:checked {
+    background-color: var(--sss-color) !important;
+    border-color: var(--sss-color) !important;
+}
+#SearchcaseSensitive .form-check-input {
+    margin-right: 3px !important;
+  }
+
+
+
+
+  hr.content-sep {
+    position: relative;
+    border: none;
+    height: 1px;
+    background: #888; /* Linie */
+    margin: 2rem 0;
+  }
+  
+  hr.content-sep::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff; /* Passe an, z. B. #1e1e1e bei dunklem Hintergrund */
+    padding: 0 0.5rem;
+    font-size: 1.2rem;
+    line-height: 1;
+    color: #555;
+  }
+  
+
+
+
+
 
 .container {
     margin-left: 0 !important;
@@ -33,6 +97,8 @@ body {
     position: relative;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
+
+
 
 .m-item {
     margin-left: 15px;
@@ -88,14 +154,25 @@ body {
     padding: 2rem;
 }
 
+pre code.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.1em !important;
+}
+
+.nav-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1rem 0;
+  }
 
 h1 {
     color: var(--main-color);
+    margin-top: 25px;
 }
 
 h2 {
     color: var(--second-color);
-    margin-top: 20px !important;
+    margin-top: 40px !important;
 }
 
 h3 {
@@ -172,6 +249,17 @@ pre {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 .cool_sep {
     color:  var(--main-color);
@@ -285,4 +373,143 @@ pre {
     padding-top: 20px;
     overflow-y: auto;
 }
+
+
+
+
+.pulsating-download {
+    animation: pulsea 1.3s infinite;
+    transition: background-color 0.3s;
+  }
+  .pulsating-download:hover {
+  
+  }
+  
+  @keyframes pulsea {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.323);
+    }
+    70% {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px 10px rgba(0, 123, 255, 0);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+  }
+
+
+
+/* ++++++++++  Download-Button ++++++++++ */
+
+  .btn-download-github {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #24292e !important;
+    color: white;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .btn-download-github:hover {
+    background-color: #444c56;
+    color: #fff;
+  }
+  .pulsating-download {
+    animation: pulsed 2s infinite;
+  }
+  
+  @keyframes pulsed {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(36, 41, 46, 0.7);
+    }
+    70% {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px 10px rgba(36, 41, 46, 0);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(36, 41, 46, 0);
+    }
+  }
+
+
+
+  /* +++++++++++++++++ Animated Divider +++++++++++++++++++ */
+  .animated-divider {
+    width: 100%;
+    height: 6px;
+    border-radius: 2px;
+    margin: 2rem 0;
+    background: linear-gradient(90deg, var(--main-color), var(--sss-color));
+    background-size: 200% 100%;
+    animation: pulse-divider 3s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-divider {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+
+  .demo-nav-link {
+    background: var(--main-color) !important;
+    margin-left: 25px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.16);   
+    border-radius: 8px !important;
+
+  }
+
+  .demo-nav-link:hover {
+    background: var(--sss-color) !important;
+    border: 1px solid var(--sss-color) !important;   
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.53);        
+  }
+
+
+
+/* Stylischer Link zur Hello-Demo */
+.demo-nav-link_ {
+    margin-top: 1rem;
+    padding: 0.1rem 0.87rem;
+    background: rgba(255, 255, 255, 0.88); /* Helles Blau mit Transparenz */
+    border-radius: 12px;
+    text-align: center;
+    transition: background 0.3s ease;
+    margin-right: 2rem;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.16);
+  }
+  
+  .demo-nav-link_ a {
+    color: #007bff;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .demo-nav-link_:hover {
+    background: rgb(255, 255, 255); /* Helles Blau mit Transparenz */
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.53);    
+  }
+  
+  .demo-nav-link_ a:hover {
+    text-decoration: none;
+    color: #0056b3; /* Dunkleres Blau beim Hover */
+  }  
+
 

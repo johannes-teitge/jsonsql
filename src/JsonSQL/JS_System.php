@@ -152,13 +152,15 @@ trait JS_System
         }
     
         // required + defaultValue nur bei Neuanlage prüfen
+        /* // Deprecated since 2025-04-17: Pflichtwertprüfung wurde auf insert() verschoben
         if (
             !$isUpdate &&
             !empty($fieldProperties['required']) &&
             (!isset($fieldProperties['defaultValue']) || $fieldProperties['defaultValue'] === null)
         ) {
-            throw new \Exception("Das Feld '$fieldName' ist als erforderlich markiert, aber es wurde kein gültiger Standardwert angegeben.");
+            throw new \Exception("Das Feld '$fieldName' ist als erforderlich markiert, aber es wurde kein gültiger Standardwert 'defaultValue' angegeben.");
         }
+        */
 
         // ⏱️ Validierungszeitpunkt eintragen
   //      $fieldProperties['⏱️ system_validated_at'] = date('Y-m-d H:i:s');     

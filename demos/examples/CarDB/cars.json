@@ -1,6 +1,6 @@
 [
     {
-        "id": 35,
+        "id": 107,
         "hash": "",
         "brand": "dsf dsf das fds fds af dsg dsfg fds gsf ",
         "model": "",
@@ -14,11 +14,11 @@
         "datum": "1970-01-01 00:00:00",
         "description": "",
         "logo": "",
-        "created_at": "2025-04-13 22:11:58",
-        "updated_at": "2025-04-13 22:11:58"
+        "created_at": "2025-04-15 11:49:03",
+        "updated_at": "2025-04-15 11:49:03"
     },
     {
-        "id": 36,
+        "id": 108,
         "hash": "",
         "brand": "",
         "model": "",
@@ -29,10 +29,10 @@
         "transmission": "",
         "doors": 4,
         "price": 120000.55,
-        "datum": "2025-04-13 22:11:58",
+        "datum": "2025-04-15 11:49:03",
         "description": "",
         "logo": "",
-        "created_at": "2025-04-13 22:11:58",
-        "updated_at": "2025-04-13 22:11:58"
+        "created_at": "2025-04-15 11:49:03",
+        "updated_at": "2025-04-15 11:49:03"
     }
 ]

@@ -4,7 +4,7 @@
             "dataType": "integer",
             "autoincrement": true,
             "autoincrement_step": 1,
-            "autoincrement_value": 19
+            "autoincrement_value": 22
         }
     },
     "allowAdditionalFields": true

@@ -242,6 +242,21 @@ require_once __DIR__ . '/../includes/header.php';
 </div>
 
 
+<!-- Required Demo : für Validierung von Pflichtfeldern -->
+<div class="demo-card card shadow-sm rounded-4 p-3" style="width: 300px;">
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title">🧪 Required Demo.</h5>
+
+    <!-- Bild nach dem Titel -->
+    <img src="<?= dirname($_SERVER['SCRIPT_NAME']) . '/images/RequiredDemo/banner.webp'; ?>" alt="Fehler beim Einfügen – Pflichtfelder in JsonSQL" class="img-fluid mb-3">
+
+    <p class="card-text">
+      Zeigt, wie <code>required</code> Felder in der <code>system.json</code> geprüft werden.  
+      Inklusive Fehlerbehandlung beim Einfügen unvollständiger Datensätze – ideal zum Testen von Pflichtfeld-Validierung.
+    </p>
+    <a href="demo_required.php" class="btn btn-sm btn-outline-danger mt-auto">Demo öffnen</a>
+  </div>
+</div>
 
 
 

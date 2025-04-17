@@ -42,6 +42,13 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+ <!-- JsonSQL CSS -->  
+ <link href="../includes/css/styles.css?v=<?= date('YmdHis') ?>" rel="stylesheet">
+
+
+   <!-- JsonSQL Icon  -->  
+   <link href="../assets/Icons/JsonSQL/style.css" rel="stylesheet">  
+
 
   <!-- Highlight.js -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
@@ -69,20 +76,6 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
 
   <style>
 
-:root {
-      --main-color: #0176D0;
-      --main-color-darken:rgb(0, 83, 147);      
-      --accent-color: #FFA800;
-      --accent-hover: #e69500;
-      --text-color: #444;
-      --background-color: #f8f9fa;
-      --background-color2:rgb(212, 212, 212); 
-      --white-color:rgb(255, 255, 255);           
-    }
-
-    header {
-  background: linear-gradient(to bottom, var(--background-color), var(--background-color2));     
-}
 
 
 
@@ -155,99 +148,6 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
 
 
 
-    body {
-     /* padding-bottom: 5rem; */
-      color: var(--text-color);
-      background: linear-gradient(to bottom, #ffffff,rgba(194, 194, 194, 0.26)); 
-      min-height: 100vh;      
-    }
-
-    main {
-  flex: 1 0 auto;
-}    
-
-
-
-    pre.code-block {
-      background-color: #1e1e1e;
-      color: #f8f8f2;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      overflow-x: auto;
-    }
-
-    .footer {
-      background: linear-gradient(to bottom, var(--main-color), var(--main-color-darken));      
-      flex-shrink: 0;
-    }
-
-    .headlogo {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  opacity: 0;
-  transform: translateY(-160px);
-  animation: moonland 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-
-
-@keyframes moonland {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-
-
-
-
-    .soft-shadow-separator {
-    margin: 1rem auto;
-    width: 100%;
-    height: 20px;
-  }
-
-  .card {
-    margin-bottom: 20px;
-  }
-
-  .backContent {
-    text-decoration: none;
-    color:rgb(168, 168, 168);
-    padding: 5px;
-    border-radius: 4px;
-  }
-
-  .backContent:hover {
-    text-decoration: none;
-    background-color:rgb(168, 168, 168);
-    color: white;
-  }  
-
-  .demoshead {
-    margin-bottom: 4px !important;
-  }
-
-
-  pre.code-block {
-    background-color:rgba(255, 255, 255, 0);
-    color:rgb(226, 226, 223);
-    padding: 0;
-    border-radius: 0;
-    _overflow-x: auto;
-}
-
-.hljs-ln-code_, header {
-  background-color:rgba(119, 187, 255, 0.1);  
-}
-
-pre code.hljs {
-    padding: 0;
-}
-
-
 
 
   </style>
@@ -272,11 +172,18 @@ pre code.hljs {
     
   <h1 class="mb-4 text-center demoshead"><?= htmlspecialchars($title) ?></h1>
     
-  <div class="text-center">
+  <div class="text-center d-flex justify-content-center gap-3">
     <a href="index.php" class="backContent">
-      ← Zur Übersicht
+      <i class="bi bi-arrow-left"></i> Zur Übersicht
     </a>
+    <a href="../../doku/" class="backContent">
+      <i class="bi bi-journal-code"></i> Dokumentation
+    </a>
+    <a href="../examples/faq.php" class="backContent">
+      <i class="bi bi-question-circle"></i> FAQ
+    </a>    
   </div>
+
 </div>   
   
 </div>

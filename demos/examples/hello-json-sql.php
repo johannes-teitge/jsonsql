@@ -201,7 +201,23 @@ $debugger->addInfoText('Die einzelnen Datenzeilen');
 </div>
 
 
+<?php
+$scriptName = basename(__FILE__);
 
+// Entferne die Exclude-Tags aus dem Quellcode, aber lasse den eigenen Codeabschnitt aus
+$scriptContent = file_get_contents(__FILE__);
+
+// Verhindern, dass der Codeblock selbst ersetzt wird, indem wir ihn in einen temporären Kommentar umwandeln
+$scriptContent = preg_replace('/<!-- Exclude Begin -->.*?<!-- Exclude End -->/s', '', $scriptContent);
+
+// Hier verwenden wir einen temporären Platzhalter, um den Code zu umgehen, der ersetzt wird.
+$scriptContent = str_replace('<!-- Exclude Begin -->', '<!-- Exclude Begin Temp -->', $scriptContent);
+$scriptContent = str_replace('<!-- Exclude End -->', '<!-- Exclude End Temp -->', $scriptContent);
+
+?>
+
+
+<!-- Exclude Begin -->
 <!-- ===============================
 🔍 Anzeige der JSON SQL Dateien
 =============================== -->
@@ -230,6 +246,7 @@ $debugger->addInfoText('Die einzelnen Datenzeilen');
   </div>
 </div>
 
+
 <!-- ===============================
 🔍 Quellcode-Anzeige für Lernzwecke
 =============================== -->
@@ -243,12 +260,13 @@ $debugger->addInfoText('Die einzelnen Datenzeilen');
       </h2>
       <div id="collapseCode" class="accordion-collapse collapse" aria-labelledby="headingCode" data-bs-parent="#codeAccordion">
         <div class="accordion-body">
-          <pre class="code-block"><code><?php echo htmlspecialchars(file_get_contents(__FILE__)); ?></code></pre>
+          <pre class="code-block"><code><?php echo htmlspecialchars($scriptContent); ?></code></pre>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- Exclude End -->
 
 
 <?php

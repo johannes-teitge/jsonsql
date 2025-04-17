@@ -663,6 +663,53 @@ private function insertAdditionalFields(array $newrecord, array $originalRecord)
 
 
 
+/**
+ * Prüft, ob alle als `required` markierten Felder in der system.json im Datensatz vorhanden sind.
+ *
+ * Diese Methode wird vor dem Speichern eines Datensatzes aufgerufen, um sicherzustellen,
+ * dass alle Pflichtfelder (`required: true`) gemäß system.json vorhanden und nicht leer sind.
+ * Wird ein erforderliches Feld nicht übergeben oder ist leer, wird eine Exception ausgelöst
+ * und der Insert-Vorgang abgebrochen.
+ *
+ * Hinweise:
+ * - Leere Werte (z. B. `''` oder `null`) gelten als nicht gesetzt.
+ * - Die Prüfung erfolgt **vor** dem Anwenden von Defaultwerten oder Autofeldern.
+ * - Nur relevant für Insert-Vorgänge, nicht für Update (außer dort explizit gewünscht).
+ *
+ * @param array $inputRecord Der vom Benutzer übergebene Datensatz (vor Anwendung von Auto-Feldern).
+ *
+ * @throws \Exception Wenn ein oder mehrere Pflichtfelder fehlen oder leer sind.
+ *
+ * @return void
+ */
+private function validateRequiredFields(array $inputRecord): void {
+    if (!isset($this->systemConfig['fields'])) {
+        return; // Wenn keine Felder definiert sind, überspringen
+    }
+
+    $missingFields = [];
+
+    foreach ($this->systemConfig['fields'] as $field => $config) {
+        if (!empty($config['required'])) {
+            $value = $inputRecord[$field] ?? null;
+            
+            // Prüfen: Feld fehlt oder ist leer (z. B. '', null)
+            if ($value === null || $value === '') {
+                $missingFields[] = $field;
+            }
+        }
+    }
+
+    if (!empty($missingFields)) {
+        $fieldList = implode(', ', $missingFields);
+        $fieldList = implode('<except-seperator>,</except-seperator>', array_map(fn($f) => "<except>$f</except>", $missingFields));        
+        throw new \Exception("Fehlende erforderliche Felder: <except-wrapper>$fieldList</except-wrapper>");
+    }
+}
+
+
+
+
 
 
 /**
@@ -699,6 +746,8 @@ public function insert(array $record): void {
         $records = isset($record[0]) && is_array($record[0]) ? $record : [$record];
 
         foreach ($records as $rec) {
+            $this->validateRequiredFields($rec);  // 🔴 OHNE DAS: Kein Fehler bei fehlenden Pflichtfeldern!
+
             $newRecord = $this->applyAutoFields($rec);
             $finalRecord = $this->insertAdditionalFields($newRecord, $rec);
             $data[] = $finalRecord;
@@ -779,6 +828,40 @@ public function insert(array $record): void {
     
 
 
+
+
+
+    /**
+     * Setzt automatische Update-Zeitstempel gemäß system.json.
+     *
+     * Felder mit `"auto_modified_timestamp": true` werden automatisch
+     * auf das aktuelle Datum/Zeit gesetzt – mit Format und Zeitzone aus system.json.
+     *
+     * @param array $record Der Datensatz, der aktualisiert werden soll.
+     * @return array Der aktualisierte Datensatz mit gesetzten Auto-Feldern.
+     */
+    private function applyUpdateFields(array $record): array {
+        if ($this->systemConfig === null || !isset($this->systemConfig['fields'])) {
+            return $record;
+        }
+
+        foreach ($this->systemConfig['fields'] as $field => $config) {
+            if (!empty($config['auto_modified_timestamp'])) {
+                $format = $config['format'] ?? 'Y-m-d H:i:s';
+                $timezone = $config['timezone'] ?? 'UTC';
+                $dt = new \DateTime('now', new \DateTimeZone($timezone));
+                $record[$field] = $dt->format($format);
+            }
+        }
+
+        return $record;
+    }
+
+
+
+
+
+
     /**
      * Aktualisiert Datensätze in der aktuell gesetzten JSON-Tabelle, basierend auf gesetzten Filtern.
      *
@@ -819,11 +902,8 @@ public function insert(array $record): void {
     
             foreach ($data as $index => $row) {
                 if (in_array($row, $filteredData, true)) {
-                    // Zeitstempel für "updated_at" setzen
-                    if (isset($this->systemConfig['autoupdated'])) {
-                        $updatedField = $this->systemConfig['autoupdated']; // Hole den Wert aus der system.json
-                        $fieldsToUpdate[$updatedField] = date('Y-m-d H:i:s'); // Setzt den aktuellen Zeitstempel für das 'autoupdated'-Feld
-                    }
+
+                    $fieldsToUpdate = $this->applyUpdateFields($fieldsToUpdate);
     
                     $data[$index] = array_merge($row, $fieldsToUpdate);
                     $updatedCount++;
@@ -1015,6 +1095,66 @@ public function insert(array $record): void {
     public function getLastInsertId(): ?int {
         return $this->lastInsertId;
     }
+
+
+
+    /**
+     * Prüft, ob ein Datensatz zur aktuellen Abfrage existiert.
+     *
+     * Gibt `true` zurück, wenn mindestens ein Treffer vorhanden ist.
+     *
+     * Beispiel:
+     * ---------
+     * if ($db->from('users')->where('email', '=', 'test@example.com')->exists()) {
+     *   echo "Benutzer existiert.";
+     * }
+     *
+     * @return bool
+     */
+    public function exists(): bool {
+        $results = $this->limit(1)->get(); // Schnellste Variante: nur 1 Datensatz laden
+        return !empty($results);
+    }
+
+
+
+    /**
+     * Gibt den ersten passenden Datensatz der aktuellen Abfrage zurück.
+     *
+     * Beispiel:
+     * ---------
+     * $user = $db->from('users')
+     *            ->where('email', '=', 'alice@example.com')
+     *            ->first();
+     *
+     * @return array|null Der erste Datensatz oder null, wenn nichts gefunden wurde.
+     */
+    public function first(): ?array {
+        $results = $this->limit(1)->get();
+        return $results[0] ?? null;
+    }
+
+
+
+/**
+ * Gibt den Wert eines bestimmten Feldes zurück.
+ *
+ * @param string $column    Feldname, der ausgegeben werden soll
+ * @param bool   $all       Wenn true, gibt ein Array aller Werte zurück (Standard: false)
+ *
+ * @return mixed            Einzelwert oder Array von Werten
+ */
+public function pluck(string $column, bool $all = false) {
+    $this->select($column);
+
+    $results = $this->get();
+
+    if ($all) {
+        return array_map(fn($row) => $row[$column] ?? null, $results);
+    }
+
+    return $results[0][$column] ?? null;
+}
 
 
 

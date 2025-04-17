@@ -214,28 +214,79 @@ trait JS_Tables
         return file_get_contents($this->currentTableFile);
     }
     
+   
     
-
-    public function truncate(string $tableName): void {
+    public function clearTable(string $tableName): void {
         if (!$this->currentDbPath) {
             throw new \Exception("Keine Datenbank ausgewählt.");
         }
     
-        $this->currentTableName = $tableName; // 👈 wichtig: für system.json
+        $this->currentTableName = $tableName;
         $this->currentTableFile = $this->currentDbPath . DIRECTORY_SEPARATOR . $tableName . '.json';
     
-        // Datei anlegen oder leeren
-        if (!file_exists($this->currentTableFile)) {
+        // Nur leeren, wenn die Tabelle existiert
+        if (file_exists($this->currentTableFile)) {
             file_put_contents($this->currentTableFile, json_encode([], JSON_PRETTY_PRINT));
-     //       echo "📁 Tabelle '$tableName' wurde neu erstellt.<br>";
+            $this->loadSystemConfig(); // Falls Autoincrement/UUID zurückgesetzt werden sollen
         } else {
-            file_put_contents($this->currentTableFile, json_encode([], JSON_PRETTY_PRINT));
-         //   echo "🧹 Tabelle '$tableName' wurde geleert.<br>";
+            throw new \Exception("Tabelle '$tableName' existiert nicht und kann daher nicht geleert werden.");
         }
-    
-        // System laden und ggf. neu speichern (z. B. für autoincrement-Werte)
-        $this->loadSystemConfig();
     }
+    
+
+
+
+/**
+ * Löscht die system.json-Datei der angegebenen Tabelle.
+ *
+ * @param string $tableName Der Tabellenname (ohne .json)
+ */
+public function truncateSystem(string $tableName): void {
+    if (!$this->currentDbPath) {
+        throw new \Exception("Keine Datenbank ausgewählt.");
+    }
+
+    $systemFile = $this->currentDbPath . DIRECTORY_SEPARATOR . $tableName . '.system.json';
+    if (file_exists($systemFile)) {
+        unlink($systemFile);
+    }
+
+    // Falls die aktuelle Tabelle betroffen ist, interne Konfiguration zurücksetzen
+    if ($this->currentTableName === $tableName) {
+        $this->systemConfig = null;
+    }
+}
+
+
+
+/**
+ * Leert eine Tabelle und optional auch die zugehörige system.json.
+ *
+ * @param string $tableName   Der Tabellenname (ohne .json)
+ * @param bool   $resetSystem Wenn true, wird zusätzlich die system.json gelöscht
+ *
+ * @throws \Exception Wenn keine Datenbank ausgewählt wurde.
+ */
+public function truncate(string $tableName, bool $resetSystem = false): void {
+    if (!$this->currentDbPath) {
+        throw new \Exception("Keine Datenbank ausgewählt.");
+    }
+
+    $this->currentTableName = $tableName;
+    $this->currentTableFile = $this->currentDbPath . DIRECTORY_SEPARATOR . $tableName . '.json';
+
+    // Tabelle leeren oder neu erstellen
+    file_put_contents($this->currentTableFile, json_encode([], JSON_PRETTY_PRINT));
+
+    // Optional: system.json löschen
+    if ($resetSystem) {
+        $this->truncateSystem($tableName);
+    }
+
+    // System (neu) laden
+    $this->loadSystemConfig();
+}
+
     
     /**
      * Löscht eine Tabelle und ggf. ihre zugehörige system.json-Konfiguration.

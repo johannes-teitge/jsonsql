@@ -44,27 +44,29 @@ if (!file_exists(__DIR__ . '/../testdb/' . $productTable . '.json')) {
 }
 
 // Filter aus der URL
-$filterIds = isset($_GET['filter']) 
-    ? array_map('intval', is_array($_GET['filter']) ? $_GET['filter'] : explode(',', $_GET['filter'])) 
-    : [];
+$filterIds = isset($_GET['filter']) ? array_map('intval', $_GET['filter']) : [];
 
 // Kategorien laden
-$categories = $db->from($categoryTable)->select('*')->orderBy('cat_title')->get();
+$categories = $db->select('*')->from($categoryTable)->orderBy('cat_title')->get();
 
 // Produkte mit JOIN auf Kategorien – jetzt explizit mit unterschiedlichen Spalten
-$db->from($productTable)->join($categoryTable, ['local' => 'pro_cat_id', 'foreign' => 'cat_id'], 'LEFT');
+// !Select am Anfang sonst wird der Filter überschrieben !!!
+$db->select([
+  'pro_title',
+  'pro_price',
+  'cat_title'])
+  ->from($productTable,true)
+  ->join($categoryTable, ['local' => 'pro_cat_id', 'foreign' => 'cat_id'], 'LEFT');
 
 if (!empty($filterIds)) {
-    $db->where([['pro_cat_id', 'IN', $filterIds]]);
+  $db->where([['pro_cat_id', 'IN', $filterIds]]);
 }
 
-$products = $db->select([
-        'pro_title',
-        'pro_price',
-        'cat_title'
-    ])
-    ->orderBy('pro_title')
-    ->get();
+// Hier Select würde den Filter resetten und wieder alle Datensätze ausgeben
+$products = $db->orderBy('pro_title')
+               ->get();
+
+
 ?>
 
 <div class="container">
@@ -141,8 +143,60 @@ $products = $db->select([
     </div>
   </div>
 
-  <!-- Quellcode anzeigen -->
-  <?php $scriptName = basename(__FILE__); ?>
+  <?php
+$scriptName = basename(__FILE__);
+
+// Entferne die Exclude-Tags aus dem Quellcode, aber lasse den eigenen Codeabschnitt aus
+$scriptContent = file_get_contents(__FILE__);
+
+// Verhindern, dass der Codeblock selbst ersetzt wird, indem wir ihn in einen temporären Kommentar umwandeln
+$scriptContent = preg_replace('/<!-- Exclude Begin -->.*?<!-- Exclude End -->/s', '', $scriptContent);
+
+// Hier verwenden wir einen temporären Platzhalter, um den Code zu umgehen, der ersetzt wird.
+$scriptContent = str_replace('<!-- Exclude Begin -->', '<!-- Exclude Begin Temp -->', $scriptContent);
+$scriptContent = str_replace('<!-- Exclude End -->', '<!-- Exclude End Temp -->', $scriptContent);
+
+?>
+
+
+
+
+
+
+
+<!-- Exclude Begin -->
+<!-- ===============================
+🔍 Anzeige der JSON SQL Dateien
+=============================== -->
+<div class="container mt-5 mb-3">
+  <div class="accordion" id="jsonAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingJson">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJson" aria-expanded="false" aria-controls="collapseJson">
+          📄 JSON-Dateien anzeigen
+        </button>
+      </h2>
+      <div id="collapseJson" class="accordion-collapse collapse" aria-labelledby="headingJson" data-bs-parent="#jsonAccordion">
+        <div class="accordion-body">
+          <h4>JsonSQL Datei: st3_categories.json</h4>
+          <pre class="code-block"><code><?php
+            echo htmlspecialchars(file_get_contents(__DIR__ . '/../testdb/st3_categories.json'));
+          ?></code></pre>
+
+          <h4>JsonSQL Datei: st3_products.json</h4>
+          <pre class="code-block"><code><?php
+            echo htmlspecialchars(file_get_contents(__DIR__ . '/../testdb/st3_products.json'));
+          ?></code></pre>          
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===============================
+🔍 Quellcode-Anzeige für Lernzwecke
+=============================== -->
   <div class="container mt-5 mb-3">
     <div class="accordion" id="codeAccordion">
       <div class="accordion-item">
@@ -153,12 +207,13 @@ $products = $db->select([
         </h2>
         <div id="collapseCode" class="accordion-collapse collapse" aria-labelledby="headingCode" data-bs-parent="#codeAccordion">
           <div class="accordion-body">
-            <pre class="code-block"><code><?= htmlspecialchars(file_get_contents(__FILE__)); ?></code></pre>
+          <pre class="code-block"><code><?php echo htmlspecialchars($scriptContent); ?></code></pre>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- Exclude End -->
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

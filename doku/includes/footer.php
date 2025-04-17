@@ -35,12 +35,14 @@ $runtime = round((microtime(true) - $__start) * 1000, 2);
     }
   </style>   
 
+
+
       <div class="col-md-4">
         <h6 class="text-uppercase">Ressourcen</h6>
         <ul class="list-unstyled">
           <li><a class="text-white" href="../demos/examples/faq.php">FAQ</a></li>
           <li><a class="text-white" href="../demos/examples/index.php">Demos (Index)</a></li>
-          <li><a class="text-white" href="https://github.com/jteitge/jsonsql" target="_blank">GitHub</a></li>
+          <li><a class="text-white" href="https://github.com/johannes-teitge/JsonSQL" target="_blank">GitHub</a></li>
           <li><a class="text-white" href="../LICENSE.html">Lizenz</a></li>          
         </ul>
       </div>
@@ -56,6 +58,8 @@ $runtime = round((microtime(true) - $__start) * 1000, 2);
   hljs.highlightAll();
   hljs.initLineNumbersOnLoad();
 </script>
+
+<script src="assets/js/mark.js"></script>
 
 <style>
 .hljs-ln-numbers {

@@ -3,6 +3,7 @@
   "description": "SQL-ähnliche Datenbankabfragen auf JSON-Dateien in PHP",
   "type": "library",
   "license": "MIT",
+  "version": "1.0.2",
   "autoload": {
     "psr-4": {
       "JsonSQL\\": "src/JsonSQL/"
