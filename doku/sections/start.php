@@ -9,7 +9,7 @@ $baseUrl = dirname($_SERVER['PHP_SELF']);
 
   <div class="text-left my-4">
     <a href="<?= $baseUrl ?>/../demos/examples/hello-json-sql.php" target="_blank">
-      <img src="assets/images/hello-json-sql.webp" alt="Erste Demo starten" class="img-fluid rounded shadow" style="max-width: 30%; height: auto;"> 
+      <img src="assets/images/hello-json-sql.webp" alt="Erste Demo starten" class="img-fluid rounded shadow" style="max-width: 50%; height: auto;"> 
     </a>
   </div>
 

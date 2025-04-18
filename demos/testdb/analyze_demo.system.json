@@ -1,0 +1,29 @@
+{
+    "fields": {
+        "firstname": {
+            "dataType": "string",
+            "required": true,
+            "length": 50
+        },
+        "lastname": {
+            "dataType": "string",
+            "required": true,
+            "length": 50
+        },
+        "email": {
+            "dataType": "string",
+            "required": true,
+            "length": 64
+        },
+        "phone": {
+            "dataType": "string",
+            "length": 64
+        },
+        "created_at": {
+            "dataType": "datetime",
+            "auto_create_timestamp": true
+        }
+    },
+    "allowAdditionalFields": true,
+    "analyze_demo": "allowAdditionalFields"
+}

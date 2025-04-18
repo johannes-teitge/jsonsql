@@ -1,0 +1,31 @@
+[
+    {
+        "firstname": "Erika",
+        "lastname": "Mustermann",
+        "phone": "0154 345 67",
+        "created_at": "2025-04-18 08:23:13"
+    },
+    {
+        "firstname": "Max",
+        "lastname": "Muster",
+        "email": "max@example.com",
+        "phone": "0123 456 78",
+        "created_at": "2025-04-18 08:23:13",
+        "debug": "X",
+        "demo": "true"
+    },
+    {
+        "firstname": "Anna",
+        "lastname": "Beispiel",
+        "email": "anna@example.com",
+        "phone": "089 123 456",
+        "created_at": "2025-04-18 08:23:13",
+        "foo": "EXTRA"
+    },
+    {
+        "email": "karl@example.com",
+        "phone": "",
+        "created_at": "2025-04-18 08:23:13",
+        "bar": "!!!"
+    }
+]

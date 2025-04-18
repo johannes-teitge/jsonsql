@@ -4,7 +4,7 @@
             "dataType": "integer",
             "autoincrement": true,
             "autoincrement_step": 1,
-            "autoincrement_value": 221
+            "autoincrement_value": 241
         },
         "Erstellt am": {
             "dataType": "datetime",

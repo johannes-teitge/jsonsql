@@ -22,6 +22,14 @@ use FancyDumpVar\FancyDumpVar;
 $debugger = new FancyDumpVar();
 
 $title = $pageTitle ?? 'JsonSQL Demo';
+$removeOverview = $removeOverview ?? false;
+
+$ogDescription = $pageDescription ?? 'Eine interaktive Demo aus dem JsonSQL-Projekt.';
+$ogImage = $pageImage ?? 'https://www.teitge.de/JsonSQL/demos/assets/images/FacebookDefault.webp';
+// URL dynamisch erzeugen
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+$ogUrl = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
 $__start = microtime(true);
 
 define('APP_ROOT', dirname(__DIR__)); // z. B. /var/www/html/projekte/JsonSQL
@@ -35,6 +43,14 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
   <meta charset="UTF-8">
   <title><?= htmlspecialchars($title) ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✅ Open Graph für Facebook -->
+  <meta property="og:title" content="<?= htmlspecialchars($ogTitle) ?>">
+  <meta property="og:description" content="<?= htmlspecialchars($ogDescription) ?>">
+  <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
+  <meta property="og:url" content="<?= htmlspecialchars($ogUrl) ?>">
+  <meta property="og:type" content="website">
+
   <link rel="icon" href="<?= APP_ASSETS_URL ?>/images/JsonSQL-Logo.svg" type="image/webp">
 
   <!-- Bootstrap CSS -->
@@ -173,9 +189,11 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
   <h1 class="mb-4 text-center demoshead"><?= htmlspecialchars($title) ?></h1>
     
   <div class="text-center d-flex justify-content-center gap-3">
-    <a href="index.php" class="backContent">
-      <i class="bi bi-arrow-left"></i> Zur Übersicht
-    </a>
+    <?php if (!$removeOverview): ?>
+      <a href="index.php" class="backContent">
+        <i class="bi bi-arrow-left"></i> Zur Übersicht
+      </a>
+    <?php endif; ?>
     <a href="../../doku/" class="backContent">
       <i class="bi bi-journal-code"></i> Dokumentation
     </a>

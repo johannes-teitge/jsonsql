@@ -5,7 +5,7 @@ namespace Src\JsonSQL;
 
 
 class JS_Base {
-    protected string $jsonSQLVersion = '1.0.1'; 
+    protected string $jsonSQLVersion = '1.0.3'; 
     protected array $databases = [];
     protected ?string $currentDbPath = null;
     protected ?string $currentTableFile = null;
@@ -35,9 +35,21 @@ class JS_Base {
     protected ?array $lastError = null;  // Fehlerbehandlung    
     protected ?array $lastMessage = null;  // Fehlerbehandlung          
 
+    // ============================================================================
+    // 🔧 Variablen-Platzhalter für erlaubte Datentypen und Feldoptionen
+    // ============================================================================
+    // Diese Variablen werden im Trait JS_System befüllt und zentral verwaltet.
+    // Sie dienen der Validierung von system.json-Feldern und stehen allen Modulen zur Verfügung.
+    //
+    // added: 2025-04-18 by Dscho
+    // ============================================================================
+    protected static array $allowedDataTypes = [];         // Wird in JS_System gesetzt
+    protected static array $allowedFieldProperties = [];   // Wird in JS_System gesetzt
+
 
     public function __construct(array $databases) {
         $this->databases = [];
+        $this->initSystemDefaults();
     
         foreach ($databases as $alias => $path) {
             $cleanPath = rtrim($path, DIRECTORY_SEPARATOR);

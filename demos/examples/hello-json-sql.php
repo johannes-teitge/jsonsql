@@ -34,6 +34,8 @@
 
 //  Definition des Titels für header.php
 $pageTitle = "🚀 Erste JsonSQL-Demo: Hello JsonSQL";
+$pageDescription = "Einfacher Einstieg in JsonSQL: Lerne, wie du ohne klassische Datenbankstruktur Daten speichern und abfragen kannst – ideal für kleine Webprojekte.";
+
 
 // 💡 Pfad zur JsonSQL-Klasse definieren
 $JsonSQLpath = __DIR__ . '/../../src/JsonSQL.php';

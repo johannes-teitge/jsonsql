@@ -330,7 +330,206 @@ public function truncate(string $tableName, bool $resetSystem = false): void {
     
         return $renamed;
     }
+
+
+// In deiner JsonSQL Klasse (z. B. in JS_TABLES)
+public function getCurrentTableFile(): string
+{
+    if (empty($this->currentTableFile)) {
+        throw new \Exception("❌ Keine Tabelle gesetzt.");
+    }
+    return $this->currentTableFile;
+}    
     
+// In JsonSQL Klasse
+public function saveTable(array $data): bool
+{
+    if (empty($this->currentTableFile)) {
+        throw new \Exception("❌ Keine Tabelle gesetzt.");
+    }
+    return file_put_contents($this->currentTableFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) !== false;
+}
+
+
+    /**
+     * Lädt die aktuellen Daten der gesetzten Tabelle im Rohformat.
+     *
+     * @trait JS_TABLES
+     * @return array Array mit Datensätzen aus der JSON-Datei
+     * @throws Exception Wenn keine Tabelle gesetzt ist oder Datei nicht lesbar
+     */
+    public function loadTable(): array
+    {
+        if (empty($this->currentTableFile)) {
+            throw new \Exception("❌ Keine Tabelle gesetzt. Bitte zuerst setTable() aufrufen.");
+        }
+
+        if (!file_exists($this->currentTableFile)) {
+            return []; // Leere Tabelle bei nicht vorhandener Datei
+        }
+
+        $json = file_get_contents($this->currentTableFile);
+        $data = json_decode($json, true);
+
+        if (!is_array($data)) {
+            throw new \Exception("❌ Fehler beim Parsen der Tabelle: JSON ist ungültig.");
+        }
+
+        return $data;
+    }
+
+
+
+
+     /**
+     * Analyse der aktiven Tabelle auf Abweichungen zur Systemdefinition.
+     *
+     * Diese Methode überprüft alle Datensätze gegen die aktuell geladene
+     * Systemdefinition. Sie erkennt:
+     * - fehlende Pflichtfelder (required: true)
+     * - zusätzliche Felder, die nicht in der Definition enthalten sind
+     *   (abhängig von allowAdditionalFields oder manuell aktivierbar)
+     *
+     * Rückgabeformat:
+     * [
+     *   [
+     *     'row' => 2,
+     *     'missing' => ['email'],
+     *     'extra' => ['foo'],
+     *     'excerpt' => '{\"firstname\":\"Max\",\"foo\":\"...\"...}'
+     *   ],
+     *   ...
+     * ]
+     *
+     * @trait JS_TABLES
+     * @param bool $checkExtras Zusätzliche Felder anzeigen, auch wenn erlaubt (Standard: false)
+     * @return array Liste aller fehlerhaften Datensätze mit Details
+     * @throws Exception Wenn keine Tabelle gesetzt ist
+     */
+    public function analyzeTable(bool $checkExtras = false): array
+    {
+        if (empty($this->currentTableFile)) {
+            throw new \Exception("❌ Keine aktive Tabelle gesetzt. Bitte setTable() zuerst aufrufen.");
+        }
+
+        if ($this->systemConfig === null) {
+            $this->loadSystemConfig();
+        }
+
+        $definedFields = $this->systemConfig['fields'] ?? [];
+        $allowAdditional = $this->systemConfig['allowAdditionalFields'] ?? false;
+
+        $requiredFields = [];
+        foreach ($definedFields as $key => $meta) {
+            if (!empty($meta['required'])) {
+                $requiredFields[] = $key;
+            }
+        }
+
+        $data = $this->loadTable(); // Achtung: Diese Methode muss currentTable nutzen!
+
+        $result = [];
+        foreach ($data as $index => $row) {
+            $missing = [];
+            $extra = [];
+
+            // Fehlende Pflichtfelder
+            foreach ($requiredFields as $field) {
+                if (!array_key_exists($field, $row)) {
+                    $missing[] = $field;
+                }
+            }
+
+            // Zusätzliche Felder prüfen
+            if (!$allowAdditional || $checkExtras) {
+                foreach (array_keys($row) as $key) {
+                    if (!array_key_exists($key, $definedFields)) {
+                        $extra[] = $key;
+                    }
+                }
+            }
+
+            if (!empty($missing) || !empty($extra)) {
+                $result[] = [
+                    'row' => $index + 1,
+                    'missing' => $missing,
+                    'extra' => $extra,
+                    'excerpt' => substr(json_encode($row, JSON_UNESCAPED_UNICODE), 0, 120) . '...'
+                ];
+            }
+        }
+
+        return $result;
+    }
+
+    
+    /**
+     * Analysiert die Systemdefinition der aktuellen Tabelle (system.json).
+     *
+     * Diese Methode prüft:
+     * - ob alle dataType-Werte gültig sind (optional)
+     * - ob alle Property-Namen innerhalb der Felddefinitionen erlaubt sind (optional)
+     *
+     * Rückgabeformat:
+     * [
+     *   'invalidTypes' => [
+     *     ['field' => 'birthdate', 'dataType' => 'datim']
+     *   ],
+     *   'invalidProperties' => [
+     *     ['field' => 'email', 'property' => 'foobar']
+     *   ]
+     * ]
+     *
+     * @param bool $checkDataTypes Ob dataType-Werte geprüft werden sollen
+     * @param bool $checkFieldProperties Ob Feldoptionen geprüft werden sollen
+     * @return array Fehlerliste
+     * @throws \Exception Wenn keine Tabelle geladen ist
+     */
+    public function analyzeSystemTable(bool $checkDataTypes = true, bool $checkFieldProperties = true): array
+    {
+        if ($this->systemConfig === null) {
+            $this->loadSystemConfig();
+        }
+
+        $definedFields = $this->systemConfig['fields'] ?? [];
+        $invalidTypes = [];
+        $invalidProperties = [];
+
+        foreach ($definedFields as $field => $meta) {
+            // 1️⃣ Ungültige Datentypen prüfen
+            if ($checkDataTypes && isset($meta['dataType']) && !in_array($meta['dataType'], self::$allowedDataTypes)) {
+                $invalidTypes[] = [
+                    'field' => $field,
+                    'dataType' => $meta['dataType']
+                ];
+            }
+
+            // 2️⃣ Ungültige Properties prüfen
+            if ($checkFieldProperties) {
+                foreach (array_keys($meta) as $propertyName) {
+                    if (!in_array($propertyName, self::$allowedFieldProperties)) {
+                        $invalidProperties[] = [
+                            'field' => $field,
+                            'property' => $propertyName
+                        ];
+                    }
+                }
+            }
+        }
+
+        return [
+            'invalidTypes' => $invalidTypes,
+            'invalidProperties' => $invalidProperties
+        ];
+    }
+
+
+
+
+
+
+
+
 
 
 

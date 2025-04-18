@@ -73,11 +73,11 @@ function loadTemplate($templatePath) {
 #doku-search {
   border: =;
   padding: 4px;
-  border-radius: 2px;
+  border-radius: 3px;
   overflow: hidden;
   display: flex;
   max-width: 90%;
-  background: linear-gradient(180deg, #ffffff,rgb(226, 226, 226));
+  background: linear-gradient(180deg,rgb(189, 213, 236),rgb(189, 213, 236));
   transition: all 0.3s ease-in-out;
   box-shadow: 0 8px 14px rgba(0, 0, 0, 0.16);
   margin-top: 35px;
@@ -127,6 +127,11 @@ function loadTemplate($templatePath) {
 #clearSearch:hover i {
   color: white !important;
 }
+
+#searchDoc::placeholder {
+  color:var(--main-color) !important;
+}
+
 </style>
 
             
@@ -193,9 +198,38 @@ function loadTemplate($templatePath) {
           <li><a class="nav-link" href="#clearTable">🧹 clearTable()</a></li>
           <li><a class="nav-link" href="#clear">☠️ clear() <span class="JsonSQL-danger small">vorsichtig!</span></a></li>
           <li><a class="nav-link" href="#paginate">📄 paginate()</a></li>
+          <li><hr></li>          
         </ul>
       </div>
     </li>
+
+
+    <li class="nav-item">
+  <a class="nav-link" data-bs-toggle="collapse" href="#systemFields" role="button" aria-expanded="true" aria-controls="systemFields">
+    <span class="m-item"><i class="bi bi-caret-down-fill"></i> Datenfelder & system.json</span>
+  </a>
+  <div class="collapse ms-3 show" id="systemFields">
+    <ul class="nav flex-column">
+      <li><a class="nav-link" href="#system-intro">📘 Einführung</a></li>
+      <li><a class="nav-link" href="#system-options">🌐 Globale Optionen</a></li>
+      <li><a class="nav-link" href="#field-properties">🧩 Feldoptionen</a></li>
+      <li><a class="nav-link" href="#auto-fields">⚙️ Auto-Felder</a></li>
+      <li><a class="nav-link" href="#validation">🧪 Validierung</a></li>
+      <li><a class="nav-link" href="#analyze">🔎 Analyse</a></li>
+      <li><hr></li>
+      <li><a class="nav-link" href="#type-string">🔤 Datentyp: string</a></li>
+      <li><a class="nav-link" href="#type-integer">🔢 Datentyp: integer</a></li>
+      <li><a class="nav-link" href="#type-float">🌊 Datentyp: float</a></li>
+      <li><a class="nav-link" href="#type-boolean">☑️ Datentyp: boolean</a></li>
+      <li><a class="nav-link" href="#type-datetime">📅🕒 Datentyp: datetime</a></li>
+      <li><a class="nav-link" href="#type-date">📅 Datentyp: date</a></li>      
+      <li><a class="nav-link" href="#type-time">🕒 Datentyp: time</a></li>            
+      <li><a class="nav-link" href="#type-enum">📚 Datentyp: enum</a></li>
+      <li><hr></li>      
+    </ul>
+  </div>
+</li>
+
 
 
 
@@ -207,9 +241,6 @@ function loadTemplate($templatePath) {
       <a class="nav-link" href="#aggregation"><span class="m-item"><i class="bi bi-bar-chart-fill"></i> Aggregation & Statistik</span></a>
     </li>    
 
-    <li class="nav-item">
-      <a class="nav-link" href="#system"><span class="m-item"><i class="bi bi-sliders"></i> Systemkonfiguration</span></a>
-    </li>    
     
     <li class="nav-item">
       <a class="nav-link" href="#joins"><span class="m-item"><i class="bi bi-link-45deg"></i> Joins & Beziehungen</span></a>
@@ -273,16 +304,17 @@ function loadTemplate($templatePath) {
         <?php loadTemplate(__DIR__ . '/sections/grundlagen.php'); ?>  
 
         <span id="kern"></span>
-        <?php loadTemplate(__DIR__ . '/sections/kernfunktionen.php'); ?>     
+        <?php loadTemplate(__DIR__ . '/sections/kernfunktionen.php'); ?>    
+        
+        <span id="system"></span>
+        <?php loadTemplate(__DIR__ . '/sections/system.php'); ?>          
         
         <span id="filter"></span>
         <?php loadTemplate(__DIR__ . '/sections/filterlogik.php'); ?>        
         
         <span id="aggregation"></span>
         <?php loadTemplate(__DIR__ . '/sections/aggregation.php'); ?>        
-        
-        <span id="system"></span>
-        <?php loadTemplate(__DIR__ . '/sections/system.php'); ?>     
+         
         
         <span id="joins"></span>
         <?php loadTemplate(__DIR__ . '/sections/joins.php'); ?>    

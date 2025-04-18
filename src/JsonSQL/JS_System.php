@@ -8,6 +8,72 @@ trait JS_System
 
 
 
+    /**
+     * Initialisiert die erlaubten Datentypen und Feld-Properties für system.json.
+     * Wird beim Start automatisch aufgerufen.
+     * 
+     * added: 2025-04-18 by Dscho
+     */
+    protected function initSystemDefaults(): void {
+        self::$allowedDataTypes = [
+            'string', 
+            'integer', 
+            'boolean', 
+            'float', 
+            'datetime', 
+            'enum', 
+            'datetime', 
+            'date', 
+            'time',
+            'timestamp'
+        ];
+
+        self::$allowedFieldProperties = [
+            'dataType',
+            'length',
+            'precision',
+            'allowNULL',
+            'defaultValue',
+            'comment',
+            'enumValues',
+            'encrypt',
+            'autoincrement',
+            'autoincrement_value',
+            'autohash',
+            'required',
+            'unique',
+            'min',
+            'max',
+            'random',
+            'unit',
+            'isNULL',
+            'format',
+            'auto_modified_timestamp',
+            'auto_create_timestamp',
+        ];
+    }
+
+    /**
+     * Gibt die Liste der erlaubten Datentypen zurück.
+     *
+     * @return array
+     */
+    public static function getAllowedDataTypes(): array {
+        return self::$allowedDataTypes;
+    }
+
+    /**
+     * Gibt die Liste der erlaubten Feld-Properties zurück.
+     *
+     * @return array
+     */
+    public static function getAllowedFieldProperties(): array {
+        return self::$allowedFieldProperties;
+    }    
+
+
+
+
 
     /**
      * Validiert die Eigenschaften eines Feldes basierend auf den übergebenen Parametern.
@@ -44,29 +110,7 @@ trait JS_System
      */
     public function validateFieldProperties(array $fieldProperties): array {
         // Liste der gültigen Property-Bezeichner
-        $validProperties = [
-            'dataType',
-            'length',
-            'precision',
-            'allowNULL',
-            'defaultValue',
-            'comment',
-            'enumValues',
-            'encrypt',
-            'autoincrement',
-            'autoincrement_value',
-            'autohash',
-            'required',
-            'unique',
-            'min',
-            'max',
-            'random',
-            'unit',
-            'isNULL',
-            'format',
-            'auto_modified_timestamp',
-            'auto_create_timestamp',
-        ];
+        $validProperties = self::$allowedFieldProperties;
     
         // Überprüfen, ob die übergebenen Properties gültig sind
         foreach ($fieldProperties as $property => $value) {
@@ -109,7 +153,7 @@ trait JS_System
 
     public function validateSystemFieldProperties(array $fieldProperties, string $fieldName = '', bool $isUpdate = false): array
     {
-        $validTypes = ['string', 'integer', 'boolean', 'float', 'datetime', 'enum', 'datetime', 'date', 'time','timestamp'];      
+        $validTypes = self::$allowedDataTypes;
     
         // Nur prüfen, wenn Feld 'dataType' übergeben wird
         if (isset($fieldProperties['dataType']) && !in_array($fieldProperties['dataType'], $validTypes)) {
@@ -241,12 +285,19 @@ trait JS_System
     
     
     
-    protected function saveSystemConfig(): void {
-        if (!$this->currentDbPath || !$this->currentTableName) return;
+    /**
+     * Speichert die aktuelle systemConfig als JSON-Datei.
+     *
+     * @return bool true bei Erfolg, false bei Fehler
+     */
+    protected function saveSystemConfig(): bool
+    {
+        if (!$this->currentDbPath || !$this->currentTableName) return false;
 
         $file = $this->currentDbPath . DIRECTORY_SEPARATOR . $this->currentTableName . '.system.json';
-        file_put_contents($file, json_encode($this->systemConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        return file_put_contents($file, json_encode($this->systemConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) !== false;
     }
+
     
 
     public function addField(string $fieldName, array $definition): self {
@@ -974,8 +1025,76 @@ trait JS_System
 
 
 
+    /**
+     * Setzt eine globale Option in der system.json der aktiven Tabelle.
+     *
+     * @trait JS_SYSTEM
+     * @param string $optionKey Name der Option (z. B. 'allowAdditionalFields')
+     * @param mixed $value Wert der Option
+     * @return bool true bei Erfolg
+     * @throws Exception Wenn keine aktive Tabelle gesetzt ist
+     */
+    public function setSystemOption(string $optionKey, $value): bool
+    {
+        if (empty($this->currentTableFile)) {
+            throw new \Exception("❌ Keine aktive Tabelle gesetzt. Bitte setTable() zuerst aufrufen.");
+        }
+
+        if ($this->systemConfig === null) {
+            $this->loadSystemConfig();
+        }
+
+        $this->systemConfig[$optionKey] = $value;
+
+        // Rückgabe: true bei erfolgreichem Speichern
+        return $this->saveSystemConfig();
+    }
+
+
+
     
-    
+    /**
+     * Liest eine globale Option aus der system.json der aktiven Tabelle.
+     *
+     * @trait JS_SYSTEM
+     * @param string $optionKey Name der Option
+     * @param mixed $default Fallback-Wert, falls Option nicht gesetzt ist
+     * @return mixed
+     * @throws Exception Wenn keine aktive Tabelle gesetzt ist
+     */
+    public function getSystemOption(string $optionKey, $default = null)
+    {
+        if (empty($this->currentTableFile)) {
+            throw new \Exception("❌ Keine aktive Tabelle gesetzt. Bitte setTable() aufrufen.");
+        }
+
+        if ($this->systemConfig === null) {
+            $this->loadSystemConfig();
+        }
+
+        $system = $this->getSystemDefinition($this->activeTable);
+        return $system[$optionKey] ?? $default;
+    }
+
+
+
+    /**
+     * Schreibt eine neue system.json-Konfiguration für die aktuelle Tabelle.
+     *
+     * @param array $config Neue Konfiguration (z. B. 'fields' und Optionen)
+     * @throws \Exception Wenn keine Tabelle gesetzt ist
+     */
+    public function writeSystemConfig(array $config): void
+    {
+        if (empty($this->currentTableName)) {
+            throw new \Exception("❌ Es wurde keine Tabelle gesetzt. writeSystemConfig() nicht möglich.");
+        }
+
+        $file = $this->getSystemFilePath();
+        file_put_contents($file, json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        $this->systemConfig = $config;
+    }
+
 
 
 

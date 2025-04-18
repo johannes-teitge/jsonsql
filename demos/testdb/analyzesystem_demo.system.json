@@ -1,0 +1,16 @@
+{
+    "fields": {
+        "firstname": {
+            "dataType": "strng",
+            "length": 50,
+            "required": true
+        },
+        "email": {
+            "dataType": "string",
+            "length": 64,
+            "required": true,
+            "foobar": true
+        }
+    },
+    "allowAdditionalFields": false
+}

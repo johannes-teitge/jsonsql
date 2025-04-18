@@ -17,6 +17,8 @@
  */
 
 $pageTitle = "🧪 JsonSQL-Demo: Pflichtfelder (required)";
+$pageDescription = "In dieser JsonSQL-Demo zeigen wir, wie Pflichtfelder definiert werden und was passiert, wenn sie beim Insert fehlen.";
+
 
 // 💡 Pfad zur JsonSQL-Klasse definieren
 $JsonSQLpath = __DIR__ . '/../../src/JsonSQL.php';
@@ -95,9 +97,9 @@ try {
         'email' => 'erika@example.com',
         'phone' => '0154 345 67'        
     ]);
-    echo "<div class='alert alert-success'>Insert ohne Fehler (sollte nicht passieren)</div>";
+    echo "<div class='alert alert-success'>Insert ohne Fehler (erwartet)</div>";
 } catch (\Exception $e) {
-    echo "<div class='alert alert-danger'><strong>Fehler beim Insert (erwartet):</strong> " . $e->getMessage() . "</div>";
+    echo "<div class='alert alert-danger'><strong>Fehler beim Insert (sollte nicht passieren):</strong> " . $e->getMessage() . "</div>";
 } 
 
 
