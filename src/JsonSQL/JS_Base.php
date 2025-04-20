@@ -5,7 +5,7 @@ namespace Src\JsonSQL;
 
 
 class JS_Base {
-    protected string $jsonSQLVersion = '1.0.3'; 
+    protected string $jsonSQLVersion = '1.0.5'; 
     protected array $databases = [];
     protected ?string $currentDbPath = null;
     protected ?string $currentTableFile = null;

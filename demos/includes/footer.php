@@ -194,11 +194,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </style>
 
-
-
 <!-- Bootstrap Bundle (inkl. Popper.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<?php if (!empty($additionalFooterJs)): ?>
+  <!-- Additional Footer JS -->   
+<?php foreach ($additionalFooterJs as $js): ?>
+<script src="<?= $js ?>"></script>
+  <?php endforeach; ?>
+<?php endif; ?>  
+
+<!-- FlipCounter JS-Init -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.flip-counter').forEach(el => {
+      const value = parseInt(el.getAttribute('data-value') || '0');
+      new FlipCounter(el, {
+        value: value,
+        duration: 1000,
+        digitCount: 3
+      });
+    });
+  });
+</script>
 
 </body>
 </html>

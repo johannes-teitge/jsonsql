@@ -21,6 +21,10 @@ $themeOptions = [
       'h1' => [
         'color' => 'var(--white-color)'
       ],
+      '.numbers' => [
+        'font-size' => '2.8rem',
+        'font-weight' => 'bold'
+      ],      
       '.backContent' => [
         'color' => ' rgba(255, 255, 255, 0.81)'
       ],   

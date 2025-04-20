@@ -1,34 +1,38 @@
 [
     {
-        "firstname": "David",
-        "lastname": "Koch",
-        "email": "david.koch@schule.de",
-        "id": 161,
-        "created_at": "2025-04-20 00:12:36",
-        "updated_at": "2025-04-20 00:12:36"
-    },
-    {
-        "firstname": "Eva",
-        "lastname": "Wagner",
-        "email": "eva.wagner@schule.de",
-        "id": 162,
-        "created_at": "2025-04-20 00:12:36",
-        "updated_at": "2025-04-20 00:12:36"
-    },
-    {
-        "firstname": "Hannes",
+        "firstname": "Felix",
         "lastname": "Hoffmann",
-        "email": "hannes.hoffmann@schule.de",
-        "id": 163,
-        "created_at": "2025-04-20 00:12:36",
-        "updated_at": "2025-04-20 00:12:36"
+        "email": "felix.hoffmann@schule.de",
+        "gender": "m",
+        "id": 295,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
     },
     {
-        "firstname": "Eva",
-        "lastname": "Becker",
-        "email": "eva.becker@schule.de",
-        "id": 164,
-        "created_at": "2025-04-20 00:12:36",
-        "updated_at": "2025-04-20 00:12:36"
+        "firstname": "Anna",
+        "lastname": "Wagner",
+        "email": "anna.wagner@schule.de",
+        "gender": "f",
+        "id": 296,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "David",
+        "lastname": "Schmidt",
+        "email": "david.schmidt@schule.de",
+        "gender": "m",
+        "id": 297,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Isabel",
+        "lastname": "Koch",
+        "email": "isabel.koch@schule.de",
+        "gender": "f",
+        "id": 298,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
     }
 ]

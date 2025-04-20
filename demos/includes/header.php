@@ -76,17 +76,19 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
     });
     </script>
 
-  <?php if (!empty($additionalCss)): ?>
-    <?php foreach ($additionalCss as $css): ?>
-      <link rel="stylesheet" href="<?= $css ?>">
-    <?php endforeach; ?>
-  <?php endif; ?>
+<?php if (!empty($additionalCss)): ?>
+<!-- Additional CSS -->  
+  <?php foreach ($additionalCss as $css): ?>
+<link rel="stylesheet" href="<?= $css ?>">
+  <?php endforeach; ?>
+<?php endif; ?>
 
-  <?php if (!empty($additionalJs)): ?>
-    <?php foreach ($additionalJs as $js): ?>
-      <script src="<?= $js ?>"></script>
-    <?php endforeach; ?>
-  <?php endif; ?>  
+<?php if (!empty($additionalJs)): ?>
+<!-- Additional JS -->   
+  <?php foreach ($additionalJs as $js): ?>
+<script src="<?= $js ?>"></script>
+  <?php endforeach; ?>
+<?php endif; ?>  
 
 <?php if (!empty($themeOptions['css'])): ?>
   <style>

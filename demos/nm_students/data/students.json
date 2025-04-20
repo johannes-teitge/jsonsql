@@ -1,0 +1,182 @@
+[
+    {
+        "firstname": "Paul",
+        "lastname": "Hartmann",
+        "email": "paul.hartmann635@schule.de",
+        "class_id": 239,
+        "id": 1339,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Mia",
+        "lastname": "Kuhn",
+        "email": "mia.kuhn893@schule.de",
+        "class_id": 242,
+        "id": 1340,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Lea",
+        "lastname": "Lorenz",
+        "email": "lea.lorenz883@schule.de",
+        "class_id": 241,
+        "id": 1341,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Max",
+        "lastname": "Berger",
+        "email": "max.berger114@schule.de",
+        "class_id": 240,
+        "id": 1342,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Max",
+        "lastname": "Schneider",
+        "email": "max.schneider628@schule.de",
+        "class_id": 240,
+        "id": 1343,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Luca",
+        "lastname": "Richter",
+        "email": "luca.richter439@schule.de",
+        "class_id": 239,
+        "id": 1344,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Paul",
+        "lastname": "Richter",
+        "email": "paul.richter891@schule.de",
+        "class_id": 241,
+        "id": 1345,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Sophie",
+        "lastname": "Hartmann",
+        "email": "sophie.hartmann752@schule.de",
+        "class_id": 241,
+        "id": 1346,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Emma",
+        "lastname": "Schuster",
+        "email": "emma.schuster168@schule.de",
+        "class_id": 240,
+        "id": 1347,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Lina",
+        "lastname": "Jung",
+        "email": "lina.jung146@schule.de",
+        "class_id": 242,
+        "id": 1348,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Emma",
+        "lastname": "Baumann",
+        "email": "emma.baumann851@schule.de",
+        "class_id": 240,
+        "id": 1349,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Mia",
+        "lastname": "Jung",
+        "email": "mia.jung489@schule.de",
+        "class_id": 240,
+        "id": 1350,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Mia",
+        "lastname": "Lorenz",
+        "email": "mia.lorenz508@schule.de",
+        "class_id": 242,
+        "id": 1351,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Paul",
+        "lastname": "Keller",
+        "email": "paul.keller517@schule.de",
+        "class_id": 242,
+        "id": 1352,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Emma",
+        "lastname": "Baumann",
+        "email": "emma.baumann226@schule.de",
+        "class_id": 240,
+        "id": 1353,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Emma",
+        "lastname": "Schneider",
+        "email": "emma.schneider482@schule.de",
+        "class_id": 240,
+        "id": 1354,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Mia",
+        "lastname": "Lorenz",
+        "email": "mia.lorenz578@schule.de",
+        "class_id": 242,
+        "id": 1355,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Emma",
+        "lastname": "Schneider",
+        "email": "emma.schneider562@schule.de",
+        "class_id": 239,
+        "id": 1356,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Lea",
+        "lastname": "Jung",
+        "email": "lea.jung630@schule.de",
+        "class_id": 241,
+        "id": 1357,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    },
+    {
+        "firstname": "Luca",
+        "lastname": "Keller",
+        "email": "luca.keller108@schule.de",
+        "class_id": 239,
+        "id": 1358,
+        "created_at": "2025-04-20 07:20:23",
+        "updated_at": "2025-04-20 07:20:23"
+    }
+]

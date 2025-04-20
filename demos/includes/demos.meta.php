@@ -272,5 +272,18 @@ return [
         'keywords' => 'system.json, felddefinition, validierung, datatype, properties, analyse, debug'
       ],
 
+      [
+        'icon' => '🔗',
+        'title' => 'n:m-Demo – Schüler & Kursbelegungen',
+        'file' => '../nm_students/',
+        'description' => 'Diese Demo zeigt eine typische <strong>n:m-Beziehung</strong> zwischen <strong>Schülern</strong> und <strong>Kursen</strong> mit Zuordnungstabelle.<br>Zusätzlich werden <strong>Lehrer, Klassen</strong> und weitere Metadaten verwaltet. Ideal zur Demonstration von <code>JOINs</code>, <code>Unique Checks</code> und <code>Autoincrement</code>.',
+        'image' => '../nm_students/assets/images/banner.webp',
+        'alt' => 'n:m-Verknüpfung Schüler ↔ Kurse',
+        'buttonClass' => 'btn-outline-success',
+        'buttonText' => 'n:m-Demo starten',
+        'tags' => 'schule, n:m, beziehungen, jsonsql, demo',
+        'keywords' => 'n:m, schule, schüler, kurse, belegung, lehrer, klassen, join, datenmodellierung, jsonsql'
+      ]
+
   // Weitere Demos hier ergänzen...
 ];

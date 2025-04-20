@@ -4,7 +4,7 @@
             "dataType": "integer",
             "autoincrement": true,
             "autoincrement_step": 1,
-            "autoincrement_value": 299
+            "autoincrement_value": 1359
         },
         "firstname": {
             "dataType": "string",
@@ -18,7 +18,10 @@
         },
         "email": {
             "dataType": "string",
-            "length": 100
+            "unique": true
+        },
+        "class_id": {
+            "dataType": "integer"
         },
         "created_at": {
             "dataType": "datetime",
@@ -33,11 +36,6 @@
             "format": "Y-m-d H:i:s",
             "timezone": "UTC",
             "comment": "automatisch bei Änderungen aktualisiert"
-        },
-        "gender": {
-            "dataType": "enum",
-            "enumValues": "m,f",
-            "required": true
         }
     },
     "allowAdditionalFields": true

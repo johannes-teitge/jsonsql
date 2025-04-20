@@ -7,6 +7,31 @@ und verwendet [Semantische Versionierung](https://semver.org/lang/de/).
 
 ---
 
+## [1.0.5] – 2025-04-20
+### Hinzugefügt
+- Demo `nm_students` fertiggestellt:
+  - Kurs-, Dozenten-, Klassen-, Studenten- und Belegungsverwaltung
+  - Ansicht `view_overview.php` mit animierten Flip-Zählern (via @pqina/flip)
+  - Kursansicht `view_courses.php` mit Dozenten-Link und Teilnehmerzählung
+- Umfangreiche Dokumentation zur `where()`-Methode ergänzt:
+  - Unterstützte Operatoren (`=`, `!=`, `like`, `in`, `not`, etc.)
+  - Negierte Bedingungen mit `['not', [...]]`
+  - Kombinierte Bedingungen mit `AND` oder `OR`
+  - Hinweise zur Erweiterbarkeit und Nutzung mit `append = true`
+
+### Geändert
+- `JsonSQL::setTable()` setzt `autoload = true` nun standardmäßig  
+  - reduziert Fehlerquellen durch vergessene `true`-Angabe beim Setzen der Tabelle
+- Flip-Integration vereinheitlicht, nicht mehr mit `FlipCounter`, sondern mit `@pqina/flip` über `data-did-init`
+- Datenanzeige und Navigation über Tabs modernisiert
+
+### Sonstiges
+- Dokumentation und Changelog erweitert
+
+
+---
+
+
 ## [1.0.4] – 2025-04-19
 ### Hinzugefügt
 - Unique-Validierung für `insert()` mit neuer Methode `recordExistsByUniqueFields()`

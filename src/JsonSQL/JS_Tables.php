@@ -57,8 +57,19 @@ trait JS_Tables
 
         // Tabelldetails (Filegröße, Änderungsdatum, Anzahl der Felder und Datensätze) sammeln
 //        $this->collectTableInfo($tableFile, $systemFile);
-
-public function setTable(string $tableName, bool $autoLoad = false): self {
+/**
+ * Setzt den aktuellen Tabellennamen und lädt optional die Tabelle direkt in den Speicher.
+ *
+ * @method JsonSQL setTable(string $tableName, bool $autoLoad = true)
+ *
+ * @param string $tableName   Der Name der Tabelle (entspricht dem Dateinamen ohne .json)
+ * @param bool   $autoLoad    Gibt an, ob die Tabelle direkt nach dem Setzen geladen werden soll.
+ *                            Standardwert ist seit April 2025 auf `true` gesetzt, um typische
+ *                            Anwendungsfehler durch vergessenes Nachladen zu vermeiden.
+ *
+ * @return self               Gibt die Instanz zurück zur Methodenkettung.
+ */
+public function setTable(string $tableName, bool $autoLoad = true): self {
     $this->currentTableName = $tableName;
     $this->tableLoaded = false;    
 

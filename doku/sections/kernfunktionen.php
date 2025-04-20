@@ -261,6 +261,84 @@ $rows = $db->from('products')->select(['title AS name', 'price'])->get();
 
 
 
+
+<hr class='content-sep'>  
+<!-- WHERE -->  
+<h2 id="where">🔎 where()</h2>
+<p><strong>[Trait: <code>JS_Query</code>]</strong></p>
+
+<p>Die Methode <code>where()</code> filtert die Datensätze anhand definierter Bedingungen. Du kannst mehrere Bedingungen gleichzeitig prüfen und sie logisch mit <code>AND</code> oder <code>OR</code> verknüpfen (Standard: <code>OR</code>).</p>
+
+<p>Jede Bedingung besteht aus einem Array mit <strong>drei Elementen</strong>: <code>[Feld, Operator, Wert]</code>. Alternativ kannst du eine Bedingung auch mit <code>'not'</code> negieren.</p>
+
+<pre><code class="language-php">
+// Einzelne Bedingung
+$db->where([['vendor', '=', 'Aldi']]);
+
+// Mehrere Bedingungen mit AND
+$db->where([
+  ['vendor', '=', 'Aldi'],
+  ['rating', '>=', 4]
+], 'AND');
+
+// Negation mit NOT
+$db->where([
+  ['not', ['rating', '=', 2]],
+  ['vendor', '=', 'Lidl']
+], 'AND');
+
+// IN-Filter
+$db->where([
+  ['vendor', 'in', ['Aldi', 'Lidl']],
+  ['product', 'not in', 'Toaster, Wasserkocher']
+], 'AND');
+</code></pre>
+
+<h5 class="mt-4">Unterstützte Operatoren:</h5>
+<ul>
+  <li><code>=</code>, <code>==</code> – Gleichheit</li>
+  <li><code>!=</code> – Ungleichheit</li>
+  <li><code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code> – Vergleichsoperatoren</li>
+  <li><code>like</code> – Textsuche mit Platzhalter <code>%</code></li>
+  <li><code>in</code>, <code>not in</code> – Vergleich mit einer Liste (Array oder String)</li>
+  <li><code>not</code> – Negation einer einzelnen Bedingung</li>
+</ul>
+
+<h5 class="mt-4">Verknüpfung:</h5>
+<ul>
+  <li>Standardmäßig werden Bedingungen mit <strong>ODER</strong> verknüpft (<code>'OR'</code>)</li>
+  <li>Mit dem zweiten Parameter kannst du <strong>'AND'</strong> erzwingen</li>
+  <li>Mit <code>$append = true</code> kannst du mehrere where()-Aufrufe kombinieren</li>
+</ul>
+
+<h5 class="mt-4">Internes Verhalten:</h5>
+<ul>
+  <li>Alle Bedingungen werden in <code>$this-&gt;filters</code> gespeichert</li>
+  <li>Die Verknüpfung (AND/OR) steht in <code>$this-&gt;mergeCondition</code></li>
+  <li>Beim <code>get()</code> werden alle Filter mit <code>applyFilters()</code> ausgewertet</li>
+</ul>
+
+<h5 class="mt-4">Beispielausgabe:</h5>
+<pre><code class="language-json">
+[
+  {
+    "vendor": "Aldi",
+    "product": "Wasserkocher",
+    "rating": 4
+  }
+]
+</code></pre>
+
+<p class="mt-4">🔁 Diese Filterung kann mit <code>select()</code>, <code>orderBy()</code>, <code>groupBy()</code> usw. kombiniert werden.</p>
+
+
+
+
+
+
+
+
+
 <hr class='content-sep'>
 <!-- GET -->
 <h2 id="get">📦 get()</h2>

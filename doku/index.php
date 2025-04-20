@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Dokumentation";
+$pageTitle = "JsonSQL Dokumentation – JSON-Datenbank mit SQL-Funktionen";
 require_once __DIR__ . '/includes/header.php'; // Header laden, wenn nötig
 
 $baseUrl = dirname($_SERVER['PHP_SELF']);
@@ -191,6 +191,7 @@ function loadTemplate($templatePath) {
           <li><a class="nav-link" href="#update">🛠️ update()</a></li>
           <li><a class="nav-link" href="#delete">🗑️ delete()</a></li>
           <li><a class="nav-link" href="#select">🎯 select()</a></li>
+          <li><a class="nav-link" href="#where">🔍 where()</a></li>          
           <li><a class="nav-link" href="#get">📦 get()</a></li>
           <li><a class="nav-link" href="#exists">❓ exists()</a></li>
           <li><a class="nav-link" href="#pluck">🎯 pluck()</a></li>
