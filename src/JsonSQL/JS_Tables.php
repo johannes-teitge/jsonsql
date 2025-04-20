@@ -54,38 +54,39 @@ trait JS_Tables
     }
 
 
-    public function setTable(string $tableName, bool $autoLoad = false): self {
-        $this->currentTableName = $tableName;
-    
-        // Überprüfen, ob die system.json-Datei existiert
-        $systemFile = $this->currentDbPath . DIRECTORY_SEPARATOR . $tableName . '.system.json';
-        if (!file_exists($systemFile)) {
-            // system.json existiert nicht, also erstellen wir die grundlegenden Felder
-            $this->initializeSystemConfig($tableName);
-        }
-    
-        // Überprüfen, ob die Tabelle .json existiert
-        $tableFile = $this->currentDbPath . DIRECTORY_SEPARATOR . $tableName . '.json';
-        if (!file_exists($tableFile)) {
-            // Tabelle existiert nicht, also eine leere Tabelle erstellen
-            file_put_contents($tableFile, json_encode([], JSON_PRETTY_PRINT));
-        }
-    
+
         // Tabelldetails (Filegröße, Änderungsdatum, Anzahl der Felder und Datensätze) sammeln
 //        $this->collectTableInfo($tableFile, $systemFile);
-    
-        // Tabelle für die Arbeit setzen
-        $this->currentTableFile = $tableFile;
 
-        // Keine Daten laden, nur Struktur setzen
-        $this->tableLoaded = false;  // Setzt ein Flag, dass die Daten noch nicht geladen sind
+public function setTable(string $tableName, bool $autoLoad = false): self {
+    $this->currentTableName = $tableName;
+    $this->tableLoaded = false;    
 
-        if ($autoLoad) {
-            $this->loadTableData();
-        }           
-    
-        return $this;
+    // system.json prüfen/erstellen
+    $systemFile = $this->currentDbPath . DIRECTORY_SEPARATOR . $tableName . '.system.json';
+    if (!file_exists($systemFile)) {
+        $this->initializeSystemConfig($tableName);
     }
+
+    // Tabelle prüfen/erstellen
+    $tableFile = $this->currentDbPath . DIRECTORY_SEPARATOR . $tableName . '.json';
+    if (!file_exists($tableFile)) {
+        file_put_contents($tableFile, json_encode([], JSON_PRETTY_PRINT));
+    } elseif (filesize($tableFile) === 0) {
+        // 🧯 Falls leer (0 Byte), sicher initialisieren
+        file_put_contents($tableFile, json_encode([], JSON_PRETTY_PRINT));
+    }
+
+    $this->currentTableFile = $tableFile;
+
+    if ($autoLoad) {
+        $this->loadTableData();
+    }
+
+    return $this;
+}
+
+
     
 
 
@@ -522,13 +523,6 @@ public function saveTable(array $data): bool
             'invalidProperties' => $invalidProperties
         ];
     }
-
-
-
-
-
-
-
 
 
 

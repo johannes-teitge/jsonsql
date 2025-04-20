@@ -2,8 +2,44 @@
 $pageTitle = "JsonSQL Demo: Auto-Datenbank Demo - Systemfelder";
 $baseUrl = dirname($_SERVER['PHP_SELF']);
 
-$headerBG = dirname($_SERVER['SCRIPT_NAME']) . '/images/CarDB/header.webp'; // Beispiel: Hintergrundbild für Header
-$headerHeight = '440px'; // Feste Höhe für den Header
+$basedir =  dirname($_SERVER['SCRIPT_NAME']) . '/../assets';
+
+$themeOptions = [
+  'css' => [
+    'header' => [
+      'background' => "url('../examples/images/CarDB/header.webp') no-repeat center center",
+      'background-size' => 'cover',
+      'height' => '440px',
+      'color' => 'white'
+    ],
+    '.head-wrapper' => [
+      'background-color' => 'rgba(0, 0, 0, 0.54)',
+      'padding' => '10px 0'
+    ],
+    'h1' => [
+      'color' => 'var(--white-color)'
+    ],
+    '.backContent' => [
+      'color' => ' rgba(255, 255, 255, 0.81)'
+    ],   
+    '.logo-style' => [
+      'background-image' => 'url("../assets/images/JsonSQL-Logo-FullWhite.svg")',
+    ],      
+    '.headlogo img' => [
+      'filter' => 'drop-shadow(0 0 3px rgb(255, 255, 255))',
+      'animation' => 'glow 2.5s ease-in-out infinite alternate',
+      'animation-delay' => '1.8s'
+    ],
+    '@keyframes glow' => [
+      'from' => ['filter' => 'drop-shadow(0 0 3px rgb(255, 255, 255))'],
+      'to'   => ['filter' => 'drop-shadow(0 0 20px rgb(255, 255, 255))']
+    ]
+  ],
+  'logo_src' => ($basedir . '/images/JsonSQL-Logo-FullWhite.svg')  
+];
+
+
+
 
 $JsonSQLpath = __DIR__ . '/../../src/JsonSQL.php';
 if (!file_exists($JsonSQLpath)) {
@@ -150,82 +186,6 @@ $db->insert(['datum' => $formattedDate, 'price' => 120000.55]);
   </div>
 </div>
 
-
-<!-- Snackbar-Styles und JavaScript -->
-<style>
-.snackbar {
-    visibility: hidden;
-    min-width: 250px;
-    color: white;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    top: -100px;  /* Startet außerhalb des sichtbaren Bereichs (oben) */
-    transform: translateX(-50%);
-    font-size: 17px;
-    transition: top 0.5s ease, visibility 0.5s ease;
-}
-
-.snackbar.show {
-    visibility: visible;
-    top: 30px; /* Position im sichtbaren Bereich */
-    animation: snack_fadein 0.5s ease forwards;
-}
-
-.snackbar.hide {
-    animation: snack_fadeout 0.5s ease forwards;
-}
-
-@keyframes snack_fadein {
-    from { top: -100px; }
-    to { top: 30px; }
-}
-
-@keyframes snack_fadeout {
-    from { top: 30px; }
-    to { top: -100px; }
-}
-
-.snackbar.success {
-    background-color: #4CAF50;
-}
-
-.snackbar.info {
-    background-color: #2196F3;
-}
-
-.snackbar.error {
-    background-color: #f44336;
-}
-</style>
-
-<script>
-// Funktion zum Anzeigen der Snackbar
-function showSnackbar() {
-    var snackbar = document.getElementById("snackbar");
-    snackbar.classList.remove("hide");
-    snackbar.classList.add("show");
-
-    setTimeout(function() {
-        snackbar.classList.remove("show");
-        snackbar.classList.add("hide");
-    }, 3000); // Snackbar bleibt für 3 Sekunden sichtbar
-}
-
-document.getElementById('dataType').addEventListener('change', function() {
-    var enumValuesField = document.getElementById('enumValues');
-    if (this.value === 'enum') {
-        enumValuesField.style.display = 'block'; // Zeige Enum-Werte-Feld
-    } else {
-        enumValuesField.style.display = 'none'; // Verstecke Enum-Werte-Feld
-    }
-});
-
-
-</script>
 
 <?php 
 

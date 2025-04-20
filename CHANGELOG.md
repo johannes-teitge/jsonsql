@@ -7,6 +7,24 @@ und verwendet [Semantische Versionierung](https://semver.org/lang/de/).
 
 ---
 
+## [1.0.4] – 2025-04-19
+### Hinzugefügt
+- Unique-Validierung für `insert()` mit neuer Methode `recordExistsByUniqueFields()`
+- Neuer Mechanismus zur **Duplikatprüfung bei Insert**
+  - `$this->skippedInserts` speichert übersprungene Datensätze
+  - Methoden: `getSkippedInserts()`, `getSkippedInsertCount()`, `clearSkippedInserts()`
+- Unterstützung für Masseninserts mit nur einmaligem Ladevorgang der Tabelle
+- Helper-Funktion `dump()` für strukturierte Debug-Ausgabe
+- Erweiterung `create_classes()` zur Verwendung von Masseninsert und Reporting
+- Fallback-Logik in `setTable()` für komplett leere JSON-Dateien (0 Byte)
+
+### Geändert
+- `insert()` aktualisiert: lädt Daten nur einmal, prüft Duplikate gegen geplante Inserts
+- Unique-Feldprüfung erfolgt nun speichereffizient und korrekt ohne erneutes Laden
+- Dokumentation der Methode `recordExistsByUniqueFields()` mit vollständigem DocBlock
+
+---
+
 ## [1.0.3] – 2025-04-18
 ### Hinzugefügt
 - Neue Demo: `demo_required.php` zur Validierung von Pflichtfeldern

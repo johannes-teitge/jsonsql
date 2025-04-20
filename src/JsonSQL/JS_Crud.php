@@ -444,7 +444,7 @@ private function applyAutoFields(array $insertrecord): array {
         $this->loadSystemConfig();
     }
 
-    $record = [];
+    $record = $insertrecord;
 
     if (!isset($this->systemConfig['fields'])) {
         return $record;
@@ -505,18 +505,17 @@ private function applyAutoFields(array $insertrecord): array {
 
                 /*********  ENUM  ***********/
                 case 'enum':
-                    // Prüfen, ob ein Default-Wert gesetzt wurde
-                    if (isset($config['defaultValue'])) {
-                        // Setze den Default-Wert aus den Enum-Werten, wenn vorhanden
-                        $enumValues = isset($config['enumValues']) ? explode(',', $config['enumValues']) : [];
-                        if (in_array($config['defaultValue'], $enumValues)) {
-                            $record[$field] = $config['defaultValue']; // Setze den Default-Wert
-                        } else {
-                            // Falls der Default-Wert nicht in den möglichen Enum-Werten ist, auf leeren String setzen
-                            $record[$field] = '';
-                        }
+                    $enumValues = isset($config['enumValues']) ? explode(',', $config['enumValues']) : [];
+                    $inputValue = $insertrecord[$field] ?? null;
+
+                    if ($inputValue !== null && in_array($inputValue, $enumValues, true)) {
+                        // Wenn ein gültiger Wert übergeben wurde → übernehmen
+                        $record[$field] = $inputValue;
+                    } elseif (isset($config['defaultValue']) && in_array($config['defaultValue'], $enumValues, true)) {
+                        // Wenn gültiger defaultValue → setzen
+                        $record[$field] = $config['defaultValue'];
                     } else {
-                        // Wenn kein Default-Wert definiert ist, den Wert auf eine leere Zeichenkette setzen
+                        // Sonst leeres Feld
                         $record[$field] = '';
                     }
                     break;
@@ -709,6 +708,75 @@ private function validateRequiredFields(array $inputRecord): void {
 
 
 
+    /**
+     * Gibt alle Datensätze zurück, die beim letzten Insert übersprungen wurden (z. B. wegen UNIQUE).
+     *
+     * @return array Liste der übersprungenen Datensätze
+     */
+    public function getSkippedInserts(): array {
+        return $this->skippedInserts;
+    }
+
+    /**
+     * Leert die Liste der übersprungenen Datensätze.
+     *
+     * @return void
+     */
+    public function clearSkippedInserts(): void {
+        $this->skippedInserts = [];
+    }
+
+    /**
+     * Gibt die Anzahl der beim letzten Insert übersprungenen Datensätze zurück.
+     *
+     * @return int Anzahl der übersprungenen Einträge
+     */
+    public function getSkippedInsertsCount(): int {
+        return count($this->skippedInserts);
+    }    
+
+
+
+    /**
+     * Prüft, ob ein Datensatz mit identischen UNIQUE-Feldern bereits vorhanden ist.
+     *
+     * Diese Methode durchsucht die vorhandenen Datensätze (aus `$this->currentData` oder optional übergeben)
+     * nach Übereinstimmungen in Feldern, die in der `system.json` als `unique: true` markiert sind.
+     *
+     * Wird ein solcher Datensatz gefunden, schlägt der Insert fehl (bei aktiviertem Abbruch oder stillschweigendem Skip).
+     *
+     * @param array $record      Der zu prüfende neue Datensatz.
+     * @param array|null $searchData Optional: Datenarray, gegen das geprüft werden soll (z. B. `$this->currentData`).
+     *                               Wird nichts übergeben, wird automatisch `$this->currentData` verwendet.
+     *
+     * @return bool `true`, wenn ein Datensatz mit denselben UNIQUE-Feldern existiert, sonst `false`.
+     *
+     * @author Dscho
+     * @since 2025-04-19
+     */
+    private function recordExistsByUniqueFields(array $record, array $searchData = null): bool {
+        if (!isset($this->systemConfig['fields']) || empty($record)) {
+            return false;
+        }
+
+        $data = $searchData ?? $this->currentData;
+
+        if (empty($data)) {
+            return false;
+        }
+
+        foreach ($this->systemConfig['fields'] as $field => $config) {
+            if (!empty($config['unique']) && isset($record[$field])) {
+                foreach ($data as $row) {
+                    if (isset($row[$field]) && $row[$field] === $record[$field]) {
+                        return true; // Datensatz mit gleichem UNIQUE-Wert existiert
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 
 
 
@@ -728,12 +796,21 @@ public function insert(array $record): void {
         throw new \Exception("Keine Tabelle ausgewählt.");
     }
 
+    if ($this->systemConfig === null) {
+        $this->loadSystemConfig();
+    }
+
+    $this->clearSkippedInserts();    
+
+    // Lade bestehende Daten einmalig – wichtig für Unique-Prüfung
+    $this->loadTableData();
+    $current = $this->currentData; // eigene Arbeitskopie, wird innerhalb der Schleife erweitert
+
     $fp = fopen($this->currentTableFile, 'c+');
     if (!$fp) {
         throw new \Exception("Datei konnte nicht geöffnet werden.");
     }
 
-    // Ressourcen korrekt verwalten
     try {
         if (!flock($fp, LOCK_EX)) {
             throw new \Exception("Datei konnte nicht gesperrt werden (insert).");
@@ -742,15 +819,22 @@ public function insert(array $record): void {
         $content = stream_get_contents($fp);
         $data = $content ? json_decode($content, true) : [];
 
-        // Automatisch Einzel- oder Mehrfacheinfügen erkennen
         $records = isset($record[0]) && is_array($record[0]) ? $record : [$record];
 
         foreach ($records as $rec) {
-            $this->validateRequiredFields($rec);  // 🔴 OHNE DAS: Kein Fehler bei fehlenden Pflichtfeldern!
+            // Prüfen gegen aktuelle + geplante Daten
+            if ($this->recordExistsByUniqueFields($rec, $current)) {
+                $this->skippedInserts[] = $rec;              
+                continue;
+            }
+
+            $this->validateRequiredFields($rec);
 
             $newRecord = $this->applyAutoFields($rec);
             $finalRecord = $this->insertAdditionalFields($newRecord, $rec);
+
             $data[] = $finalRecord;
+            $current[] = $finalRecord;          // Speicher erweitern für weitere Unique-Prüfungen
         }
 
         rewind($fp);
@@ -758,14 +842,15 @@ public function insert(array $record): void {
         fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
         fflush($fp);
 
-        $this->saveSystemConfig(); // system.json aktualisieren
+        $this->currentData = $current;          // 🧠 am Ende final übernehmen
+        $this->saveSystemConfig();
 
     } finally {
-        // IMMER ausführen – auch bei Fehlern
         flock($fp, LOCK_UN);
         fclose($fp);
     }
 }
+
 
 
 

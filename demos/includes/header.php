@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__ . '/tools/renderThemeCSS.php';
+
 // Überprüfen, ob der URL-Parameter gesetzt ist
 if (isset($_GET['debugger'])) {
     // URL-Parameter lesen und den gewünschten Status setzen
@@ -11,10 +14,6 @@ if (isset($_GET['debugger'])) {
 
 // Prüfen, ob der Debugger angezeigt werden soll (Cookie auslesen)
 $showDebugger = isset($_COOKIE['show_debugger']) && $_COOKIE['show_debugger'] === 'true';
-$headerBG = isset($headerBG) ? $headerBG : ''; // Wenn $headerBG gesetzt ist, behält es den Wert, sonst wird es auf einen leeren String gesetzt.
-
-
-
 
 // FancyDumpVar für Debugging einbinden
 require_once __DIR__ . '/../includes/tools/fdv/FancyDumpVar.php';
@@ -89,84 +88,13 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
     <?php endforeach; ?>
   <?php endif; ?>  
 
-
+<?php if (!empty($themeOptions['css'])): ?>
   <style>
-
-
-
-
-<?php if ($headerBG != '') { ?>
-
-
-    header {
-            background: url('<?= $headerBG ?>') no-repeat center center;
-            background-size: cover;
-            height: <?= $headerHeight ?>;
-            color: white;
-        }
-
-    .head-wrapper {
-      background-color:rgba(0, 0, 0, 0.54);  
-      padding: 10px 0
-    }
-
-    h1 {
-          color: var(--white-color);
-        } 
-
-.headlogo img {
-  filter: drop-shadow(0 0 3px rgb(255, 255, 255));
-  animation: glow 2.5s ease-in-out infinite alternate;
-  animation-delay: 1.8s; /* startet nach dem Landen */
-}
-
-
-@keyframes glow {
-  from {
-    filter: drop-shadow(0 0 3px rgb(255, 255, 255));
-  }
-  to {
-    filter: drop-shadow(0 0 20px rgb(255, 255, 255));
-  }
-}
-
-
-
-
-
-<?php } else { ?>
-
-    h1 {
-          color: var(--main-color);
-        }
-
-
-.headlogo img {
-  filter: drop-shadow(0 0 10px #0076cfaa);
-  animation: glow 2.5s ease-in-out infinite alternate;
-  animation-delay: 1.8s; /* startet nach dem Landen */
-}
-
-  @keyframes glow {
-  from {
-    filter: drop-shadow(0 0 5px #0076cf55);
-  }
-  to {
-    filter: drop-shadow(0 0 20px #0076cfff);
-  }
-}
-
-
-<?php } ?>    
-
-
-
-
-
-
-
-
+    <?= renderCssFromArray($themeOptions['css']) ?>
   </style>
+<?php endif; ?>
+
+
 </head>
 
 
@@ -174,17 +102,16 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
 <body class="bg-light d-flex flex-column min-vh-100">
 
    
-  <header class="bg-primary text-white py-3 shadow-sm">
+  <header class="py-3 shadow-sm">
   <div class="head-wrapper">  
   <div class="container align-items-center justify-content-between flex-wrap">    
 
+
   <div class="text-center mb-4 headlogo">
-      <?php if ($headerBG != '') { ?>
-        <img src="<?= APP_ASSETS_URL ?>/images/JsonSQL-Logo-FullWhite.svg" alt="JsonSQL Logo" style="max-height: 80px;">
-      <?php } else { ?>
-          <img src="<?= APP_ASSETS_URL ?>/images/JsonSQL-Logo.svg" alt="JsonSQL Logo" style="max-height: 80px;">          
-      <?php } ?>          
-  </div>
+    <img src="<?= $themeOptions['logo_src'] ?? (APP_ASSETS_URL . '/images/JsonSQL-Logo.svg') ?>"
+        alt="JsonSQL Logo"
+        class="_logo-style">
+  </div>  
     
   <h1 class="mb-4 text-center demoshead"><?= htmlspecialchars($title) ?></h1>
     

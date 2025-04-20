@@ -46,6 +46,19 @@ class JS_Base {
     protected static array $allowedDataTypes = [];         // Wird in JS_System gesetzt
     protected static array $allowedFieldProperties = [];   // Wird in JS_System gesetzt
 
+    // ============================================================================
+    // 📌 Übersprungene Inserts (z. B. wegen UNIQUE)
+    // ============================================================================
+    // Diese Variable sammelt alle Datensätze, die beim Insert-Vorgang übersprungen
+    // wurden – etwa weil sie gegen ein UNIQUE-Feld verstoßen haben.
+    // Kann später ausgewertet oder im UI angezeigt werden.
+    //
+    // added: 2025-04-19 by Dscho
+    // ============================================================================
+    protected array $skippedInserts = [];
+
+
+
 
     public function __construct(array $databases) {
         $this->databases = [];

@@ -9,9 +9,26 @@
     --white-color:rgb(255, 255, 255);           
   }
 
-  header {
+
+  h1 {
+    color: var(--main-color);
+  }
+
+
+
+.head-wrapper {
+  background: #ffffff00;
+}  
+
+
+header {
 background: linear-gradient(to bottom, var(--background-color), var(--background-color2));     
 }
+
+
+
+
+
 
 body {
     /* padding-bottom: 5rem; */
@@ -23,6 +40,22 @@ body {
    main {
  flex: 1 0 auto;
 }    
+
+.headlogo img {
+  height: 80px;
+  filter: drop-shadow(0 0 10px #0076cfaa);
+  animation: glow 2.5s ease-in-out infinite alternate;
+  animation-delay: 1.8s; /* startet nach dem Landen */
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 5px #0076cf55);
+  }
+  to {
+    filter: drop-shadow(0 0 20px #0076cfff);
+  }
+}
 
 
 

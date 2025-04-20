@@ -117,5 +117,28 @@ public static function generateHash(string $value, string $algorithm = 'sha256',
     }
 
 
+    /**
+     * Universelle Debug-Funktion zum Anzeigen von Variableninhalten.
+     *
+     * @param mixed  $var       Die Variable, die ausgegeben werden soll.
+     * @param string $label     Optionaler Label-Titel für die Ausgabe.
+     * @param bool   $asString  Wenn true, wird der Dump als String zurückgegeben.
+     *
+     * @return string|null
+     */
+    public function dump($var, string $label = '', bool $asString = false): ?string {
+        $labelPart = $label ? "<strong>$label:</strong>\n" : '';
+        $output = $labelPart . print_r($var, true);
+
+        if ($asString) {
+            return $output;
+        }
+
+        echo "<pre style='background:#f8f9fa;padding:1em;border:1px solid #ccc;border-radius:5px;font-size:0.9em;'>"
+        . htmlspecialchars($output) . "</pre>";
+        return null;
+    }    
+
+
 
 }

@@ -1,0 +1,34 @@
+[
+    {
+        "firstname": "David",
+        "lastname": "Koch",
+        "email": "david.koch@schule.de",
+        "id": 161,
+        "created_at": "2025-04-20 00:12:36",
+        "updated_at": "2025-04-20 00:12:36"
+    },
+    {
+        "firstname": "Eva",
+        "lastname": "Wagner",
+        "email": "eva.wagner@schule.de",
+        "id": 162,
+        "created_at": "2025-04-20 00:12:36",
+        "updated_at": "2025-04-20 00:12:36"
+    },
+    {
+        "firstname": "Hannes",
+        "lastname": "Hoffmann",
+        "email": "hannes.hoffmann@schule.de",
+        "id": 163,
+        "created_at": "2025-04-20 00:12:36",
+        "updated_at": "2025-04-20 00:12:36"
+    },
+    {
+        "firstname": "Eva",
+        "lastname": "Becker",
+        "email": "eva.becker@schule.de",
+        "id": 164,
+        "created_at": "2025-04-20 00:12:36",
+        "updated_at": "2025-04-20 00:12:36"
+    }
+]
