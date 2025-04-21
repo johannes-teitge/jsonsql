@@ -162,6 +162,12 @@ $scriptContent = str_replace('<!-- Exclude End -->', '<!-- Exclude End Temp -->'
 
 
 
+<?php
+// Vorverarbeitung der Dateien
+$jsonCategories = htmlspecialchars(file_get_contents(__DIR__ . '/../testdb/st3_categories.json'));
+$jsonProducts   = htmlspecialchars(file_get_contents(__DIR__ . '/../testdb/st3_products.json'));
+$phpCode        = htmlspecialchars($scriptContent); // bereits gesetzt
+?>
 
 
 <!-- Exclude Begin -->
@@ -179,15 +185,10 @@ $scriptContent = str_replace('<!-- Exclude End -->', '<!-- Exclude End Temp -->'
       <div id="collapseJson" class="accordion-collapse collapse" aria-labelledby="headingJson" data-bs-parent="#jsonAccordion">
         <div class="accordion-body">
           <h4>JsonSQL Datei: st3_categories.json</h4>
-          <pre class="code-block"><code><?php
-            echo htmlspecialchars(file_get_contents(__DIR__ . '/../testdb/st3_categories.json'));
-          ?></code></pre>
+          <pre class="line-numbers"><code class="language-json"><?= $jsonCategories ?></code></pre>
 
           <h4>JsonSQL Datei: st3_products.json</h4>
-          <pre class="code-block"><code><?php
-            echo htmlspecialchars(file_get_contents(__DIR__ . '/../testdb/st3_products.json'));
-          ?></code></pre>          
-
+          <pre class="line-numbers"><code class="language-json"><?= $jsonProducts ?></code></pre>
         </div>
       </div>
     </div>
@@ -197,23 +198,23 @@ $scriptContent = str_replace('<!-- Exclude End -->', '<!-- Exclude End Temp -->'
 <!-- ===============================
 🔍 Quellcode-Anzeige für Lernzwecke
 =============================== -->
-  <div class="container mt-5 mb-3">
-    <div class="accordion" id="codeAccordion">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingCode">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCode" aria-expanded="false" aria-controls="collapseCode">
-            📄 Quellcode dieser Demo anzeigen (<?= htmlspecialchars($scriptName) ?>)
-          </button>
-        </h2>
-        <div id="collapseCode" class="accordion-collapse collapse" aria-labelledby="headingCode" data-bs-parent="#codeAccordion">
-          <div class="accordion-body">
-          <pre class="code-block"><code><?php echo htmlspecialchars($scriptContent); ?></code></pre>
-          </div>
+<div class="container mt-5 mb-3">
+  <div class="accordion" id="codeAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingCode">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCode" aria-expanded="false" aria-controls="collapseCode">
+          📄 Quellcode dieser Demo anzeigen (<?= htmlspecialchars($scriptName) ?>)
+        </button>
+      </h2>
+      <div id="collapseCode" class="accordion-collapse collapse" aria-labelledby="headingCode" data-bs-parent="#codeAccordion">
+        <div class="accordion-body">
+          <pre class="line-numbers"><code class="language-php"><?= $phpCode ?></code></pre>
         </div>
       </div>
     </div>
   </div>
 </div>
 <!-- Exclude End -->
+
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

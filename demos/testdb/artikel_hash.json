@@ -1,17 +1,17 @@
 [
     {
-        "id": "",
         "title": "Mauspad XXL",
-        "price": 9.99
+        "price": 9.99,
+        "id": ""
     },
     {
-        "id": "",
         "title": "Gaming-Maus",
-        "price": 19.95
+        "price": 19.95,
+        "id": ""
     },
     {
-        "id": "",
         "title": "Monitorhalterung",
-        "price": 34.9
+        "price": 34.9,
+        "id": ""
     }
 ]

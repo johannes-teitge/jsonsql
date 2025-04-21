@@ -246,6 +246,12 @@ function loadTemplate($templatePath) {
     <li class="nav-item">
       <a class="nav-link" href="#joins"><span class="m-item"><i class="bi bi-link-45deg"></i> Joins & Beziehungen</span></a>
     </li>       
+
+
+    <li class="nav-item">
+      <a class="nav-link" href="#mysql-export"><span class="m-item"><i class="bi bi-box-arrow-up-right"></i> MySQL-Export</span></a>
+    </li>
+
     
     <li class="nav-item">
       <a class="nav-link" href="#tools"><span class="m-item"><i class="bi bi-tools"></i> Extras & Tools</span></a>
@@ -319,6 +325,10 @@ function loadTemplate($templatePath) {
         
         <span id="joins"></span>
         <?php loadTemplate(__DIR__ . '/sections/joins.php'); ?>    
+
+        <span id="mysql-export"></span>
+        <?php loadTemplate(__DIR__ . '/sections/mysql_export.php'); ?>
+
         
         <span id="tools"></span>
         <?php loadTemplate(__DIR__ . '/sections/tools.php'); ?>    

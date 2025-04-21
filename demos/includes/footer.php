@@ -143,10 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  hljs.highlightAll();
-  hljs.initLineNumbersOnLoad();  
-
-
 
 </script>
 

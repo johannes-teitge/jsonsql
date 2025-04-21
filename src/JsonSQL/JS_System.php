@@ -17,6 +17,7 @@ trait JS_System
     protected function initSystemDefaults(): void {
         self::$allowedDataTypes = [
             'string', 
+            'text',            
             'integer', 
             'boolean', 
             'float', 
@@ -52,6 +53,18 @@ trait JS_System
             'auto_create_timestamp',
         ];
     }
+
+
+
+    /**
+     * Gibt den aktuellen Datenbankpfad (Ordner) zurück – ohne Dateinamen.
+     *
+     * @return string|null Pfad zur aktuellen Datenbank oder null, wenn keine gesetzt ist.
+     */
+    public function getDatabasePath(): ?string {
+        return $this->currentDbPath ?? null;
+    }
+
 
     /**
      * Gibt die Liste der erlaubten Datentypen zurück.
@@ -894,11 +907,24 @@ trait JS_System
 
 
     
-
     public function getSystemFilePath(): ?string {
         if (!$this->currentDbPath || !$this->currentTableName) return null;
         return $this->currentDbPath . DIRECTORY_SEPARATOR . $this->currentTableName . '.system.json';
     }
+
+    /**
+     * Gibt das aktuelle Systemverzeichnis zurück, also den Pfad zur Datenbank (ohne Datei).
+     *
+     * @return string|null Der aktuelle Datenbankpfad oder null, wenn keine Datenbank gesetzt ist.
+     */
+    public function getSystemDir(bool $trailingSlash = false): ?string {
+        if (!$this->currentDbPath) return null;
+        return $trailingSlash
+            ? rtrim($this->currentDbPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
+            : $this->currentDbPath;
+    }
+    
+
 
     public function hasSystemConfig(): bool {
         $path = $this->getSystemFilePath();
@@ -1094,6 +1120,9 @@ trait JS_System
         file_put_contents($file, json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         $this->systemConfig = $config;
     }
+
+
+
 
 
 

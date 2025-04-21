@@ -25,18 +25,87 @@ trait JS_Tables
 {
 
 
-    public function listTables(): array {
+
+    /**
+     * Gibt den vollständigen Pfad zur JSON-Datendatei der aktuellen Tabelle zurück.
+     * Falls keine Tabelle gesetzt ist, wird null zurückgegeben.
+     *
+     * @param string|null $table Optional: Name der Tabelle. Wenn null, wird aktuelle verwendet.
+     * @return string|null
+     */
+    public function getTableFilePath(?string $table = null): ?string {
+        if ($table === null) {
+            $table = $this->currentTableName ?? null;
+        }
+
+        if (!$this->currentDbPath || !$table) {
+            return null;
+        }
+
+        return $this->currentDbPath . DIRECTORY_SEPARATOR . $table . '.json';
+    }
+
+
+    /**
+     * Gibt den vollständigen Pfad zur .system.json-Datei zurück – entweder für eine angegebene Tabelle oder die aktuelle.
+     *
+     * @param string|null $table Optional: Name der Tabelle. Wenn null, wird die aktuelle verwendet.
+     * @return string|null Pfad zur .system.json-Datei oder null, wenn keine Tabelle oder Datenbank gesetzt ist.
+     */
+    public function getSystemTableFilePath(?string $table = null): ?string {
+        if ($table === null) {
+            $table = $this->currentTableName ?? null;
+        }
+
+        if (!$this->currentDbPath || !$table) {
+            return null;
+        }
+
+        return $this->currentDbPath . DIRECTORY_SEPARATOR . $table . '.system.json';
+    }
+ 
+
+    /**
+     * Prüft, ob für die angegebene Tabelle eine system.json-Datei existiert.
+     *
+     * @param string $table  Der Tabellenname (ohne .json)
+     * @return bool           true, wenn die Datei existiert, sonst false
+     */
+    public function hasSystemTable(string $table): bool {
+        return file_exists($this->getTableSystemFilePath($table));
+    }
+
+
+
+
+    /**
+     * Listet alle Tabellennamen in der aktuellen Datenbank auf.
+     *
+     * @param bool $excludeSystem  Wenn true, werden .system.json-Dateien ausgeschlossen (Standard: true)
+     * @return array               Liste der Tabellennamen (ohne .json-Endung)
+     */
+    public function listTables(bool $excludeSystem = true): array {
         if (!$this->currentDbPath) {
             throw new \Exception("Keine Datenbank ausgewählt.");
         }
 
         $files = glob($this->currentDbPath . DIRECTORY_SEPARATOR . '*.json');
-        $tables = array_map(function ($file) {
-            return basename($file, '.json');
-        }, $files);
+        $tables = [];
+
+        foreach ($files as $file) {
+            $base = basename($file, '.json');
+
+            // System-Dateien ausschließen?
+            if ($excludeSystem && str_ends_with($base, '.system')) {
+                continue;
+            }
+
+            $tables[] = $base;
+        }
 
         return $tables;
-    }    
+    }
+
 
     protected function loadTableData(): void {
         if (!$this->currentTableFile) return;

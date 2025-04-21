@@ -30,6 +30,75 @@ function showAlert($type, $message) {
   </div>";
 }
 
+
+function generateTeacherDescription($firstname, $lastname, $gender) {
+    $unis = ['University of Berlin', 'University of Hamburg', 'Technical University of Munich', 'Heidelberg University', 'Leipzig University'];
+    $orte = ['Berlin', 'Hamburg', 'München', 'Heidelberg', 'Leipzig'];
+
+    $familienstande = ['verheiratet', 'ledig', 'geschieden'];
+    $kinder = rand(0, 5);
+    $alter = rand(35, 65);
+    $jahr = rand(1980, 2020);
+
+    $uni = $unis[array_rand($unis)];
+    $ort = $orte[array_rand($orte)];
+    $stand = $familienstande[array_rand($familienstande)];
+
+    $templates_m = [
+        "%s %s ist ein engagierter Lehrer mit langjähriger Erfahrung.",
+        "%s %s unterrichtet seit vielen Jahren mit Leidenschaft.",
+        "%s %s bringt Struktur und Humor in den Unterricht.",
+        "%s %s motiviert seine Schüler durch praxisnahe Beispiele.",
+        "%s %s ist für seine geduldige und klare Art bekannt.",
+        "%s %s setzt auf moderne Lehrmethoden und Teamarbeit.",
+        "%s %s inspiriert durch seine ruhige und verständnisvolle Art.",
+        "%s %s gestaltet seinen Unterricht abwechslungsreich und lebensnah.",
+        "%s %s legt Wert auf kritisches Denken und eigenständiges Arbeiten.",
+        "%s %s unterstützt die individuelle Entwicklung jedes Lernenden."
+    ];
+
+    $templates_f = [
+        "%s %s ist eine engagierte Lehrerin mit Herz und Kompetenz.",
+        "%s %s begeistert ihre Schüler:innen durch anschaulichen Unterricht.",
+        "%s %s steht für moderne, interaktive Lernmethoden.",
+        "%s %s bringt Leidenschaft und Einfühlungsvermögen in den Unterricht.",
+        "%s %s ist bekannt für ihre kreative Unterrichtsgestaltung.",
+        "%s %s vermittelt Wissen mit Geduld und Klarheit.",
+        "%s %s fördert eigenständiges Denken und Handeln.",
+        "%s %s schafft eine wertschätzende und inspirierende Lernumgebung.",
+        "%s %s legt großen Wert auf Zusammenarbeit und soziales Lernen.",
+        "%s %s kombiniert Fachwissen mit persönlichem Engagement."
+    ];
+
+    $tpl = ($gender === 'f') ? $templates_f[array_rand($templates_f)] : $templates_m[array_rand($templates_m)];
+    $basis = sprintf($tpl, $firstname, $lastname);
+
+    // Kind-Angabe sauber
+    $kinderText = match (true) {
+        $kinder === 0 => "keine Kinder",
+        $kinder === 1 => "1 Kind",
+        default       => "$kinder Kinder"
+    };
+
+    // Textbausteine
+    $absatz2 = "Er/Sie ist Absolvent:in der $uni in $ort,<br>seit $jahr an unserer Fakultät.";
+    $absatz3 = "$alter Jahre alt, $stand und hat $kinderText.";
+
+    // Geschlechtsspezifisch anpassen
+    if ($gender === 'f') {
+        $absatz2 = str_replace("Er/Sie", "Sie", $absatz2);
+        $absatz3 = str_replace("Er", "Sie", $absatz3);
+    } else {
+        $absatz2 = str_replace("Er/Sie", "Er", $absatz2);
+    }
+
+    // Als HTML-Text zurückgeben
+    return "<p>$basis</p><p>$absatz2<br>$absatz3</p>";
+}
+
+
+
+
 function create_teachers($db, $numTeachers = 4) {
   global $table_teachers;
   
@@ -41,6 +110,7 @@ function create_teachers($db, $numTeachers = 4) {
       ->addField('firstname', ['dataType' => 'string', 'required' => true, 'length' => 50])
       ->addField('lastname', ['dataType' => 'string', 'required' => true, 'length' => 50])
       ->addField('email', ['dataType' => 'string', 'length' => 100])
+      ->addField('description', ['dataType' => 'text', 'comment' => 'Beschreibung und Expertise'])
       ->addCreatedAtField('created_at')
       ->addUpdatedAtField('updated_at');
 
@@ -68,12 +138,14 @@ function create_teachers($db, $numTeachers = 4) {
     $gender    = $f['gender'];
     $lastname  = $lastnames[array_rand($lastnames)];
     $email     = strtolower($firstname . '.' . $lastname . "@schule.de");
+    $description = generateTeacherDescription($firstname, $lastname, $gender);    
 
     $db->setTable($table)->insert([
         'firstname' => $firstname,
         'lastname'  => $lastname,
         'email'     => $email,
-        'gender'    => $gender
+        'gender'    => $gender,
+        'description' => $description        
     ]);
    }
 

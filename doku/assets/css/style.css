@@ -22,6 +22,12 @@ body {
     color: var(--text-color);
 }
 
+code, code a {
+  color: var(--sss-color) !important;
+  font-size: 1.0rem;
+}
+
+
 
 .method-signature {
   list-style: none;

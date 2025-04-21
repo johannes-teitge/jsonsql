@@ -130,6 +130,7 @@ $fields = $db->getRawSystemData()['fields']; // Alle Felder aus der Systemkonfig
             <label for="dataType">Datentyp:</label>
             <select id="dataType" name="dataType" class="form-control" required>
                 <option value="string">String</option>
+                <option value="text">Text</option>                
                 <option value="integer">Integer</option>
                 <option value="boolean">Boolean</option>
                 <option value="enum">Enum</option>
@@ -174,7 +175,7 @@ $fields = $db->getRawSystemData()['fields']; // Alle Felder aus der Systemkonfig
             <?php foreach ($fields as $fieldName => $fieldConfig): ?>
                 <tr>
                     <td><?= htmlspecialchars($fieldName) ?></td>
-                    <td><?= htmlspecialchars($fieldConfig['datentyp'] ?? 'Nicht festgelegt') ?></td>
+                    <td><?= htmlspecialchars($fieldConfig['dataType'] ?? 'Nicht festgelegt') ?></td>
                     <td>
                         <!-- Löschen-Button für jedes Feld -->
                         <form method="POST" style="display:inline;">

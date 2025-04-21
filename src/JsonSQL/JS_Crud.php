@@ -495,13 +495,17 @@ private function applyAutoFields(array $insertrecord): array {
                     $record[$field] = $value;  // Wert setzen
                     break;                     
 
-                /*********  STRING  ***********/
+                /*********  STRING/TEXT  ***********/
                 case 'string':
-                    // String-Wert: Keine Min-Max-Prüfung, nur Längenbegrenzung
-                    $value = isset($insertrecord[$field]) ? $insertrecord[$field] : ($config['defaultValue'] ?? '');
-                    $value = $this->validateStringLength($value, $config);
-                    $record[$field] = $value;  // Wert setzen
-                    break;
+                    case 'text': // NEU: text wie string behandeln, aber ohne Längenlimit
+                        $value = isset($insertrecord[$field]) ? $insertrecord[$field] : ($config['defaultValue'] ?? '');
+                    
+                        if ($config['dataType'] === 'string') {
+                            $value = $this->validateStringLength($value, $config); // Nur bei string
+                        }
+                    
+                        $record[$field] = $value;
+                        break;
 
                 /*********  ENUM  ***********/
                 case 'enum':

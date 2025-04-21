@@ -23,6 +23,7 @@ $debugger = new FancyDumpVar();
 $title = $pageTitle ?? 'JsonSQL Demo';
 $removeOverview = $removeOverview ?? false;
 
+$baseUrl = $baseUrl ?? '';  // Standard: eine Ebene zurück (für /demos/*)
 $ogDescription = $pageDescription ?? 'Eine interaktive Demo aus dem JsonSQL-Projekt.';
 $ogImage = $pageImage ?? 'https://www.teitge.de/JsonSQL/demos/assets/images/FacebookDefault.webp';
 // URL dynamisch erzeugen
@@ -52,6 +53,12 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
 
   <link rel="icon" href="<?= APP_ASSETS_URL ?>/images/JsonSQL-Logo.svg" type="image/webp">
 
+  <!-- Favicon -->
+  <link rel="icon" href="<?= APP_ASSETS_URL ?>/images/favicon.ico" sizes="any"> <!-- Fallback für ältere Browser -->
+  <link rel="icon" href="<?= APP_ASSETS_URL ?>/images/favicon.svg" type="image/svg+xml"> <!-- Modernes SVG -->
+  <link rel="apple-touch-icon" href="<?= APP_ASSETS_URL ?>/images/apple-touch-icon.png"> <!-- iOS -->
+  <meta name="theme-color" content="#2f2f2f"> <!-- Browser-Tab-Farbe z.B. auf Android -->  
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -65,16 +72,42 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
    <link href="../assets/Icons/JsonSQL/style.css" rel="stylesheet">  
 
 
-  <!-- Highlight.js -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
-  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      hljs.highlightAll();
-      hljs.initLineNumbersOnLoad(); // <- Zeilennummern aktivieren
-    });
-    </script>
+
+<!-- Prism Theme -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-coy.css">
+
+<!-- Zeilennummern CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.css">
+
+<!-- Prism Core -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
+<!-- ✅ Wichtige Abhängigkeit zuerst -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup-templating.min.js"></script>
+
+<!-- ✅ Dann erst php -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
+
+<!-- Weitere Sprachen (z. B. JSON, SQL) -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
+
+<!-- ✅ Toolbar-Plugin zuerst laden -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+
+<!-- Copy-Button Plugin -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<!-- ✅ Toolbar CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.min.css">
+
+
+<!-- Zeilennummern Plugin -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+
+
+
+
 
 <?php if (!empty($additionalCss)): ?>
 <!-- Additional CSS -->  
@@ -104,6 +137,8 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
 <body class="bg-light d-flex flex-column min-vh-100">
 
    
+
+
   <header class="py-3 shadow-sm">
   <div class="head-wrapper">  
   <div class="container align-items-center justify-content-between flex-wrap">    
@@ -119,7 +154,7 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
     
   <div class="text-center d-flex justify-content-center gap-3">
     <?php if (!$removeOverview): ?>
-      <a href="index.php" class="backContent">
+      <a href="<?= $baseUrl ?>index.php" class="backContent">
         <i class="bi bi-arrow-left"></i> Zur Übersicht
       </a>
     <?php endif; ?>

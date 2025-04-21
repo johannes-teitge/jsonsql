@@ -1,32 +1,32 @@
 [
     {
-        "hash": "SzZRYmVrbTl6T29TOWo3bkNzdG5HZz09",
+        "id": 1,
         "title": "djh3Q05QZU5xM2MxMXArQWYwTWlLUT09",
+        "price": 1.49,
+        "hash": "SzZRYmVrbTl6T29TOWo3bkNzdG5HZz09",
         "created_at": "2025-04-10 12:00:00",
         "published_on": "2025-04-10",
         "event_time": "15:30:00",
-        "updated_at": 1744286400,
-        "id": 1,
-        "price": 1.49
+        "updated_at": "2025-04-10 12:00:00"
     },
     {
-        "hash": "cHJZSGlHQUZUblBudFJJdXltUG5pZz09",
+        "id": 2,
         "title": "Ty9aT2ZYUGM3Z09BYSs5WDVkOVJFZz09",
+        "price": 5.99,
+        "hash": "cHJZSGlHQUZUblBudFJJdXltUG5pZz09",
         "created_at": "2025-04-10 12:30:00",
         "published_on": "2025-04-11",
         "event_time": "16:00:00",
-        "updated_at": 1744288200,
-        "id": 2,
-        "price": 5.99
+        "updated_at": "2025-04-10 12:30:00"
     },
     {
-        "hash": "SWtTNU9XRWZJSHhpQ2tHaWlkZzdjQT09",
+        "id": 3,
         "title": "ajlmYW1aRW5Ub1EydjR2RGpCdnh2UT09",
+        "price": 8.49,
+        "hash": "SWtTNU9XRWZJSHhpQ2tHaWlkZzdjQT09",
         "created_at": "2025-04-10 13:00:00",
         "published_on": "2025-04-12",
         "event_time": "17:00:00",
-        "updated_at": 1744290000,
-        "id": 3,
-        "price": 8.49
+        "updated_at": "2025-04-10 13:00:00"
     }
 ]

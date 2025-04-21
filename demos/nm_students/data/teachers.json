@@ -1,38 +1,122 @@
 [
     {
-        "firstname": "Felix",
-        "lastname": "Hoffmann",
-        "email": "felix.hoffmann@schule.de",
-        "gender": "m",
-        "id": 295,
-        "created_at": "2025-04-20 07:20:23",
-        "updated_at": "2025-04-20 07:20:23"
-    },
-    {
-        "firstname": "Anna",
-        "lastname": "Wagner",
-        "email": "anna.wagner@schule.de",
-        "gender": "f",
-        "id": 296,
-        "created_at": "2025-04-20 07:20:23",
-        "updated_at": "2025-04-20 07:20:23"
-    },
-    {
         "firstname": "David",
-        "lastname": "Schmidt",
-        "email": "david.schmidt@schule.de",
+        "lastname": "Weber",
+        "email": "david.weber@schule.de",
         "gender": "m",
-        "id": 297,
-        "created_at": "2025-04-20 07:20:23",
-        "updated_at": "2025-04-20 07:20:23"
+        "description": "<p>David Weber gestaltet seinen Unterricht abwechslungsreich und lebensnah.<\/p><p>Er ist Absolvent:in der University of Hamburg in M\u00fcnchen,<br>seit 1999 an unserer Fakult\u00e4t.<br>42 Jahre alt, ledig und hat 5 Kinder.<\/p>",
+        "id": 51,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "Jonas",
+        "lastname": "Schmidt",
+        "email": "jonas.schmidt@schule.de",
+        "gender": "m",
+        "description": "<p>Jonas Schmidt gestaltet seinen Unterricht abwechslungsreich und lebensnah.<\/p><p>Er ist Absolvent:in der University of Hamburg in Leipzig,<br>seit 1996 an unserer Fakult\u00e4t.<br>49 Jahre alt, geschieden und hat 1 Kind.<\/p>",
+        "id": 52,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "Clara",
+        "lastname": "Hoffmann",
+        "email": "clara.hoffmann@schule.de",
+        "gender": "f",
+        "description": "<p>Clara Hoffmann schafft eine wertsch\u00e4tzende und inspirierende Lernumgebung.<\/p><p>Sie ist Absolvent:in der University of Berlin in M\u00fcnchen,<br>seit 1996 an unserer Fakult\u00e4t.<br>35 Jahre alt, ledig und hat 2 Kinder.<\/p>",
+        "id": 53,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "Hannes",
+        "lastname": "Schulz",
+        "email": "hannes.schulz@schule.de",
+        "gender": "m",
+        "description": "<p>Hannes Schulz motiviert seine Sch\u00fcler durch praxisnahe Beispiele.<\/p><p>Er ist Absolvent:in der Heidelberg University in Hamburg,<br>seit 2004 an unserer Fakult\u00e4t.<br>45 Jahre alt, geschieden und hat 2 Kinder.<\/p>",
+        "id": 54,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "Clara",
+        "lastname": "Becker",
+        "email": "clara.becker@schule.de",
+        "gender": "f",
+        "description": "<p>Clara Becker kombiniert Fachwissen mit pers\u00f6nlichem Engagement.<\/p><p>Sie ist Absolvent:in der Technical University of Munich in Heidelberg,<br>seit 2009 an unserer Fakult\u00e4t.<br>44 Jahre alt, verheiratet und hat 2 Kinder.<\/p>",
+        "id": 55,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "Greta",
+        "lastname": "Meier",
+        "email": "greta.meier@schule.de",
+        "gender": "f",
+        "description": "<p>Greta Meier ist bekannt f\u00fcr ihre kreative Unterrichtsgestaltung.<\/p><p>Sie ist Absolvent:in der Leipzig University in Heidelberg,<br>seit 2002 an unserer Fakult\u00e4t.<br>61 Jahre alt, ledig und hat 2 Kinder.<\/p>",
+        "id": 56,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
     },
     {
         "firstname": "Isabel",
-        "lastname": "Koch",
-        "email": "isabel.koch@schule.de",
+        "lastname": "Fischer",
+        "email": "isabel.fischer@schule.de",
         "gender": "f",
-        "id": 298,
-        "created_at": "2025-04-20 07:20:23",
-        "updated_at": "2025-04-20 07:20:23"
+        "description": "<p>Isabel Fischer kombiniert Fachwissen mit pers\u00f6nlichem Engagement.<\/p><p>Sie ist Absolvent:in der University of Berlin in Berlin,<br>seit 2002 an unserer Fakult\u00e4t.<br>37 Jahre alt, ledig und hat keine Kinder.<\/p>",
+        "id": 57,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "Felix",
+        "lastname": "Weber",
+        "email": "felix.weber@schule.de",
+        "gender": "m",
+        "description": "<p>Felix Weber inspiriert durch seine ruhige und verst\u00e4ndnisvolle Art.<\/p><p>Er ist Absolvent:in der University of Hamburg in M\u00fcnchen,<br>seit 1981 an unserer Fakult\u00e4t.<br>40 Jahre alt, geschieden und hat 5 Kinder.<\/p>",
+        "id": 58,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "David",
+        "lastname": "Becker",
+        "email": "david.becker@schule.de",
+        "gender": "m",
+        "description": "<p>David Becker setzt auf moderne Lehrmethoden und Teamarbeit.<\/p><p>Er ist Absolvent:in der Technical University of Munich in Leipzig,<br>seit 2007 an unserer Fakult\u00e4t.<br>62 Jahre alt, ledig und hat 4 Kinder.<\/p>",
+        "id": 59,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "Greta",
+        "lastname": "Meier",
+        "email": "greta.meier@schule.de",
+        "gender": "f",
+        "description": "<p>Greta Meier schafft eine wertsch\u00e4tzende und inspirierende Lernumgebung.<\/p><p>Sie ist Absolvent:in der Heidelberg University in M\u00fcnchen,<br>seit 1986 an unserer Fakult\u00e4t.<br>64 Jahre alt, verheiratet und hat 3 Kinder.<\/p>",
+        "id": 60,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "Isabel",
+        "lastname": "Hoffmann",
+        "email": "isabel.hoffmann@schule.de",
+        "gender": "f",
+        "description": "<p>Isabel Hoffmann f\u00f6rdert eigenst\u00e4ndiges Denken und Handeln.<\/p><p>Sie ist Absolvent:in der Technical University of Munich in M\u00fcnchen,<br>seit 1998 an unserer Fakult\u00e4t.<br>37 Jahre alt, ledig und hat 2 Kinder.<\/p>",
+        "id": 61,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
+    },
+    {
+        "firstname": "Clara",
+        "lastname": "Schulz",
+        "email": "clara.schulz@schule.de",
+        "gender": "f",
+        "description": "<p>Clara Schulz bringt Leidenschaft und Einf\u00fchlungsverm\u00f6gen in den Unterricht.<\/p><p>Sie ist Absolvent:in der University of Berlin in Heidelberg,<br>seit 1994 an unserer Fakult\u00e4t.<br>55 Jahre alt, ledig und hat 5 Kinder.<\/p>",
+        "id": 62,
+        "created_at": "2025-04-20 23:10:52",
+        "updated_at": "2025-04-20 23:10:52"
     }
 ]

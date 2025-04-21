@@ -89,4 +89,36 @@ trait JS_Database
     }    
 
 
+    /**
+     * Gibt den Pfad zur .system.json-Datei zurück – entweder für eine angegebene Tabelle
+     * oder die aktuell gesetzte Tabelle (via setTable()).
+     *
+     * @param string|null $table Optional: Tabellenname. Wenn nicht angegeben, wird die aktuelle verwendet.
+     * @return string Pfad zur .system.json-Datei
+     * @throws \Exception Wenn keine Datenbank oder Tabelle gesetzt ist
+     */
+    public function getTableSystemFilePath(?string $table = null): string {
+        if (!$this->currentDbPath) {
+            throw new \Exception("❌ Keine Datenbank ausgewählt.");
+        }
+
+        $tableName = $table ?? $this->currentTableName;
+
+        if (!$tableName) {
+            throw new \Exception("❌ Kein Tabellenname angegeben und keine aktuelle Tabelle gesetzt.");
+        }
+
+        return $this->currentDbPath . DIRECTORY_SEPARATOR . $tableName . '.system.json';
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

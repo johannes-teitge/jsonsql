@@ -10,6 +10,7 @@ $additionalFooterJs = [
   'assets/scripts/flip/flip.min.js'
 ];
 
+$baseUrl = '../examples/'; // Wenn du direkt im Root von /JsonSQL bist
 include __DIR__ . '/../includes/header.php';
 use Src\JsonSQL;
 
@@ -49,6 +50,9 @@ $page = $_GET['view'] ?? 'overview';
   <li class="nav-item">
     <a class="nav-link <?= $page == 'enrollments' ? 'active' : '' ?>" href="?view=enrollments">📌 Belegungen</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link <?= $page == 'mysql' ? 'active' : '' ?>" href="?view=mysql">🛠️ MySQL Export</a>
+  </li>  
   <li class="nav-item ms-auto">
   <!--  <a class="nav-link text-danger" href="create_data.php">🚀 Demodaten erzeugen</a> -->
   </li>
@@ -76,6 +80,10 @@ switch ($page) {
   case 'enrollments':
     include 'views/view_enrollments.php';
     break;
+
+    case 'mysql':
+      include 'views/view_mysql.php';
+      break;    
 
   case 'overview':
   default:

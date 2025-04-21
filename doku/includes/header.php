@@ -32,6 +32,13 @@ $__start = microtime(true);
     <meta name="twitter:image" content="https://teitge.de/jsonsql/doku/assets/images/demos-banner.webp">
    <!-- <meta name="twitter:site" content="@dein_twittername"> --> <!-- Optional -->    
 
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any"> <!-- Fallback für ältere Browser -->
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml"> <!-- Modernes SVG -->
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png"> <!-- iOS -->
+  <meta name="theme-color" content="#2f2f2f"> <!-- Browser-Tab-Farbe z.B. auf Android -->
+
+
 
 
 

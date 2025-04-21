@@ -1,5 +1,7 @@
 <?php
 $pageTitle = "JsonSQL Demo: Systemfelder dynamisch hinzufügen und entfernen";
+$successMessage = '';
+$errorMessage = '';
 
 $JsonSQLpath = __DIR__ . '/../../src/JsonSQL.php';
 if (!file_exists($JsonSQLpath)) {
@@ -37,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_field'])) {
         // Beispiel: Systemfeld 'email' hinzufügen
         addSystemField("email", [
-            'dateType' => 'string',
+            'dataType' => 'string',
             'length' => 120,
             'allowNULL' => false,
             'defaultValue' => null,

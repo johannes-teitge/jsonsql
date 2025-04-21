@@ -7,6 +7,30 @@ und verwendet [Semantische Versionierung](https://semver.org/lang/de/).
 
 ---
 
+## [1.0.6] – 2025-04-21
+### Hinzugefügt
+- **MySQL-Exportfunktionen erweitert:**
+  - Neue Methode `ExportMySQLCreate()` zur Generierung von SQL-Tabellen aus `.system.json`
+  - In `view_mysql.php` (N:M-Demo) werden nun alle Tabellen dynamisch angezeigt inkl.:
+    - Dateipfad
+    - Verlinkter Systemdefinition
+    - Exportbutton für einzelne Tabellen (nur mit Systemdefinition)
+    - Gesamtexport aller `.system.json`-basierten Tabellen möglich
+- **Export-Sicherheit verbessert:**
+  - Nur Tabellen mit gültiger `.system.json` können als SQL (INSERT) exportiert werden  
+    → Sicherstellung korrekter Typen, Validierungen und Autowerte
+
+### Geändert
+- `listTables()`-Methode erhält neue Option zur Ausblendung von `.system.json`-Dateien
+- `view_mysql.php` modernisiert:
+  - Übersichtliche Darstellung mit Tabellennamen, Verlinkungen und Aktionen
+  - Neue Exportbuttons eingebaut (je Tabelle & global)
+
+### Sonstiges
+- Dokumentation um Abschnitt *MySQL-Export* ergänzt (inkl. Anwendungsbeispiele und Einschränkungen)
+
+---
+
 ## [1.0.5] – 2025-04-20
 ### Hinzugefügt
 - Demo `nm_students` fertiggestellt:

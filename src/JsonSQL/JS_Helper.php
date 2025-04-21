@@ -127,17 +127,20 @@ public static function generateHash(string $value, string $algorithm = 'sha256',
      * @return string|null
      */
     public function dump($var, string $label = '', bool $asString = false): ?string {
-        $labelPart = $label ? "<strong>$label:</strong>\n" : '';
-        $output = $labelPart . print_r($var, true);
-
+        $labelPart = $label ? "<strong>" . htmlspecialchars($label) . ":</strong><br>" : '';
+        $output = htmlspecialchars(print_r($var, true));
+    
+        $html = "<pre>"
+              . $labelPart . $output . "</pre>";
+    
         if ($asString) {
-            return $output;
+            return $html;
         }
-
-        echo "<pre style='background:#f8f9fa;padding:1em;border:1px solid #ccc;border-radius:5px;font-size:0.9em;'>"
-        . htmlspecialchars($output) . "</pre>";
+    
+        echo $html;
         return null;
-    }    
+    }
+    
 
 
 

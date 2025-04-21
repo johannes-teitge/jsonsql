@@ -13,6 +13,14 @@ if (isset($_GET['id'])) {
   echo "<h2>👩‍🏫 Dozent: {$teacher['firstname']} {$teacher['lastname']}</h2>";
   echo "<p><strong>E-Mail:</strong> {$teacher['email']}</p>";
 
+  if (!empty($teacher['description'])) {
+    echo "<h4 class='mt-4'>📝 Beschreibung</h4>";
+    echo (str_contains($teacher['description'], '<p>') || str_contains($teacher['description'], '<br'))
+        ? $teacher['description']
+        : "<p>" . nl2br(htmlspecialchars($teacher['description'])) . "</p>";
+}
+
+
   // Optional: Kurse dieses Dozenten
   $courses = $db->setTable($table_courses)->where([['teacher_id', '=', $teacherId]])->get();
 
