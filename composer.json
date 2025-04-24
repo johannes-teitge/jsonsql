@@ -1,13 +1,19 @@
 {
-  "name": "teitge/jsonsql",
-  "description": "SQL-ähnliche Datenbankabfragen auf JSON-Dateien in PHP",
-  "license": "MIT",
-  "autoload": {
-    "psr-4": {
-      "JsonSQL\\": "src/JsonSQL/"
-    }
-  },
-  "require": {
-    "php": ">=7.4"
-  }
+    "name": "teitg/jsonsql-test",
+    "autoload": {
+        "psr-4": {
+            "Teitg\\JsonsqlTest\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dscho-Delphi",
+            "email": "teitge@gmx.de"
+        }
+    ],
+    "require": {
+        "teitge/jsonsql": "^1.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
