@@ -144,6 +144,14 @@ class JS_Base {
         }
     }
 
+    public function getVersion(): string {
+        return $this->jsonSQLVersion;
+    } 
+
+    public function getVersionDate(): string {
+        return $this->jsonSQLVersionDate;
+    }     
+
     public function clearLastError(): void {
         $this->lastError = null;  // Setzt das Fehler-Array zurück
     } 
