@@ -1,4 +1,17 @@
 <?php
+/**
+ * JS_Base.php
+ *
+ * Basis-Klasse für das JsonSQL-System.
+ * Beinhaltet zentrale Konfigurations- und Verwaltungsfunktionen für den Umgang mit JSON-basierten Datenbanken.
+ *
+ * @package     JsonSQL
+ * @subpackage  Core
+ * @author      Johannes Teitge
+ * @copyright   Copyright (c) 2025
+ * @license     MIT License
+ * @version     1.0.7 (24.04.2025)
+ */
 
 namespace Src\JsonSQL;
 

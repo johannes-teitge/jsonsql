@@ -1,15 +1,72 @@
 <?php
+/**
+ * JS_Crud.php
+ *
+ * Enthält das CRUD-Trait für JsonSQL.
+ * Dieses Trait stellt zentrale Funktionen zur Verfügung für:
+ * - Einfügen, Aktualisieren und Löschen von Datensätzen
+ * - Validierung von Eingaben basierend auf system.json
+ * - Automatische Felder wie UUID, Hash, Timestamps, Autoincrement
+ * - Transaktionen und Backups
+ * - Datenfilterung, Selektion, Gruppierung und mehr
+ *
+ * @package     JsonSQL
+ * @subpackage  Core
+ * @author      Johannes Teitge
+ * @copyright   Copyright (c) 2025
+ * @license     MIT License
+ * @version     1.0.7 (24.04.2025)
+ */
+
 namespace Src\JsonSQL;
 
 trait JS_Crud
 {
 
 
+
+    /**
+     * Startet eine neue Transaktion.
+     *
+     * Diese Methode aktiviert den Transaktionsmodus, in dem Datensätze zunächst im 
+     * Speicher gesammelt (gepuffert) und erst bei `commit()` tatsächlich in die JSON-Datei geschrieben werden.
+     *
+     * Vorteile:
+     * - Verhindert Teilschreibungen bei Fehlern
+     * - Ermöglicht atomare Inserts mehrerer Datensätze
+     * - Ideal für mehrstufige Insert-Operationen
+     *
+     * Beispiel:
+     * ```php
+     * $db->transact();
+     * $db->insert($datensatz1);
+     * $db->insert($datensatz2);
+     * $db->commit(); // schreibt beide Datensätze gemeinsam
+     * ```
+     *
+     * @return void
+     */    
     public function transact(): void {
         $this->isTransaction = true;
         $this->transactionBuffer = [];
     }
 
+    /**
+     * Beendet eine laufende Transaktion und schreibt die gepufferten Datensätze in die JSON-Datei.
+     *
+     * Diese Methode speichert alle seit `transact()` gesammelten Datensätze atomar in die Datei.  
+     * Dabei wird die Datei exklusiv gesperrt, der bestehende Inhalt eingelesen und mit den neuen 
+     * Datensätzen zusammengeführt.
+     *
+     * Sicherheit:
+     * - Verwendet `flock()` zur Vermeidung paralleler Schreibzugriffe
+     * - Nutzt `ftruncate()` und `rewind()` für sicheres Überschreiben
+     * - Aktualisiert `system.json` falls Felder wie Autoincrement verändert wurden
+     *
+     * @throws \Exception Wenn die Datei nicht gesperrt werden konnte (z. B. durch parallelen Zugriff)
+     * 
+     * @return void
+     */    
     public function commit(): void {
         if (!$this->isTransaction) {
             return;
@@ -37,6 +94,23 @@ trait JS_Crud
         }
     }   
     
+    /**
+     * Bricht eine laufende Transaktion ab und verwirft alle bisher gepufferten Datensätze.
+     *
+     * Diese Methode leert den internen Transaktionspuffer ohne Änderungen an der JSON-Datei vorzunehmen.
+     * Ideal zur Fehlerbehandlung oder wenn bestimmte Bedingungen während eines Transaktionsvorgangs nicht erfüllt wurden.
+     *
+     * ⚠️ Wichtig: Bereits geschriebene Daten außerhalb der Transaktion bleiben unberührt.
+     *
+     * Beispiel:
+     * ```php
+     * $db->transact();
+     * $db->insert($datensatz1);
+     * $db->rollback(); // datensatz1 wird **nicht** gespeichert
+     * ```
+     *
+     * @return void
+     */    
     public function rollback(): void {
         $this->transactionBuffer = [];
         $this->inTransaction = false;
