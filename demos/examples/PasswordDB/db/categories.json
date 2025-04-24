@@ -1,5 +1,0 @@
-[
-  { "id": 1, "name": "Privat", "parent": null },
-  { "id": 2, "name": "Arbeit", "parent": null },
-  { "id": 3, "name": "Websites", "parent": 1 }
-]

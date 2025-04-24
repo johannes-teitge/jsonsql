@@ -1,9 +1,0 @@
-{
-    "fields": {
-        "password": {
-            "dataType": "string",
-            "encrypt": true
-        }
-    },
-    "allowAdditionalFields": true
-}
