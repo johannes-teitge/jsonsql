@@ -134,5 +134,5 @@ Du hast Ideen, willst mithelfen oder Fehler melden?
 ---
 
 **© 2024–2025 JsonSQL Team**  
-🔗 Projektseite: [https://jsonsql.de](https://jsonsql.de)  
-🔧 GitHub: [https://github.com/jsonsql/jsonsql](https://github.com/jsonsql/jsonsql)
+🔗 Projektseite: [https://jsonsql.de](https://www.teitge.de/JsonSQL/doku/)  
+🔧 GitHub: [https://github.com/jsonsql/jsonsql](https://github.com/johannes-teitge/JsonSQL)
