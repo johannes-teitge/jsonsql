@@ -5,8 +5,8 @@ namespace Src\JsonSQL;
 
 
 class JS_Base {
-    protected string $jsonSQLVersion = '1.0.6'; 
-    protected string $jsonSQLVersionDate = '2025-04-21';     
+    protected string $jsonSQLVersion = '1.0.7'; 
+    protected string $jsonSQLVersionDate = '2025-04-24';     
     protected array $databases = [];
     protected ?string $currentDbPath = null;
     protected ?string $currentTableFile = null;
@@ -57,6 +57,58 @@ class JS_Base {
     // added: 2025-04-19 by Dscho
     // ============================================================================
     protected array $skippedInserts = [];
+
+    /**
+     * @var bool $useBackup
+     *
+     * 🛡️ Aktiviert oder deaktiviert das automatische Backup beim Speichern von JSON-Daten.
+     *
+     * Wenn diese Option aktiviert ist (`true`), wird bei jedem Schreibvorgang an einer JSON-Tabelle
+     * automatisch eine Sicherungskopie der Originaldatei angelegt. Die Backups werden unter
+     * `*.json.bak.YYYYMMDD-HHMMSS` gespeichert und ermöglichen eine Wiederherstellung bei Fehlern
+     * oder Datenverlust.
+     *
+     * Wenn deaktiviert (`false`), erfolgt keine Sicherung – nützlich z. B. in Performance-kritischen
+     * Umgebungen oder bei bewusstem Verzicht auf Versionierung.
+     *
+     * 💡 Diese Einstellung kann global gesetzt oder dynamisch geändert werden:
+     * ```php
+     * $db->setUseBackup(true);  // aktivieren
+     * $db->setUseBackup(false); // deaktivieren
+     * ```
+     *
+     * @default true
+     * @since 1.0.4
+     * @author Dscho
+     * @see setUseBackup(), writeTableData()
+     */    
+    protected bool $useBackup = false; // Standard: Backup aktiv    
+
+
+    /**
+     * @var int $maxBackupFiles
+     *
+     * 🌀 Maximale Anzahl an Backup-Dateien, die pro Tabelle aufbewahrt werden.
+     *
+     * Diese Einstellung definiert, wie viele automatische Backups (`.json.bak.YYYYMMDD-HHMMSS`) pro Tabelle
+     * gespeichert bleiben. Sobald die Anzahl überschritten wird, werden die ältesten Backups gelöscht,
+     * sodass immer nur die neuesten erhalten bleiben.
+     *
+     * Beispiel:
+     * - `maxBackupFiles = 5` → Nur die letzten 5 Backups bleiben erhalten.
+     * - `maxBackupFiles = 0` → Keine Rotation (alle Backups bleiben bestehen).
+     *
+     * 💡 Diese Einstellung kann global gesetzt oder dynamisch angepasst werden:
+     * ```php
+     * $db->setMaxBackupFiles(10);  // z. B. max. 10 Backups behalten
+     * ```
+     *
+     * @default 5
+     * @since 1.0.6
+     * @author Dscho
+     * @see rotateBackups(), setMaxBackupFiles()
+     */
+    protected int $maxBackupFiles = 50;    
 
 
 

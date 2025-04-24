@@ -10,7 +10,7 @@ $additionalFooterJs = [
   'assets/scripts/flip/flip.min.js'
 ];
 
-$baseUrl = '../examples/'; // Wenn du direkt im Root von /JsonSQL bist
+$baseUrl = '../examples'; // Wenn du direkt im Root von /JsonSQL bist
 include __DIR__ . '/../includes/header.php';
 use Src\JsonSQL;
 

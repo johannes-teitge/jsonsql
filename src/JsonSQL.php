@@ -22,8 +22,8 @@ namespace Src;
  *
  * @package Src
  * @author Johannes
- * @version 1.0.6
- * @date 2025-04-21 14:43:21
+ * @version 1.0.7
+ * @date 2025-04-24 21:11:01
  * @createdate 2025-04-07 06:55:55 
  * @license MIT
  * @link https://teitge.de

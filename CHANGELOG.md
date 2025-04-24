@@ -7,6 +7,53 @@ und verwendet [Semantische Versionierung](https://semver.org/lang/de/).
 
 ---
 
+## [1.0.7] – 2025-04-24  
+### Hinzugefügt
+- **Backup-Funktionen integriert:**
+  - `setBackupMode(bool $mode)`, `getBackupMode()`
+  - `setMaxBackupFiles(int $max)`, `getMaxBackupFiles()`
+  - `rotateBackups(string $filepath)`  
+  → Automatische Sicherung und Rotation von Tabellen-Dateien
+
+- **Validierungssteuerung beim Update:**
+  - `.system.json` unterstützt `"allowAdditionalFields": true|false`
+  - Optionale Prüfung auf unerlaubte Felder bei `update()`
+
+- **Snackbar-Logik zur Benutzerinteraktion:**
+  - Erfolgs- und Fehlermeldungen bei Aktionen
+  - Eingebaut in AutoFields- und Fahrzeug-Demo
+
+- **Fahrzeug-Demo deutlich erweitert:**
+  - Neue Marken: Larifari, Eleantrix, Zentoro, Worsche, Solarix, Nordex
+  - Realistische Fahrzeugdaten: Leistung, Beschreibung, Preis, Bilder
+  - Frontend-Features:
+    - Swiper.js für große Bildslider
+    - Auffälliges Preisschild
+    - Editierbare Felder mit Live-Speicherung
+    - Snackbar-Rückmeldungen bei Änderungen
+
+- **UI-Erweiterung:**
+  - Blaue Aktionsleiste mit „Speichern“ / „Abbrechen“-Buttons
+  - Bootstrap-Icons verwendet
+
+### Geändert
+- `setTable()` setzt `autoload` nun standardmäßig auf `true` → weniger Anwendungsfehler
+- `insert()` bricht korrekt ab, wenn `required`-Felder fehlen
+- Demos vereinheitlicht: Struktur, Header/Footer, Modularisierung
+
+### Dokumentation
+- Neue Abschnitte:
+  - **MySQL-Export**
+  - **Datenfelder** (system.json)
+  - **Validierung bei Update**
+  - **Snackbar-Integration**
+
+### Sonstiges
+- `listTables()` blendet `.system.json`-Dateien optional aus
+- Code- und UI-Aufräumarbeiten, Vorbereitung auf weitere Module
+
+---
+
 ## [1.0.6] – 2025-04-21
 ### Hinzugefügt
 - **MySQL-Exportfunktionen erweitert:**

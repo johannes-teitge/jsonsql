@@ -2,6 +2,9 @@
 
 require_once __DIR__ . '/tools/renderThemeCSS.php';
 
+$baseUrl = !empty($baseUrl) ? $baseUrl : dirname($_SERVER['PHP_SELF']);
+$basedir = !empty($basedir) ? $basedir : dirname($_SERVER['SCRIPT_NAME']) . '/../assets';
+
 // Überprüfen, ob der URL-Parameter gesetzt ist
 if (isset($_GET['debugger'])) {
     // URL-Parameter lesen und den gewünschten Status setzen
@@ -106,6 +109,9 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
 
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
 
 
 
@@ -154,7 +160,7 @@ define('APP_ASSETS_URL', dirname($_SERVER['SCRIPT_NAME']) . '/../assets'); // UR
     
   <div class="text-center d-flex justify-content-center gap-3">
     <?php if (!$removeOverview): ?>
-      <a href="<?= $baseUrl ?>index.php" class="backContent">
+      <a href="<?= $baseUrl ?>/index.php" class="backContent">
         <i class="bi bi-arrow-left"></i> Zur Übersicht
       </a>
     <?php endif; ?>

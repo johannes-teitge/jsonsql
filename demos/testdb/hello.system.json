@@ -4,7 +4,7 @@
             "dataType": "integer",
             "autoincrement": true,
             "autoincrement_step": 1,
-            "autoincrement_value": 245
+            "autoincrement_value": 249
         },
         "Erstellt am": {
             "dataType": "datetime",
@@ -21,5 +21,6 @@
             "comment": "automatisch bei Änderungen aktualisiert"
         }
     },
-    "allowAdditionalFields": true
+    "allowAdditionalFields": true,
+    "validateOnUpdate": true
 }

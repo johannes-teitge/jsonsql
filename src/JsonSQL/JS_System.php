@@ -229,57 +229,50 @@ trait JS_System
 
 
     // 🔧 Systemkonfiguration laden/speichern:
-
     protected function loadSystemConfig(): void {
-        // Überprüfen, ob die Datenbank- und Tabellennamen gesetzt sind
         if (!$this->currentDbPath || !$this->currentTableName) {
-            $this->systemConfig = []; // Leere Konfiguration, wenn keine Tabelle gesetzt ist
+            $this->systemConfig = [];
             return;
         }
     
-        // Pfad zur system.json-Datei der aktuellen Tabelle
         $file = $this->currentDbPath . DIRECTORY_SEPARATOR . $this->currentTableName . '.system.json';
     
-        // Überprüfen, ob die system.json existiert
         if (file_exists($file)) {
             $json = json_decode(file_get_contents($file), true);
+    
+            if (!is_array($json)) {
+                throw new \Exception("❌ Fehler beim Laden der system.json: " . json_last_error_msg());
+            }
+    
             $this->systemConfig = $json;
     
-            // Verschlüsselungsschlüssel setzen, wenn vorhanden
+            // Setze Encryption-Key, falls vorhanden
             if (!empty(trim($json['encryption_key'] ?? ''))) {
                 $this->encryptionKey = trim($json['encryption_key']);
             }
+    
         } else {
-            $this->systemConfig = []; // Leere Konfiguration, wenn Datei nicht existiert
+            $this->systemConfig = [];
         }
     
-        // Standardwert für Verschlüsselungsschlüssel setzen, falls nicht vorhanden
+        // Fallback für Encryption-Key
         if (empty($this->encryptionKey)) {
             $this->encryptionKey = 'JsonSQL-Default-Key@04-2025!?#';
         }
     
-        // Sicherstellen, dass 'fields' vorhanden ist
-        if (!isset($this->systemConfig['fields'])) {
-            $this->systemConfig['fields'] = [];
-        }
+        // Sicherheits-Fallbacks
+        $this->systemConfig['fields'] ??= [];
+        $this->systemConfig['allowAdditionalFields'] ??= true;
+        $this->systemConfig['validateOnUpdate'] ??= true;
     
-        // Setze allowAdditionalFields auf true, wenn es nicht definiert ist
-        if (!isset($this->systemConfig['allowAdditionalFields'])) {
-            $this->systemConfig['allowAdditionalFields'] = true;
-        }
-    
-        // Autoincrement-Werte setzen, falls erforderlich
+        // Autoincrement vorbereiten
         foreach ($this->systemConfig['fields'] as $fieldName => &$fieldConfig) {
             if (!empty($fieldConfig['autoincrement']) && !isset($fieldConfig['autoincrement_value'])) {
-                $fieldConfig['autoincrement_value'] = 1; // Setzt den Startwert für Autoincrement
+                $fieldConfig['autoincrement_value'] = 1;
             }
         }
-    
-        // Speichern der systemConfig, wenn eine gültige Tabelle geladen wurde
-        if ($this->currentTableName && file_exists($file)) {
-            $this->saveSystemConfig(); // Nur speichern, wenn eine gültige system.json existiert
-        }
     }
+    
     
 
     /**
@@ -297,19 +290,34 @@ trait JS_System
     }
     
     
-    
+        
     /**
      * Speichert die aktuelle systemConfig als JSON-Datei.
      *
-     * @return bool true bei Erfolg, false bei Fehler
+     * @return bool true bei Erfolg, false bei schwerwiegendem Fehler
      */
     protected function saveSystemConfig(): bool
     {
         if (!$this->currentDbPath || !$this->currentTableName) return false;
 
+        // Hinweis: leeres fields-Array ist nicht zwingend ein Fehler,
+        // aber ungewöhnlich – daher loggen wir es
+        if (
+            isset($this->systemConfig['fields']) &&
+            is_array($this->systemConfig['fields']) &&
+            count($this->systemConfig['fields']) === 0
+        ) {
+            error_log("⚠️ system.json enthält kein definiertes Feldschema ('fields' ist leer) – wird trotzdem gespeichert.");
+        }
+
         $file = $this->currentDbPath . DIRECTORY_SEPARATOR . $this->currentTableName . '.system.json';
-        return file_put_contents($file, json_encode($this->systemConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) !== false;
+
+        return file_put_contents(
+            $file,
+            json_encode($this->systemConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        ) !== false;
     }
+
 
     
 
@@ -753,13 +761,10 @@ trait JS_System
 
 
     public function addAutoincrementField(string $field, int $start = 1, int $step = 1): self {
-        global $debugger;
+
         if ($this->systemConfig === null) {
             $this->loadSystemConfig();
         }
-    
-
-        $debugger->dump($this->systemConfig);
     
         if (!isset($this->systemConfig['fields'])) {
             $this->systemConfig['fields'] = [];
@@ -945,6 +950,28 @@ trait JS_System
 
 
 
+    /**
+     * Gibt den Datentyp eines Feldes basierend auf der system.json zurück.
+     *
+     * @param string $fieldName Der Name des Feldes, für das der Datentyp abgefragt wird.
+     * @return string|null Der Datentyp des Feldes oder null, wenn nicht gefunden.
+     */
+    public function getFieldDataType(string $fieldName): ?string {
+        if ($this->systemConfig === null) {
+            $this->loadSystemConfig();  // Lädt die Systemkonfiguration, falls noch nicht geladen
+        }
+
+        // Überprüfen, ob das Feld in der Konfiguration existiert
+        if (isset($this->systemConfig['fields'][$fieldName])) {
+            return $this->systemConfig['fields'][$fieldName]['dataType'] ?? null;
+        }
+
+        return null;  // Rückgabe null, wenn das Feld nicht gefunden wird
+    }
+
+
+
+
     // Funktion zur Überprüfung und zum Hinzufügen von Systemfeldern
     public function checkAutofield($type, $fieldname, $value = null) {
         $result = [];
@@ -1120,8 +1147,6 @@ trait JS_System
         file_put_contents($file, json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         $this->systemConfig = $config;
     }
-
-
 
 
 

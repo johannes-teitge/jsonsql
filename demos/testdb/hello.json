@@ -2,29 +2,29 @@
     {
         "name": "Alice",
         "email": "alice@example.com",
-        "ID": 241,
-        "Erstellt am": "2025-04-20 06:32:22",
-        "Ge\u00e4ndert am": "2025-04-20 06:32:22"
+        "ID": 245,
+        "Erstellt am": "2025-04-24 17:57:03",
+        "Geändert am": "2025-04-24 17:57:03"
     },
     {
         "name": "Bob",
         "email": "bob@example.com",
-        "ID": 242,
-        "Erstellt am": "2025-04-20 06:32:22",
-        "Ge\u00e4ndert am": "2025-04-20 06:32:22"
+        "ID": 246,
+        "Erstellt am": "2025-04-24 17:57:03",
+        "Geändert am": "2025-04-24 17:57:03"
     },
     {
         "name": "Carol",
         "email": "carol@example.com",
-        "ID": 243,
-        "Erstellt am": "2025-04-20 06:32:22",
-        "Ge\u00e4ndert am": "2025-04-20 06:32:22"
+        "ID": 247,
+        "Erstellt am": "2025-04-24 17:57:03",
+        "Geändert am": "2025-04-24 17:57:03"
     },
     {
         "name": "Dave",
         "email": "dave@example.com",
-        "ID": 244,
-        "Erstellt am": "2025-04-20 06:32:22",
-        "Ge\u00e4ndert am": "2025-04-20 06:32:22"
+        "ID": 248,
+        "Erstellt am": "2025-04-24 17:57:03",
+        "Geändert am": "2025-04-24 17:57:03"
     }
 ]

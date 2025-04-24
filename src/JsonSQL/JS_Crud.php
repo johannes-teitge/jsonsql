@@ -438,7 +438,7 @@ private function applyAutoModified(array $config, $currentValue = '', bool $isUp
 
 
 private function applyAutoFields(array $insertrecord): array {
-    global $debugger;
+
 
     if ($this->systemConfig === null) {
         $this->loadSystemConfig();
@@ -881,7 +881,7 @@ public function insert(array $record): void {
      * @return void
      */    
     public function insert_old(array $record): void {
-        global $debugger;
+
 
         if (!$this->currentTableFile) {
             throw new \Exception("Keine Tabelle ausgewählt.");
@@ -948,72 +948,315 @@ public function insert(array $record): void {
 
 
 
+    public function setBackupMode(bool $mode): void {
+        $this->useBackup = $mode;
+    }    
+
+    public function getBackupMode(): bool {
+        return $this->useBackup;
+    }      
+    
+    /**
+     * Setzt die maximale Anzahl der Backups pro Datei.
+     *
+     * @param int $max Maximale Anzahl an Backups (0 = keine Begrenzung)
+     * @return self
+     */
+    public function setMaxBackupFiles(int $max): self {
+        $this->maxBackupFiles = $max;
+        return $this;
+    }   
+    
+    public function getMaxBackupFiles(): int {
+        return $this->maxBackupFiles;
+    }        
+
+    protected function rotateBackups(string $filepath): void {
+        if ($this->maxBackupFiles <= 0) return;
+    
+        $pattern = glob($filepath . '.bak.*');
+        usort($pattern, fn($a, $b) => filemtime($b) <=> filemtime($a));
+    
+        $toDelete = array_slice($pattern, $this->maxBackupFiles);
+        foreach ($toDelete as $file) {
+            @unlink($file);
+        }
+    }
+    
+
+    /**
+     * Prüft, ob sich mindestens eines der Felder in $newFields gegenüber $oldRow geändert hat.
+     *
+     * @param array $oldRow Originaldatenzeile
+     * @param array $newFields Neue Felder
+     * @return bool true wenn Änderungen vorliegen, sonst false
+     */
+    protected function hasFieldChanges(array $oldRow, array $newFields): bool {
+        foreach ($newFields as $key => $newValue) {
+            if (!array_key_exists($key, $oldRow)) return true;
+
+            // Optional: normalize types (z. B. "123" == 123)
+            $oldVal = $oldRow[$key];
+
+            error_log("📥 Vergleich von Feldwerten:");
+            error_log("🔹 Altwert: " . var_export($oldVal, true));
+            error_log("🔸 Neu:     " . var_export($newValue, true));       
+
+            // Zahlen sollten typgleich verglichen werden
+            if (is_numeric($oldVal) && is_numeric($newValue)) {
+                if ((float)$oldVal !== (float)$newValue) return true;
+            } else {
+                if ($oldVal !== $newValue) return true;
+            }
+        }
+        return false;
+    }
+
+
+      
+
+    /**
+     * Validiert zu aktualisierende Felder anhand der system.json-Konfiguration.
+     * Unterstützt aktuell: string, integer (Basisprüfung).
+     *
+     * @param array $fields Felder, die aktualisiert werden sollen
+     * @return array Array mit Fehlermeldungen im Format ["feldname" => "Fehlermeldung"]
+     */
+    protected function validateUpdateSystemFields(array $fields): array {
+
+        $errors = [];
+
+        // Kein Schema vorhanden → keine Prüfung
+        if (!isset($this->systemConfig['fields'])) {
+            return $errors;
+        }
+
+        $allowedFields = $this->systemConfig['fields'];
+        $allowAdditional = $this->systemConfig['allowAdditionalFields'] ?? true;
+
+        foreach ($fields as $key => $value) {
+            // Wenn zusätzliche Felder nicht erlaubt sind und das Feld fehlt
+            if (!$allowAdditional && !array_key_exists($key, $allowedFields)) {
+                $errors[$key] = "Feld nicht in system.json erlaubt.";
+                continue;
+            }
+
+            // Prüfung nur, wenn Feld in system.json vorhanden
+            if (!isset($allowedFields[$key]['dataType'])) {
+                continue;
+            }
+
+            $type = $allowedFields[$key]['dataType'];
+            switch ($type) {
+                case 'integer': 
+                    if (!is_int($value) && !(is_string($value) && ctype_digit($value))) {
+                        $errors[$key] = "$key ($value), muss ein ganzzahliger Wert sein.";
+                    } else {
+                        $intVal = (int)$value;
+                        if (isset($allowedFields[$key]['min']) && $intVal < $allowedFields[$key]['min']) {
+                            $errors[$key] = "$key ist kleiner als der erlaubte Minimalwert ({$allowedFields[$key]['min']}).";
+                        }
+                        if (isset($allowedFields[$key]['max']) && $intVal > $allowedFields[$key]['max']) {
+                            $errors[$key] = "$key ist größer als der erlaubte Maximalwert ({$allowedFields[$key]['max']}).";
+                        }
+                    }
+                    break;
+
+            case 'float':
+                // Komma erlauben und in Punkt umwandeln (z.B. bei deutschem Eingabeformat)
+                $normalized = str_replace(',', '.', (string)$value);
+                if (!is_numeric($normalized)) {
+                    $errors[$key] = "$key ($value), muss eine gültige Dezimalzahl sein.";
+                }
+                break;
+
+                case 'string':
+                    if (!is_string($value)) {
+                        $errors[$key] = "Muss ein String sein.";
+                    } else {
+                        $max = $allowedFields[$key]['length'] ?? null;
+                        if ($max && mb_strlen($value) > $max) {
+                            $errors[$key] = "Maximale Länge überschritten ({$max} Zeichen erlaubt).";
+                        }
+                    }
+                    break;
+            }
+        }
+
+        return $errors;
+    }
 
 
 
     /**
-     * Aktualisiert Datensätze in der aktuell gesetzten JSON-Tabelle, basierend auf gesetzten Filtern.
+     * Aktualisiert Datensätze in der aktuellen Tabelle basierend auf gesetzten Filtern.
      *
-     * Diese Methode führt ein selektives Update durch:  
-     * Nur die Datensätze, die den aktuell gesetzten Filterbedingungen entsprechen (`where()` / `filter()`),
-     * werden durch die im Parameter übergebenen Werte aktualisiert.
+     * Die Methode verarbeitet nur Datensätze, die durch vorher gesetzte Filter (via `where()`) ausgewählt wurden.
+     * Es werden nur Änderungen übernommen, wenn sich der neue Wert vom bisherigen unterscheidet.
+     * 
+     * Ablauf:
+     * - Sperrt die JSON-Datei exklusiv (mit Retry bei belegter Datei).
+     * - Liest den aktuellen Dateiinhalt und prüft ihn auf Gültigkeit.
+     * - Erstellt ggf. ein Backup der Originaldatei.
+     * - Dekodiert den JSON-Inhalt in ein Array.
+     * - Wendet gesetzte Filter auf die Daten an.
+     * - Validiert die neuen Werte gegen die Definition in der `system.json`, sofern aktiviert.
+     * - Prüft für jeden zutreffenden Datensatz, ob sich die Werte wirklich geändert haben.
+     * - Bei Änderung werden systemgesteuerte Felder wie `modified_at`, `autohash` etc. ergänzt.
+     * - Speichert das Ergebnis sicher über eine temporäre Datei zurück.
+     * 
+     * Sicherheit:
+     * - Verhindert das Überschreiben der Datei bei leerem oder ungültigem JSON.
+     * - Führt einen Vergleich der Alt- und Neudaten durch, um unnötige Schreibzugriffe zu vermeiden.
+     * - Entfernt temporäre Dateien nach dem Schreiben.
      *
-     * Zusätzlich wird – falls in der system.json definiert – das `autoupdated`-Feld (z. B. `updated_at`)
-     * mit einem aktuellen Zeitstempel versehen.
-     *
-     * @param array $fieldsToUpdate Ein assoziatives Array der zu ändernden Felder im Format:
-     *                               [ 'feldname' => 'neuerWert', ... ]
-     *
-     * @throws \Exception Wenn keine Tabelle ausgewählt wurde (`use()` vergessen)
-     *                    oder wenn die Datei nicht gesperrt werden konnte.
-     *
-     * @return int Die Anzahl der erfolgreich aktualisierten Datensätze.
-     */    
+     * @param array $fieldsToUpdate Ein assoziatives Array mit den zu aktualisierenden Feldern. Beispiel: ['title' => 'Neu']
+     * @return int Anzahl der tatsächlich aktualisierten Datensätze (nur bei echten Änderungen).
+     * 
+     * @throws \Exception Wenn keine Tabelle gesetzt ist, Datei nicht gelesen oder gesperrt werden kann, 
+     *                    das JSON fehlerhaft ist oder Validierungsfehler auftreten.
+     */
+
     public function update(array $fieldsToUpdate): int {
+        // ❌ Sicherstellen, dass eine Tabelle ausgewählt ist
         if (!$this->currentTableFile) {
             throw new \Exception("Keine Tabelle ausgewählt.");
         }
     
-        // system.json laden, wenn sie noch nicht geladen wurde
+        // ⚖️ Systemkonfiguration laden, falls noch nicht vorhanden
         if ($this->systemConfig === null) {
             $this->loadSystemConfig();
         }
     
         $updatedCount = 0;
     
+        // 🔑 Datei im Lese-/Schreibmodus öffnen
         $fp = fopen($this->currentTableFile, 'c+');
-        if (flock($fp, LOCK_EX)) {
-            $content = stream_get_contents($fp);
-            $data = $content ? json_decode($content, true) : [];
+        if ($fp === false) {
+            throw new \Exception("Datei konnte nicht geöffnet werden: {$this->currentTableFile}");
+        }
     
-            $filteredData = $this->applyFilters($data);
-            $newData = [];
+        // 🔃 Exklusiven Schreibzugriff mit Wartezeit (Locking)
+        $locked = false;
+        $tries = 0;
+        $maxTries = 20; // insgesamt max. 2 Sekunden warten (20 x 100ms)
     
-            foreach ($data as $index => $row) {
-                if (in_array($row, $filteredData, true)) {
+        while (!$locked && $tries < $maxTries) {
+            $locked = flock($fp, LOCK_EX | LOCK_NB);
+            if (!$locked) {
+                usleep(100_000); // 100ms warten
+                $tries++;
+            }
+        }
+    
+        if (!$locked) {
+            fclose($fp);
+            throw new \Exception("❌ Datei konnte nicht gesperrt werden (Timeout nach {$tries} Versuchen).");
+        }
+    
+        // 🔠 Dateiinhalt lesen
+        rewind($fp);
+        $content = stream_get_contents($fp);
+        if ($content === false) {
+            fclose($fp);
+            throw new \Exception("Fehler beim Lesen der Datei: {$this->currentTableFile}");
+        }
+    
+        // 🔒 Schutz vor kaputtem JSON (z.B. [] gefolgt von {})
+        if (preg_match('/^\s*\[\s*\]\s*[{[]/', $content)) {
+            $content = preg_replace('/^\s*\[\s*\]\s*/', '', $content);
+        }
+      
+        // 📊 JSON dekodieren
+        $data = json_decode($content, true);
+        if (!is_array($data)) {
+            fclose($fp);
+            throw new \Exception("Ungültiger JSON-Inhalt: " . json_last_error_msg());
+        }
+    
+        // 🔍 Vorfilter auf Daten anwenden
+        $filteredData = $this->applyFilters($data);
+    
+        // 🔢 Validierung der Eingabefelder
+        if (!empty($this->systemConfig['validateOnUpdate'])) {
+            $validationErrors = $this->validateUpdateSystemFields($fieldsToUpdate);
+            if (!empty($validationErrors)) {
+                fclose($fp);
+                throw new \Exception("Validierungsfehler:\n" . implode("\n", $validationErrors));
+            }
+        }
+    
+        // 🔄 Update nur wenn Änderung vorliegt
+        $backupDone = false;
 
-                    $fieldsToUpdate = $this->applyUpdateFields($fieldsToUpdate);
-    
-                    $data[$index] = array_merge($row, $fieldsToUpdate);
+        foreach ($data as $index => $row) {
+            if (in_array($row, $filteredData, true)) {
+                // 🔄 Prüfen ob sich Felder geändert haben
+                if ($this->hasFieldChanges($row, $fieldsToUpdate)) {
+                    
+                    // 📁 Backup nur beim ersten tatsächlichen Update
+                    if ($this->useBackup && !$backupDone) {
+                        $backupPath = $this->currentTableFile . '.bak_' . date('Ymd_His');
+                        file_put_contents($backupPath, $content);
+                        $this->rotateBackups($this->currentTableFile);
+                        $backupDone = true;
+                    }
+
+                    // 🛠️ Autofelder (z. B. modified_at) anwenden
+                    $finalUpdate = $this->applyUpdateFields($fieldsToUpdate);
+
+                    // ➕ Zusammenführen & aktualisieren
+                    $data[$index] = array_merge($row, $finalUpdate);
                     $updatedCount++;
                 }
             }
+        }
     
-            // Datei zurücksetzen und die aktualisierten Daten speichern
-            rewind($fp);
-            ftruncate($fp, 0);
-            fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
-            fflush($fp);
+        // 📊 JSON neu kodieren
+        $newJson = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        if ($newJson === false || trim($newJson) === '' || strlen(trim($newJson)) < 5) {
+            fclose($fp);
+            throw new \Exception("❌ Sicherheitsabbruch: Neues JSON ist leer oder ungültig. Speicherung wurde abgebrochen.");
+        }
+    
+        // 🔒 Sicheres Schreiben via temporärer Datei
+        $tempFile = $this->currentTableFile . '.tmp';
+        $result = file_put_contents($tempFile, $newJson, LOCK_EX);
+    
+        if ($result === false || filesize($tempFile) < 10) {
             flock($fp, LOCK_UN);
             fclose($fp);
-        } else {
-            throw new \Exception("Datei konnte nicht gesperrt werden (update).");
+            if (file_exists($tempFile)) unlink($tempFile);
+            throw new \Exception("❌ Fehler beim Schreiben der Temp-Datei oder Datei zu klein – Update abgebrochen.");
         }
+    
+        // 📝 Neue Datei übernehmen
+        rewind($fp);
+        ftruncate($fp, 0);
+        rewind($fp);
+        $tempContent = file_get_contents($tempFile);
+    
+        if ($tempContent === false || strlen(trim($tempContent)) < 10) {
+            flock($fp, LOCK_UN);
+            fclose($fp);
+            unlink($tempFile);
+            throw new \Exception("❌ Sicherheitsabbruch: Temp-Datei konnte nicht gelesen werden oder ist leer.");
+        }
+    
+        fwrite($fp, $tempContent);
+        fflush($fp);
+        flock($fp, LOCK_UN);
+        fclose($fp);
+        unlink($tempFile); // 🧹 Temp-Datei löschen
     
         return $updatedCount;
     }
     
     
+    
+  
+
+
     
     /**
      * Löscht alle Datensätze aus der aktuell ausgewählten Tabelle, die den gesetzten Filterbedingungen entsprechen.

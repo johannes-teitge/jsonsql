@@ -4,10 +4,8 @@
             "dataType": "integer",
             "autoincrement": true,
             "autoincrement_step": 1,
-            "autoincrement_value": 180,
-            "comment": "Automatisch generierte ID",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "autoincrement_value": 7,
+            "comment": "Automatisch generierte ID"
         },
         "hash": {
             "dataType": "string",
@@ -20,78 +18,63 @@
             "length": 40,
             "required": true,
             "defaultValue": "",
-            "comment": "Marke des Autos",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "comment": "Marke des Autos"
         },
         "model": {
             "dataType": "string",
             "length": 100,
-            "comment": "Modelltyp des Autos",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "comment": "Modelltyp des Autos"
         },
         "year_built": {
             "dataType": "integer",
-            "comment": "Baujahr des Fahrzeugs",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "comment": "Baujahr des Fahrzeugs"
         },
         "displacement": {
             "dataType": "integer",
-            "comment": "Hubraum",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "comment": "Hubraum"
         },
         "power": {
             "dataType": "integer",
             "comment": "Leistung",
-            "unit": "kwh",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "unit": "kwh"
         },
         "fuel": {
             "dataType": "enum",
-            "enumValues": "Benzin,Diesel,Strom",
-            "defaultValue": "Benzin",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "enumValues": "Benzin,Diesel,Elektro,Hybrid",
+            "defaultValue": "Benzin"
         },
-        "transmission": {
+        "transmission_type": {
             "dataType": "enum",
-            "enumValues": "Automatik,5-Gang,6-Gang",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "enumValues": "Schaltgetriebe,Automatik,Doppelkupplung,Tiptronic"
+        },
+        "gear_count": {
+            "dataType": "integer",
+            "min": 3,
+            "max": 10
         },
         "doors": {
             "dataType": "integer",
             "min": "4",
-            "max": "6",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "max": "6"
         },
         "price": {
             "dataType": "float",
             "unit": "€",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "precision": 24,
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "precision": 24
         },
         "datum": {
-            "dataType": "datetime",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "dataType": "datetime"
         },
         "description": {
-            "dataType": "string",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "dataType": "string"
         },
         "logo": {
             "dataType": "string",
-            "defaultValue": "",
-            "⏱️ validated_at": "2025-04-13 03:57:58",
-            "⏱️ system_validated_at": "2025-04-13 03:57:58"
+            "defaultValue": ""
+        },
+        "images": {
+            "dataType": "text",
+            "defaultValue": ""
         },
         "created_at": {
             "dataType": "datetime",
@@ -109,6 +92,5 @@
         }
     },
     "allowAdditionalFields": true,
-    "autocreated": "created_at",
-    "autoupdated": "updated_at"
+    "validateOnUpdate": true
 }

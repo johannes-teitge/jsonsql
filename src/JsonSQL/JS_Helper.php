@@ -95,7 +95,7 @@ public static function generateHash(string $value, string $algorithm = 'sha256',
 
 
 
-    public function getEnumValues(string $fieldName): array {
+    public function getEnumValues_(string $fieldName): array {
         // Sicherstellen, dass systemConfig geladen ist
         if ($this->systemConfig === null) {
             $this->loadSystemConfig();
@@ -115,6 +115,41 @@ public static function generateHash(string $value, string $algorithm = 'sha256',
         // Rückgabe von leeren Array, wenn kein Enum-Wert gefunden wurde
         return [];
     }
+
+
+
+    /**
+     * Gibt die erlaubten Enum-Werte für ein bestimmtes Feld zurück.
+     *
+     * @param string $fieldName Name des Feldes
+     * @return array|null Liste der Werte oder null, wenn keine vorhanden sind
+     */
+    public function getEnumValues(string $fieldName): ?array {
+        if ($this->systemConfig === null) {
+            $this->loadSystemConfig();
+        }
+
+        if (!isset($this->systemConfig['fields'][$fieldName])) {
+            return null;
+        }
+
+        $field = $this->systemConfig['fields'][$fieldName];
+
+        if (($field['dataType'] ?? '') === 'enum' && isset($field['enumValues'])) {
+            return is_array($field['enumValues'])
+                ? $field['enumValues']
+                : array_map('trim', explode(',', $field['enumValues']));
+        }
+
+        return null;
+    }
+
+
+
+
+
+
+
 
 
     /**

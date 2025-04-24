@@ -6,7 +6,15 @@
     --text-color: #444;
     --background-color: #f8f9fa;
     --background-color2:rgb(212, 212, 212); 
-    --white-color:rgb(255, 255, 255);           
+    --white-color:rgb(255, 255, 255); 
+    --editBG-start: #fffdf5;    
+    --editBG-end: #faf4d9;    
+    --success: #8fb115;  
+    --warning: #FFC021;   
+    --info: #0176D0;     
+    --error: #c50a0a;                
+    
+    
   }
 
 

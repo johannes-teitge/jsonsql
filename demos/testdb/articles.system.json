@@ -10,5 +10,6 @@
         }
     },
     "allowAdditionalFields": true,
-    "encryption_key": "MeinGeheimerKey123!"
+    "encryption_key": "MeinGeheimerKey123!",
+    "validateOnUpdate": true
 }
