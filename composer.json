@@ -4,7 +4,7 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Src\\": "vendor/teitge/jsonsql/src/"
+      "JsonSQL\\": "src/"
     }
   },
   "require": {
