@@ -24,7 +24,7 @@ Sie funktioniert **komplett dateibasiert** – ohne MySQL, SQLite oder Datenbank
 Mit Composer installieren:
 
 ```bash
-composer require jsonsql/jsonsql
+composer require teitge/jsonsql
 ```
 
 Oder manuell einbinden:
@@ -134,5 +134,5 @@ Du hast Ideen, willst mithelfen oder Fehler melden?
 ---
 
 **© 2024–2025 JsonSQL Team**  
-🔗 Projektseite: [https://jsonsql.de](https://www.teitge.de/JsonSQL/doku/)  
-🔧 GitHub: [https://github.com/jsonsql/jsonsql](https://github.com/johannes-teitge/JsonSQL)
+🔗 Projektseite: [https://teitge.de](https://www.teitge.de/JsonSQL/doku/)  
+🔧 GitHub: [https://github.com/johannes-teitge/JsonSQL](https://github.com/johannes-teitge/JsonSQL)
