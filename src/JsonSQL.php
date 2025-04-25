@@ -22,9 +22,9 @@ namespace Src;
  *
  * @package Src
  * @author Johannes
- * @version 1.0.7
- * @date 2025-04-24 21:11:01
- * @createdate 2025-04-07 06:55:55 
+ * @version 1.0.8
+ * @date 2025-04-25 21:11:01
+ * @createdate 2025-04-07 05:55:55 
  * @license MIT
  * @link https://teitge.de
  * @see JsonSQLHelper für Automatisierungen & Field-Checks

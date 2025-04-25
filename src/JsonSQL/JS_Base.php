@@ -10,7 +10,6 @@
  * @author      Johannes Teitge
  * @copyright   Copyright (c) 2025
  * @license     MIT License
- * @version     1.0.7 (24.04.2025)
  */
 
 namespace Src\JsonSQL;
@@ -18,8 +17,8 @@ namespace Src\JsonSQL;
 
 
 class JS_Base {
-    protected string $jsonSQLVersion = '1.0.7'; 
-    protected string $jsonSQLVersionDate = '2025-04-24';     
+    protected string $jsonSQLVersion = '1.0.8'; 
+    protected string $jsonSQLVersionDate = '2025-04-25';     
     protected array $databases = [];
     protected ?string $currentDbPath = null;
     protected ?string $currentTableFile = null;
