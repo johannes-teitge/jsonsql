@@ -11,9 +11,7 @@
       "url": "https://github.com/johannes-teitge/JsonSQL"
     }
   ],
-  "require": {
-    "teitge/jsonsql": "dev-main"
-  },
+
   "minimum-stability": "dev",
   "prefer-stable": true,
   "authors": [
