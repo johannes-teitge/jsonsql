@@ -133,6 +133,14 @@ Du hast Ideen, willst mithelfen oder Fehler melden?
 
 ---
 
+### 🗂️ Komplett-Download
+
+Du kannst auch den vollständigen Download inklusive Demo von [https://www.teitge.de/JsonSQL/JsonSQL.zip](https://www.teitge.de/JsonSQL/JsonSQL.zip) herunterladen.
+
+
+---
+
+
 **© 2024–2025 JsonSQL Team**  
 🔗 Projektseite: [https://teitge.de](https://www.teitge.de/JsonSQL/doku/)  
 🔧 GitHub: [https://github.com/johannes-teitge/JsonSQL](https://github.com/johannes-teitge/JsonSQL)
