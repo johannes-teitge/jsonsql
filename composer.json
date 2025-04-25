@@ -1,13 +1,25 @@
 {
   "name": "teitge/jsonsql",
   "description": "SQL-ähnliche Datenbankabfragen auf JSON-Dateien in PHP",
+  "type": "library",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "Johannes Teitge",
+      "email": "teitge@gmx.de"
+    }
+  ],
   "autoload": {
     "psr-4": {
-      "JsonSQL\\": "src/"
+      "Src\\": "src/"
     }
   },
   "require": {
     "php": ">=7.4"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-main": "1.0.x-dev"
+    }
   }
 }
