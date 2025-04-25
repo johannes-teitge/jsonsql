@@ -1,19 +1,25 @@
 {
-    "name": "teitg/jsonsql-test",
-    "autoload": {
-        "psr-4": {
-            "Teitg\\JsonsqlTest\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Dscho-Delphi",
-            "email": "teitge@gmx.de"
-        }
-    ],
-    "require": {
-        "teitge/jsonsql": "^1.0"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "teitge/jsonsql",
+  "autoload": {
+    "psr-4": {
+      "Src\\": "vendor/teitge/jsonsql/src/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/johannes-teitge/JsonSQL"
+    }
+  ],
+  "require": {
+    "teitge/jsonsql": "dev-main"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "Johannes Teitge",
+      "email": "johannes@teitge.de"
+    }
+  ]
 }

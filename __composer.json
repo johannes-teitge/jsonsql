@@ -1,0 +1,19 @@
+{
+    "name": "teitg/jsonsql-test",
+    "autoload": {
+        "psr-4": {
+            "Teitg\\JsonsqlTest\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dscho-Delphi",
+            "email": "teitge@gmx.de"
+        }
+    ],
+    "require": {
+        "teitge/jsonsql": "^1.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
